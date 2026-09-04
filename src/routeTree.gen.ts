@@ -10,33 +10,102 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AiAnalyticsRouteImport } from './routes/ai-analytics'
+import { Route as ChecklistRouteImport } from './routes/checklist'
+import { Route as DocumentationRouteImport } from './routes/documentation'
+import { Route as ScheduleRouteImport } from './routes/schedule'
+import { Route as WorkOrderRouteImport } from './routes/work-order'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AiAnalyticsRoute = AiAnalyticsRouteImport.update({
+  id: '/ai-analytics',
+  path: '/ai-analytics',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ChecklistRoute = ChecklistRouteImport.update({
+  id: '/checklist',
+  path: '/checklist',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DocumentationRoute = DocumentationRouteImport.update({
+  id: '/documentation',
+  path: '/documentation',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ScheduleRoute = ScheduleRouteImport.update({
+  id: '/schedule',
+  path: '/schedule',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WorkOrderRoute = WorkOrderRouteImport.update({
+  id: '/work-order',
+  path: '/work-order',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/ai-analytics': typeof AiAnalyticsRoute
+  '/checklist': typeof ChecklistRoute
+  '/documentation': typeof DocumentationRoute
+  '/schedule': typeof ScheduleRoute
+  '/work-order': typeof WorkOrderRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/ai-analytics': typeof AiAnalyticsRoute
+  '/checklist': typeof ChecklistRoute
+  '/documentation': typeof DocumentationRoute
+  '/schedule': typeof ScheduleRoute
+  '/work-order': typeof WorkOrderRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/ai-analytics': typeof AiAnalyticsRoute
+  '/checklist': typeof ChecklistRoute
+  '/documentation': typeof DocumentationRoute
+  '/schedule': typeof ScheduleRoute
+  '/work-order': typeof WorkOrderRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/ai-analytics'
+    | '/checklist'
+    | '/documentation'
+    | '/schedule'
+    | '/work-order'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/ai-analytics'
+    | '/checklist'
+    | '/documentation'
+    | '/schedule'
+    | '/work-order'
+  id:
+    | '__root__'
+    | '/'
+    | '/ai-analytics'
+    | '/checklist'
+    | '/documentation'
+    | '/schedule'
+    | '/work-order'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AiAnalyticsRoute: typeof AiAnalyticsRoute
+  ChecklistRoute: typeof ChecklistRoute
+  DocumentationRoute: typeof DocumentationRoute
+  ScheduleRoute: typeof ScheduleRoute
+  WorkOrderRoute: typeof WorkOrderRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +117,51 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/ai-analytics': {
+      id: '/ai-analytics'
+      path: '/ai-analytics'
+      fullPath: '/ai-analytics'
+      preLoaderRoute: typeof AiAnalyticsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/checklist': {
+      id: '/checklist'
+      path: '/checklist'
+      fullPath: '/checklist'
+      preLoaderRoute: typeof ChecklistRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/documentation': {
+      id: '/documentation'
+      path: '/documentation'
+      fullPath: '/documentation'
+      preLoaderRoute: typeof DocumentationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/schedule': {
+      id: '/schedule'
+      path: '/schedule'
+      fullPath: '/schedule'
+      preLoaderRoute: typeof ScheduleRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/work-order': {
+      id: '/work-order'
+      path: '/work-order'
+      fullPath: '/work-order'
+      preLoaderRoute: typeof WorkOrderRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AiAnalyticsRoute: AiAnalyticsRoute,
+  ChecklistRoute: ChecklistRoute,
+  DocumentationRoute: DocumentationRoute,
+  ScheduleRoute: ScheduleRoute,
+  WorkOrderRoute: WorkOrderRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
