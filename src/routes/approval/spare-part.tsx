@@ -5,15 +5,15 @@ import { approvalsSparepart } from "@/lib/mock-data";
 export const Route = createFileRoute("/approval/spare-part")({
   head: () => ({
     meta: [
-      { title: "Approval Spare Part — Maintenance Monitoring System" },
+      { title: "Spare Part Approval — Maintenance Monitoring System" },
       {
         name: "description",
-        content: "Persetujuan permintaan pembelian sparepart sebelum PO diterbitkan.",
+        content: "Spare part purchase request approval before PO issuance.",
       },
-      { property: "og:title", content: "Approval Spare Part — CMMS" },
+      { property: "og:title", content: "Spare Part Approval — CMMS" },
       {
         property: "og:description",
-        content: "Review dan approve permintaan sparepart dari berbagai departemen.",
+        content: "Review and approve spare part requests from various departments.",
       },
     ],
   }),
@@ -21,23 +21,23 @@ export const Route = createFileRoute("/approval/spare-part")({
 });
 
 const statusTone = (s: string) =>
-  s === "Disetujui" ? "success" : s === "Ditolak" ? "destructive" : "warning";
+  s === "Approved" ? "success" : s === "Rejected" ? "destructive" : "warning";
 
 function ApprovalSparePartPage() {
-  const pending = approvalsSparepart.filter((a) => a.status === "Menunggu").length;
+  const pending = approvalsSparepart.filter((a) => a.status === "Pending").length;
 
   return (
     <div className="space-y-6">
       <PageHeader
-        title="Approval Spare Part"
-        description="Persetujuan permintaan pembelian sparepart dari departemen terkait"
+        title="Spare Part Approval"
+        description="Spare part purchase request approval from related departments"
       />
 
       <div className="grid gap-4 sm:grid-cols-3">
         {[
-          { label: "Total Pengajuan", value: approvalsSparepart.length },
-          { label: "Menunggu Approval", value: `${pending} item` },
-          { label: "Sudah Diproses", value: `${approvalsSparepart.length - pending} item` },
+          { label: "Total Submissions", value: approvalsSparepart.length },
+          { label: "Pending Approval", value: `${pending} items` },
+          { label: "Processed", value: `${approvalsSparepart.length - pending} items` },
         ].map((s) => (
           <div key={s.label} className="card-surface p-4">
             <p className="text-xs text-muted-foreground">{s.label}</p>
@@ -47,11 +47,11 @@ function ApprovalSparePartPage() {
       </div>
 
       <Panel
-        title="Daftar Approval"
-        actions={<SearchBar placeholder="Cari approval..." />}
+        title="Approval List"
+        actions={<SearchBar placeholder="Search approval..." />}
       >
         <DataTable
-          columns={["No. Approval", "Ref. Request", "Nama Part", "Qty", "Estimasi Biaya", "Status"]}
+          columns={["Approval No.", "Ref. Request", "Part Name", "Qty", "Estimated Cost", "Status"]}
           rows={approvalsSparepart.map((a) => [
             <span className="font-medium">{a.id}</span>,
             a.ref,

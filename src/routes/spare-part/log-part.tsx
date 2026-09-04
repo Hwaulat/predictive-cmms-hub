@@ -5,15 +5,15 @@ import { logPart } from "@/lib/mock-data";
 export const Route = createFileRoute("/spare-part/log-part")({
   head: () => ({
     meta: [
-      { title: "Log Pemakaian Part — Maintenance Monitoring System" },
+      { title: "Part Usage Log — Maintenance Monitoring System" },
       {
         name: "description",
-        content: "Riwayat lengkap pemakaian sparepart per work order beserta teknisi pelaksana.",
+        content: "Complete sparepart usage history per work order with assigned technician.",
       },
-      { property: "og:title", content: "Log Pemakaian Part — CMMS" },
+      { property: "og:title", content: "Part Usage Log — CMMS" },
       {
         property: "og:description",
-        content: "Histori pemakaian part yang terhubung ke work order dan equipment.",
+        content: "Part usage history linked to work orders and equipment.",
       },
     ],
   }),
@@ -24,13 +24,13 @@ function LogPartPage() {
   return (
     <div className="space-y-6">
       <PageHeader
-        title="Log Pemakaian Part"
-        description="Riwayat pengambilan sparepart dari gudang untuk setiap work order"
+        title="Part Usage Log"
+        description="History of sparepart withdrawals from warehouse for each work order"
       />
 
-      <Panel title="Riwayat Pemakaian" actions={<SearchBar placeholder="Cari WO / part..." />}>
+      <Panel title="Usage History" actions={<SearchBar placeholder="Search WO / part..." />}>
         <DataTable
-          columns={["Tanggal", "No. WO", "Nama Part", "Qty", "Equipment", "Teknisi"]}
+          columns={["Date", "WO No.", "Part Name", "Qty", "Equipment", "Technician"]}
           rows={logPart.map((l) => [
             l.date,
             <span className="font-medium">{l.wo}</span>,

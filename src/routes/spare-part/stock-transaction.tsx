@@ -5,15 +5,15 @@ import { stockTransactions } from "@/lib/mock-data";
 export const Route = createFileRoute("/spare-part/stock-transaction")({
   head: () => ({
     meta: [
-      { title: "Transaksi Stok — Maintenance Monitoring System" },
+      { title: "Stock Transactions — Maintenance Monitoring System" },
       {
         name: "description",
-        content: "Catatan seluruh transaksi masuk, keluar, dan adjustment stok sparepart.",
+        content: "Complete record of all stock in, out, and adjustment transactions for spareparts.",
       },
-      { property: "og:title", content: "Transaksi Stok — CMMS" },
+      { property: "og:title", content: "Stock Transactions — CMMS" },
       {
         property: "og:description",
-        content: "Log transaksi stok sparepart: masuk, keluar, dan penyesuaian.",
+        content: "Sparepart stock transaction log: in, out, and adjustments.",
       },
     ],
   }),
@@ -21,22 +21,22 @@ export const Route = createFileRoute("/spare-part/stock-transaction")({
 });
 
 const typeTone = (t: string) =>
-  t === "Masuk" ? "success" : t === "Keluar" ? "destructive" : "warning";
+  t === "In" ? "success" : t === "Out" ? "destructive" : "warning";
 
 function StockTransactionPage() {
   return (
     <div className="space-y-6">
       <PageHeader
-        title="Transaksi Stok"
-        description="Seluruh pergerakan stok sparepart — masuk, keluar, dan adjustment"
+        title="Stock Transactions"
+        description="All sparepart stock movements — in, out, and adjustments"
       />
 
       <Panel
-        title="Riwayat Transaksi"
-        actions={<SearchBar placeholder="Cari transaksi / part..." />}
+        title="Transaction History"
+        actions={<SearchBar placeholder="Search transaction / part..." />}
       >
         <DataTable
-          columns={["ID Transaksi", "Tanggal", "Tipe", "Nama Part", "Qty", "Referensi", "Oleh"]}
+          columns={["Transaction ID", "Date", "Type", "Part Name", "Qty", "Reference", "By"]}
           rows={stockTransactions.map((t) => [
             <span className="font-medium">{t.id}</span>,
             t.date,

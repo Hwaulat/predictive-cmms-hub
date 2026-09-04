@@ -9,12 +9,12 @@ export const Route = createFileRoute("/spare-part/request-part")({
       { title: "Request Part — Maintenance Monitoring System" },
       {
         name: "description",
-        content: "Ajukan permintaan sparepart dan pantau status persetujuan dari setiap departemen.",
+        content: "Submit sparepart requests and track approval status from each department.",
       },
       { property: "og:title", content: "Request Part — CMMS" },
       {
         property: "og:description",
-        content: "Formulir dan daftar permintaan sparepart beserta status approval.",
+        content: "Sparepart request form and list with approval status.",
       },
     ],
   }),
@@ -22,27 +22,27 @@ export const Route = createFileRoute("/spare-part/request-part")({
 });
 
 const statusTone = (s: string) =>
-  s === "Disetujui" ? "success" : s === "Ditolak" ? "destructive" : "warning";
+  s === "Approved" ? "success" : s === "Rejected" ? "destructive" : "warning";
 
 function RequestPartPage() {
   return (
     <div className="space-y-6">
       <PageHeader
         title="Request Part"
-        description="Ajukan permintaan sparepart ke gudang — status approval real-time"
+        description="Submit sparepart requests to warehouse — real-time approval status"
         actions={
           <button className="inline-flex h-10 items-center gap-2 rounded-lg bg-primary px-4 text-sm font-semibold text-primary-foreground hover:opacity-90">
-            <Plus className="size-4" /> Buat Permintaan
+            <Plus className="size-4" /> New Request
           </button>
         }
       />
 
       <Panel
-        title="Daftar Permintaan"
-        actions={<SearchBar placeholder="Cari request..." />}
+        title="Request List"
+        actions={<SearchBar placeholder="Search request..." />}
       >
         <DataTable
-          columns={["No. Request", "Tanggal", "Nama Part", "Qty", "Pemohon", "Departemen", "Status"]}
+          columns={["Request No.", "Date", "Part Name", "Qty", "Requester", "Department", "Status"]}
           rows={requests.map((r) => [
             <span className="font-medium">{r.id}</span>,
             r.date,

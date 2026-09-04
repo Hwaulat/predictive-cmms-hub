@@ -6,15 +6,15 @@ import { documentNumbers } from "@/lib/mock-data";
 export const Route = createFileRoute("/master-data/document-number")({
   head: () => ({
     meta: [
-      { title: "Format Nomor Dokumen — Maintenance Monitoring System" },
+      { title: "Document Number Format — Maintenance Monitoring System" },
       {
         name: "description",
-        content: "Konfigurasi format penomoran otomatis untuk WO, PM, dan Request Part.",
+        content: "Auto-numbering format configuration for WO, PM, and Part Requests.",
       },
-      { property: "og:title", content: "Format Nomor Dokumen — CMMS" },
+      { property: "og:title", content: "Document Number Format — CMMS" },
       {
         property: "og:description",
-        content: "Pengaturan prefix dan format auto-number dokumen CMMS.",
+        content: "Prefix and auto-number format settings for CMMS documents.",
       },
     ],
   }),
@@ -25,18 +25,18 @@ function DocumentNumberPage() {
   return (
     <div className="space-y-6">
       <PageHeader
-        title="Format Nomor Dokumen"
-        description="Konfigurasi auto-numbering untuk setiap tipe dokumen di sistem CMMS"
+        title="Document Number Format"
+        description="Auto-numbering configuration for each document type in the CMMS system"
         actions={
           <button className="inline-flex h-10 items-center gap-2 rounded-lg bg-primary px-4 text-sm font-semibold text-primary-foreground hover:opacity-90">
-            <Plus className="size-4" /> Tambah Format
+            <Plus className="size-4" /> Add Format
           </button>
         }
       />
 
-      <Panel title="Daftar Format Dokumen">
+      <Panel title="Document Format List">
         <DataTable
-          columns={["Tipe Dokumen", "Prefix", "Format", "Nomor Terakhir"]}
+          columns={["Document Type", "Prefix", "Format", "Last Number"]}
           rows={documentNumbers.map((d) => [
             <span className="font-medium">{d.doc}</span>,
             <span className="font-mono text-xs font-semibold text-primary">{d.prefix}</span>,

@@ -85,7 +85,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         name: "description",
         content:
-          "CMMS untuk checklist, preventive maintenance, work order, dan sparepart dengan AI predictive maintenance.",
+          "CMMS for checklist, preventive maintenance, work order, and sparepart with AI predictive maintenance.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

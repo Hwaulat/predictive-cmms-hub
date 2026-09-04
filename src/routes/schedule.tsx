@@ -5,16 +5,16 @@ import { schedule } from "@/lib/mock-data";
 export const Route = createFileRoute("/schedule")({
   head: () => ({
     meta: [
-      { title: "Schedule Preventive Maintenance — CMMS" },
+      { title: "Preventive Maintenance Schedule — CMMS" },
       {
         name: "description",
         content:
-          "Jadwal PM berbasis waktu maupun running hours, lengkap status terjadwal, jatuh tempo, dan overdue.",
+          "Time-based and running-hours PM schedule with scheduled, due, and overdue status tracking.",
       },
-      { property: "og:title", content: "Schedule Preventive Maintenance" },
+      { property: "og:title", content: "Preventive Maintenance Schedule" },
       {
         property: "og:description",
-        content: "Kalender dan daftar PM dengan auto-generate work order saat jatuh tempo.",
+        content: "Calendar and PM list with auto-generated work orders when due.",
       },
     ],
   }),
@@ -36,11 +36,11 @@ function SchedulePage() {
     <div className="space-y-6">
       <PageHeader
         title="Schedule"
-        description="Preventive maintenance terjadwal berdasarkan waktu atau pemakaian"
+        description="Scheduled preventive maintenance based on time or usage"
       />
 
       <div className="grid gap-5 lg:grid-cols-3">
-        <Panel className="lg:col-span-2" title="Kalender PM — September 2026">
+        <Panel className="lg:col-span-2" title="PM Calendar — September 2026">
           <div className="grid grid-cols-7 gap-2">
             {days.map((d) => (
               <div
@@ -58,19 +58,19 @@ function SchedulePage() {
             ))}
           </div>
           <div className="mt-4 flex flex-wrap gap-3 text-xs text-muted-foreground">
-            <StatusPill label="Terjadwal" tone="info" />
-            <StatusPill label="Jatuh Tempo" tone="warning" />
+            <StatusPill label="Scheduled" tone="info" />
+            <StatusPill label="Due Today" tone="warning" />
             <StatusPill label="Overdue" tone="destructive" />
-            <StatusPill label="Selesai" tone="success" />
+            <StatusPill label="Completed" tone="success" />
           </div>
         </Panel>
 
         <Panel title="PM Compliance">
           <div className="space-y-4">
             {[
-              { label: "Selesai tepat waktu", value: 92, tone: "var(--color-success)" },
-              { label: "Terlambat", value: 6, tone: "var(--color-warning)" },
-              { label: "Terlewat", value: 2, tone: "var(--color-destructive)" },
+              { label: "Completed on time", value: 92, tone: "var(--color-success)" },
+              { label: "Late", value: 6, tone: "var(--color-warning)" },
+              { label: "Missed", value: 2, tone: "var(--color-destructive)" },
             ].map((r) => (
               <div key={r.label}>
                 <div className="flex justify-between text-sm">
@@ -89,9 +89,9 @@ function SchedulePage() {
         </Panel>
       </div>
 
-      <Panel title="Daftar Jadwal PM">
+      <Panel title="PM Schedule List">
         <DataTable
-          columns={["No. PM", "Equipment", "Trigger", "Jatuh Tempo", "Teknisi", "Status"]}
+          columns={["PM No.", "Equipment", "Trigger", "Due Date", "Technician", "Status"]}
           rows={schedule.map((s) => [
             <span className="font-medium">{s.id}</span>,
             s.equipment,
@@ -103,9 +103,9 @@ function SchedulePage() {
               tone={
                 s.status === "Overdue"
                   ? "destructive"
-                  : s.status === "Jatuh Tempo"
+                  : s.status === "Due Today"
                     ? "warning"
-                    : s.status === "Selesai"
+                    : s.status === "Completed"
                       ? "success"
                       : "info"
               }

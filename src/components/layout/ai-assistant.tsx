@@ -8,37 +8,37 @@ type Message = {
 };
 
 const quickReplies = [
-  "Status equipment hari ini?",
-  "WO mana yang paling urgent?",
-  "Sparepart apa yang perlu reorder?",
-  "Berapa PM compliance bulan ini?",
+  "Equipment status today?",
+  "Most urgent Work Orders?",
+  "Spareparts to reorder?",
+  "What is the PM compliance?",
 ];
 
 const aiResponses: Record<string, string> = {
-  "Status equipment hari ini?":
-    "🟢 4 dari 5 equipment berstatus Running.\n\n⚠️ Conveyor L2 sedang dalam Maintenance — WO-2609-014 (Bearing motor berisik) ditangani oleh Andi P.\n\n📊 Equipment Availability keseluruhan: 96.2% (+1.1% dari minggu lalu).",
-  "WO mana yang paling urgent?":
-    "🔴 WO-2609-013 — Boiler 01\nDeskripsi: Kebocoran pipa steam header\nPrioritas: Critical | Status: Assigned\nTeknisi: Budi S. | Target: 04 Sep 2026\n\n⚠️ WO ini memerlukan tindakan segera karena berdampak langsung pada safety dan operasional.",
-  "Sparepart apa yang perlu reorder?":
-    "🤖 Berdasarkan prediksi AI:\n\n1. Bearing SKF-6205 — stok 6 (min 10), habis ± 3 hari\n   → Buat PO sekarang!\n2. Oli Hidrolik ISO 68 — stok 3 (min 8), habis ± 4 hari\n   → Buat PO sekarang!\n3. V-Belt A-45 — stok 9 (min 8), habis ± 5 hari\n   → Pantau",
-  "Berapa PM compliance bulan ini?":
-    "📊 PM Compliance bulan ini: 92%\nTarget: 95%\n\n✅ Selesai tepat waktu: 92%\n⚠️ Terlambat: 6%\n❌ Terlewat: 2%\n\n📌 PM-2609-001 (Compressor A) statusnya Overdue — segera tindak lanjuti.",
+  "Equipment status today?":
+    "🟢 4 out of 5 equipments are Running.\n\n⚠️ Conveyor L2 is under Maintenance — WO-2609-014 (Drive motor bearing noisy) handled by Andi P.\n\n📊 Overall Equipment Availability: 96.2% (+1.1% since last week).",
+  "Most urgent Work Orders?":
+    "🔴 WO-2609-013 — Boiler 01\nDescription: Steam header pipe leak\nPriority: Critical | Status: Assigned\nTechnician: Budi S. | Target: 04 Sep 2026\n\n⚠️ This WO requires immediate action as it directly impacts safety and operations.",
+  "Spareparts to reorder?":
+    "🤖 Based on AI prediction:\n\n1. Bearing SKF-6205 — stock 6 (min 10), depletes in ± 3 days\n   → Create PO now!\n2. Hydraulic Oil ISO 68 — stock 3 (min 8), depletes in ± 4 days\n   → Create PO now!\n3. V-Belt A-45 — stock 9 (min 8), depletes in ± 5 days\n   → Monitor",
+  "What is the PM compliance?":
+    "📊 PM Compliance this month: 92%\nTarget: 95%\n\n✅ Completed on time: 92%\n⚠️ Late: 6%\n❌ Missed: 2%\n\n📌 PM-2609-001 (Compressor A) status is Overdue — please follow up immediately.",
 };
 
 function getAIResponse(input: string): string {
   if (aiResponses[input]) return aiResponses[input];
 
   const lower = input.toLowerCase();
-  if (lower.includes("equipment") || lower.includes("mesin"))
-    return aiResponses["Status equipment hari ini?"];
+  if (lower.includes("equipment") || lower.includes("machine") || lower.includes("status"))
+    return aiResponses["Equipment status today?"];
   if (lower.includes("wo") || lower.includes("work order") || lower.includes("urgent"))
-    return aiResponses["WO mana yang paling urgent?"];
-  if (lower.includes("spare") || lower.includes("part") || lower.includes("reorder") || lower.includes("stok"))
-    return aiResponses["Sparepart apa yang perlu reorder?"];
+    return aiResponses["Most urgent Work Orders?"];
+  if (lower.includes("spare") || lower.includes("part") || lower.includes("reorder") || lower.includes("stock"))
+    return aiResponses["Spareparts to reorder?"];
   if (lower.includes("pm") || lower.includes("compliance") || lower.includes("preventive"))
-    return aiResponses["Berapa PM compliance bulan ini?"];
+    return aiResponses["What is the PM compliance?"];
 
-  return "Terima kasih atas pertanyaannya! 🤖\n\nSaat ini saya bisa membantu Anda dengan:\n• Status equipment & availability\n• Work order urgent/kritis\n• Prediksi kebutuhan sparepart\n• PM compliance & jadwal\n\nSilakan tanyakan salah satu topik di atas!";
+  return "Thank you for asking! 🤖\n\nCurrently, I can assist you with:\n• Equipment status & availability\n• Urgent/critical work orders\n• Sparepart prediction & reordering\n• PM compliance & schedule\n\nPlease ask me about one of the topics above!";
 }
 
 export function AiAssistant() {
@@ -47,7 +47,7 @@ export function AiAssistant() {
     {
       id: 0,
       role: "assistant",
-      text: "Halo! 👋 Saya AI Assistant untuk Maintenance Monitoring System.\n\nSaya bisa membantu Anda mengecek status equipment, work order, sparepart, dan jadwal PM.\n\nAda yang bisa saya bantu?",
+      text: "Hello! 👋 I am the AI Assistant for the Maintenance Monitoring System.\n\nI can help you check equipment status, work orders, spareparts, and PM schedules.\n\nHow can I help you today?",
     },
   ]);
   const [input, setInput] = useState("");
@@ -95,7 +95,7 @@ export function AiAssistant() {
               <p className="text-sm font-bold text-white">AI Assistant</p>
               <p className="flex items-center gap-1.5 text-[11px] text-white/80">
                 <span className="size-1.5 rounded-full bg-green-400" />
-                Online — Siap membantu
+                Online — Ready to help
               </p>
             </div>
             <button
@@ -128,7 +128,7 @@ export function AiAssistant() {
               <div className="flex justify-start">
                 <div className="flex items-center gap-2 rounded-2xl rounded-bl-md bg-muted px-4 py-3 text-muted-foreground">
                   <Loader2 className="size-4 animate-spin" />
-                  <span className="text-xs">Sedang mengetik...</span>
+                  <span className="text-xs">Typing...</span>
                 </div>
               </div>
             )}
@@ -157,7 +157,7 @@ export function AiAssistant() {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && send(input)}
-              placeholder="Ketik pertanyaan..."
+              placeholder="Type a message..."
               className="h-10 flex-1 rounded-xl border border-input bg-surface px-4 text-sm outline-none focus:border-ring focus:ring-2 focus:ring-ring/20"
             />
             <button

@@ -6,16 +6,16 @@ import { inventory } from "@/lib/mock-data";
 export const Route = createFileRoute("/spare-part/inventory")({
   head: () => ({
     meta: [
-      { title: "Inventory Sparepart — Maintenance Monitoring System" },
+      { title: "Sparepart Inventory — Maintenance Monitoring System" },
       {
         name: "description",
         content:
-          "Kelola stok sparepart, pantau level minimum, dan identifikasi part kritis secara real-time.",
+          "Manage sparepart stock, monitor minimum levels, and identify critical parts in real-time.",
       },
-      { property: "og:title", content: "Inventory Sparepart — CMMS" },
+      { property: "og:title", content: "Sparepart Inventory — CMMS" },
       {
         property: "og:description",
-        content: "Daftar lengkap sparepart beserta stok, lokasi, dan status ketersediaan.",
+        content: "Complete sparepart list with stock, location, and availability status.",
       },
     ],
   }),
@@ -23,20 +23,20 @@ export const Route = createFileRoute("/spare-part/inventory")({
 });
 
 const statusTone = (s: string) =>
-  s === "Kritis" ? "destructive" : s === "Menipis" ? "warning" : "success";
+  s === "Critical" ? "destructive" : s === "Low" ? "warning" : "success";
 
 function InventoryPage() {
-  const kritis = inventory.filter((i) => i.status === "Kritis").length;
-  const menipis = inventory.filter((i) => i.status === "Menipis").length;
+  const critical = inventory.filter((i) => i.status === "Critical").length;
+  const low = inventory.filter((i) => i.status === "Low").length;
 
   return (
     <div className="space-y-6">
       <PageHeader
-        title="Inventory Sparepart"
-        description="Stok sparepart gudang — pantau level kritis dan lokasi penyimpanan"
+        title="Sparepart Inventory"
+        description="Warehouse sparepart stock — monitor critical levels and storage locations"
         actions={
           <button className="inline-flex h-10 items-center gap-2 rounded-lg bg-primary px-4 text-sm font-semibold text-primary-foreground hover:opacity-90">
-            <Package className="size-4" /> Tambah Part
+            <Package className="size-4" /> Add Part
           </button>
         }
       />
@@ -44,8 +44,8 @@ function InventoryPage() {
       <div className="grid gap-4 sm:grid-cols-3">
         {[
           { label: "Total SKU", value: inventory.length },
-          { label: "Stok Kritis", value: `${kritis} item` },
-          { label: "Stok Menipis", value: `${menipis} item` },
+          { label: "Critical Stock", value: `${critical} items` },
+          { label: "Low Stock", value: `${low} items` },
         ].map((s) => (
           <div key={s.label} className="card-surface p-4">
             <p className="text-xs text-muted-foreground">{s.label}</p>
@@ -54,9 +54,9 @@ function InventoryPage() {
         ))}
       </div>
 
-      <Panel title="Daftar Sparepart" actions={<SearchBar placeholder="Cari kode / nama part..." />}>
+      <Panel title="Sparepart List" actions={<SearchBar placeholder="Search code / part name..." />}>
         <DataTable
-          columns={["Kode", "Nama Part", "Kategori", "Stok", "Min", "UOM", "Lokasi", "Status"]}
+          columns={["Code", "Part Name", "Category", "Stock", "Min", "UOM", "Location", "Status"]}
           rows={inventory.map((i) => [
             <span className="font-medium">{i.code}</span>,
             i.name,

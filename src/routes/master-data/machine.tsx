@@ -9,12 +9,12 @@ export const Route = createFileRoute("/master-data/machine")({
       { title: "Master Machine/Equipment — Maintenance Monitoring System" },
       {
         name: "description",
-        content: "Data master mesin dan equipment: kode, area, brand, tahun, dan status operasi.",
+        content: "Master machine and equipment data: code, area, brand, year, and operational status.",
       },
       { property: "og:title", content: "Master Machine/Equipment — CMMS" },
       {
         property: "og:description",
-        content: "Daftar lengkap mesin dan equipment yang terdaftar dalam CMMS.",
+        content: "Complete list of machines and equipment registered in the CMMS.",
       },
     ],
   }),
@@ -31,10 +31,10 @@ function MachinePage() {
     <div className="space-y-6">
       <PageHeader
         title="Master Machine / Equipment"
-        description="Data mesin dan equipment yang terdaftar dalam sistem maintenance"
+        description="Machine and equipment data registered in the maintenance system"
         actions={
           <button className="inline-flex h-10 items-center gap-2 rounded-lg bg-primary px-4 text-sm font-semibold text-primary-foreground hover:opacity-90">
-            <Plus className="size-4" /> Tambah Equipment
+            <Plus className="size-4" /> Add Equipment
           </button>
         }
       />
@@ -54,11 +54,11 @@ function MachinePage() {
       </div>
 
       <Panel
-        title="Daftar Equipment"
-        actions={<SearchBar placeholder="Cari equipment..." />}
+        title="Equipment List"
+        actions={<SearchBar placeholder="Search equipment..." />}
       >
         <DataTable
-          columns={["Kode", "Nama Equipment", "Area", "Brand", "Tahun", "Status"]}
+          columns={["Code", "Equipment Name", "Area", "Brand", "Year", "Status"]}
           rows={machines.map((m) => [
             <span className="font-medium">{m.code}</span>,
             m.name,

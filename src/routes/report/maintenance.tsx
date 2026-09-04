@@ -15,16 +15,16 @@ import { workOrders, woTrend } from "@/lib/mock-data";
 export const Route = createFileRoute("/report/maintenance")({
   head: () => ({
     meta: [
-      { title: "Laporan Maintenance — Maintenance Monitoring System" },
+      { title: "Maintenance Report — Maintenance Monitoring System" },
       {
         name: "description",
         content:
-          "Ringkasan laporan maintenance: tren work order, breakdown per tipe, dan performa teknisi.",
+          "Maintenance report summary: work order trends, breakdown by type, and technician performance.",
       },
-      { property: "og:title", content: "Laporan Maintenance — CMMS" },
+      { property: "og:title", content: "Maintenance Report — CMMS" },
       {
         property: "og:description",
-        content: "Dashboard laporan aktivitas maintenance bulanan.",
+        content: "Monthly maintenance activity report dashboard.",
       },
     ],
   }),
@@ -40,20 +40,20 @@ const woByType = [
 
 function MaintenanceReportPage() {
   const total = workOrders.length;
-  const done = workOrders.filter((w) => w.status === "Selesai").length;
+  const done = workOrders.filter((w) => w.status === "Completed").length;
 
   return (
     <div className="space-y-6">
       <PageHeader
-        title="Laporan Maintenance"
-        description="Ringkasan aktivitas maintenance bulan berjalan"
+        title="Maintenance Report"
+        description="Summary of current month's maintenance activities"
       />
 
       <div className="grid gap-4 sm:grid-cols-4">
         {[
           { label: "Total WO", value: total },
-          { label: "Selesai", value: done },
-          { label: "Dalam Proses", value: total - done },
+          { label: "Completed", value: done },
+          { label: "In Progress", value: total - done },
           { label: "Completion Rate", value: `${Math.round((done / total) * 100)}%` },
         ].map((s) => (
           <div key={s.label} className="card-surface p-4">
@@ -64,7 +64,7 @@ function MaintenanceReportPage() {
       </div>
 
       <div className="grid gap-5 lg:grid-cols-2">
-        <Panel title="Tren Work Order Mingguan" description="Dibuka vs selesai per minggu">
+        <Panel title="Weekly Work Order Trend" description="Opened vs Completed per week">
           <div className="h-64">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={woTrend}>
@@ -73,14 +73,14 @@ function MaintenanceReportPage() {
                 <YAxis fontSize={12} stroke="var(--color-muted-foreground)" />
                 <Tooltip />
                 <Legend />
-                <Bar dataKey="open" name="Dibuka" fill="var(--color-chart-5)" radius={[4, 4, 0, 0]} />
-                <Bar dataKey="closed" name="Ditutup" fill="var(--color-chart-4)" radius={[4, 4, 0, 0]} />
+                <Bar dataKey="open" name="Opened" fill="var(--color-chart-5)" radius={[4, 4, 0, 0]} />
+                <Bar dataKey="closed" name="Closed" fill="var(--color-chart-4)" radius={[4, 4, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           </div>
         </Panel>
 
-        <Panel title="Distribusi WO per Tipe">
+        <Panel title="WO Distribution by Type">
           <div className="h-64">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={woByType} layout="vertical">
@@ -88,16 +88,16 @@ function MaintenanceReportPage() {
                 <XAxis type="number" fontSize={12} stroke="var(--color-muted-foreground)" />
                 <YAxis dataKey="type" type="category" fontSize={12} width={90} stroke="var(--color-muted-foreground)" />
                 <Tooltip />
-                <Bar dataKey="count" name="Jumlah" fill="var(--color-chart-1)" radius={[0, 6, 6, 0]} />
+                <Bar dataKey="count" name="Count" fill="var(--color-chart-1)" radius={[0, 6, 6, 0]} />
               </BarChart>
             </ResponsiveContainer>
           </div>
         </Panel>
       </div>
 
-      <Panel title="Detail Work Order">
+      <Panel title="Work Order Details">
         <DataTable
-          columns={["No. WO", "Equipment", "Tipe", "Prioritas", "Teknisi", "Status"]}
+          columns={["WO No.", "Equipment", "Type", "Priority", "Technician", "Status"]}
           rows={workOrders.map((w) => [
             <span className="font-medium">{w.no}</span>,
             w.equipment,
@@ -118,11 +118,11 @@ function MaintenanceReportPage() {
             <StatusPill
               label={w.status}
               tone={
-                w.status === "Selesai"
+                w.status === "Completed"
                   ? "success"
                   : w.status === "Open"
                     ? "info"
-                    : w.status === "Menunggu Sparepart"
+                    : w.status === "Awaiting Sparepart"
                       ? "warning"
                       : "primary"
               }

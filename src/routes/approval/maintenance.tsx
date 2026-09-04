@@ -5,15 +5,15 @@ import { approvalsMaintenance } from "@/lib/mock-data";
 export const Route = createFileRoute("/approval/maintenance")({
   head: () => ({
     meta: [
-      { title: "Approval Maintenance — Maintenance Monitoring System" },
+      { title: "Maintenance Approval — Maintenance Monitoring System" },
       {
         name: "description",
-        content: "Daftar work order yang memerlukan persetujuan biaya dari manajemen.",
+        content: "Work order cost approval list requiring management sign-off.",
       },
-      { property: "og:title", content: "Approval Maintenance — CMMS" },
+      { property: "og:title", content: "Maintenance Approval — CMMS" },
       {
         property: "og:description",
-        content: "Proses approval biaya work order sebelum eksekusi perbaikan.",
+        content: "Work order cost approval process before repair execution.",
       },
     ],
   }),
@@ -21,23 +21,23 @@ export const Route = createFileRoute("/approval/maintenance")({
 });
 
 const statusTone = (s: string) =>
-  s === "Disetujui" ? "success" : s === "Ditolak" ? "destructive" : "warning";
+  s === "Approved" ? "success" : s === "Rejected" ? "destructive" : "warning";
 
 function ApprovalMaintenancePage() {
-  const pending = approvalsMaintenance.filter((a) => a.status === "Menunggu").length;
+  const pending = approvalsMaintenance.filter((a) => a.status === "Pending").length;
 
   return (
     <div className="space-y-6">
       <PageHeader
-        title="Approval Maintenance"
-        description="Persetujuan biaya work order — hanya WO di atas batas parameter yang butuh approval"
+        title="Maintenance Approval"
+        description="Work order cost approval — only WOs above the parameter threshold require approval"
       />
 
       <div className="grid gap-4 sm:grid-cols-3">
         {[
-          { label: "Total Pengajuan", value: approvalsMaintenance.length },
-          { label: "Menunggu Approval", value: `${pending} item` },
-          { label: "Sudah Diproses", value: `${approvalsMaintenance.length - pending} item` },
+          { label: "Total Submissions", value: approvalsMaintenance.length },
+          { label: "Pending Approval", value: `${pending} items` },
+          { label: "Processed", value: `${approvalsMaintenance.length - pending} items` },
         ].map((s) => (
           <div key={s.label} className="card-surface p-4">
             <p className="text-xs text-muted-foreground">{s.label}</p>
@@ -47,11 +47,11 @@ function ApprovalMaintenancePage() {
       </div>
 
       <Panel
-        title="Daftar Approval"
-        actions={<SearchBar placeholder="Cari approval..." />}
+        title="Approval List"
+        actions={<SearchBar placeholder="Search approval..." />}
       >
         <DataTable
-          columns={["No. Approval", "Ref. WO", "Equipment", "Estimasi Biaya", "Pemohon", "Status"]}
+          columns={["Approval No.", "Ref. WO", "Equipment", "Estimated Cost", "Requester", "Status"]}
           rows={approvalsMaintenance.map((a) => [
             <span className="font-medium">{a.id}</span>,
             a.ref,

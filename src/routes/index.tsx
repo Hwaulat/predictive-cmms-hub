@@ -28,16 +28,16 @@ import { aiInsights, downtimePareto, kpis, schedule, woTrend } from "@/lib/mock-
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Dashboard Maintenance — CMMS AI Predictive" },
+      { title: "Maintenance Dashboard — CMMS AI Predictive" },
       {
         name: "description",
         content:
-          "Pantau MTTR, MTBF, PM compliance, work order terbuka, dan prediksi sparepart berisiko dalam satu dashboard.",
+          "Monitor MTTR, MTBF, PM compliance, open work orders, and at-risk sparepart predictions in one dashboard.",
       },
-      { property: "og:title", content: "Dashboard Maintenance — CMMS AI Predictive" },
+      { property: "og:title", content: "Maintenance Dashboard — CMMS AI Predictive" },
       {
         property: "og:description",
-        content: "KPI maintenance, tren work order, pareto downtime, dan AI insight sparepart.",
+        content: "Maintenance KPIs, work order trends, downtime pareto, and AI sparepart insights.",
       },
     ],
   }),
@@ -58,7 +58,7 @@ function Dashboard() {
     <div className="space-y-6">
       <PageHeader
         title="Dashboard Overview"
-        description="Ringkasan performa maintenance pabrik hari ini"
+        description="Today's plant maintenance performance summary"
       />
 
       <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-6">
@@ -80,17 +80,17 @@ function Dashboard() {
       <section className="ai-surface rounded-xl p-5">
         <div className="flex items-center gap-2">
           <Sparkles className="size-5 text-primary" />
-          <h3 className="font-display text-base font-bold">AI Insight Hari Ini</h3>
+          <h3 className="font-display text-base font-bold">Today's AI Insight</h3>
         </div>
         <p className="mt-2 text-sm text-muted-foreground">
-          3 sparepart diprediksi akan habis dalam 7 hari ke depan:
+          3 spareparts predicted to deplete within the next 7 days:
         </p>
         <ul className="mt-3 space-y-2">
           {aiInsights.map((i) => (
             <li key={i.part} className="rounded-lg bg-surface/70 p-3">
               <div className="flex flex-wrap items-center gap-2">
                 <span className="text-sm font-semibold">{i.part}</span>
-                <StatusPill label={`habis ± ${i.days} hari lagi`} tone="destructive" />
+                <StatusPill label={`depletes in ± ${i.days} days`} tone="destructive" />
                 <StatusPill
                   label={`confidence ${Math.round(i.confidence * 100)}%`}
                   tone="primary"
@@ -104,12 +104,12 @@ function Dashboard() {
           to="/ai-analytics"
           className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-primary"
         >
-          Lihat Detail AI Analytics <ArrowRight className="size-4" />
+          View AI Analytics Details <ArrowRight className="size-4" />
         </Link>
       </section>
 
       <div className="grid gap-5 lg:grid-cols-2">
-        <Panel title="Tren Work Order" description="Dibuka vs selesai per minggu">
+        <Panel title="Work Order Trend" description="Opened vs completed per week">
           <div className="h-64">
             <ResponsiveContainer width="100%" height="100%">
               <LineChart data={woTrend}>
@@ -125,7 +125,7 @@ function Dashboard() {
           </div>
         </Panel>
 
-        <Panel title="Pareto Downtime per Equipment" description="Total jam downtime bulan ini">
+        <Panel title="Downtime Pareto by Equipment" description="Total downtime hours this month">
           <div className="h-64">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={downtimePareto}>
@@ -140,9 +140,9 @@ function Dashboard() {
         </Panel>
       </div>
 
-      <Panel title="Jadwal PM 7 Hari ke Depan" description="Klik modul Schedule untuk detail">
+      <Panel title="PM Schedule — Next 7 Days" description="Click Schedule module for details">
         <DataTable
-          columns={["No. PM", "Equipment", "Trigger", "Jatuh Tempo", "Teknisi", "Status"]}
+          columns={["PM No.", "Equipment", "Trigger", "Due Date", "Technician", "Status"]}
           rows={schedule.map((s) => [
             <span className="font-medium">{s.id}</span>,
             s.equipment,
@@ -154,9 +154,9 @@ function Dashboard() {
               tone={
                 s.status === "Overdue"
                   ? "destructive"
-                  : s.status === "Jatuh Tempo"
+                  : s.status === "Due Today"
                     ? "warning"
-                    : s.status === "Selesai"
+                    : s.status === "Completed"
                       ? "success"
                       : "info"
               }

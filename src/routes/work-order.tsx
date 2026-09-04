@@ -10,12 +10,12 @@ export const Route = createFileRoute("/work-order")({
       {
         name: "description",
         content:
-          "Kelola work order corrective, preventive, predictive, dan emergency lengkap dengan status dan teknisi.",
+          "Manage corrective, preventive, predictive, and emergency work orders with status and technician tracking.",
       },
       { property: "og:title", content: "Work Order — CMMS" },
       {
         property: "og:description",
-        content: "Daftar perintah kerja perbaikan beserta prioritas dan status penyelesaian.",
+        content: "Work order list with priority and completion status.",
       },
     ],
   }),
@@ -23,11 +23,11 @@ export const Route = createFileRoute("/work-order")({
 });
 
 const statusTone = (s: string) =>
-  s === "Selesai"
+  s === "Completed"
     ? "success"
     : s === "Open"
       ? "info"
-      : s === "Menunggu Sparepart"
+      : s === "Awaiting Sparepart"
         ? "warning"
         : "primary";
 
@@ -39,24 +39,24 @@ function WorkOrderPage() {
     <div>
       <PageHeader
         title="Work Order"
-        description="Perintah kerja dari checklist gagal, PM jatuh tempo, breakdown, dan rekomendasi AI"
+        description="Work orders from failed checklists, due PMs, breakdowns, and AI recommendations"
         actions={
           <button className="inline-flex h-10 items-center gap-2 rounded-lg bg-primary px-4 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90">
-            <Plus className="size-4" /> Buat Work Order
+            <Plus className="size-4" /> Create Work Order
           </button>
         }
       />
-      <Panel actions={<SearchBar placeholder="Cari nomor WO / equipment..." />} title="Daftar Work Order">
+      <Panel actions={<SearchBar placeholder="Search WO no. / equipment..." />} title="Work Order List">
         <DataTable
           columns={[
-            "No. WO",
+            "WO No.",
             "Equipment",
-            "Deskripsi",
-            "Tipe",
-            "Prioritas",
-            "Teknisi",
+            "Description",
+            "Type",
+            "Priority",
+            "Technician",
             "Status",
-            "Target Selesai",
+            "Target Date",
           ]}
           rows={workOrders.map((w) => [
             <span className="font-medium">{w.no}</span>,

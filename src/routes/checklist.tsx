@@ -6,16 +6,16 @@ import { checklists } from "@/lib/mock-data";
 export const Route = createFileRoute("/checklist")({
   head: () => ({
     meta: [
-      { title: "Checklist Inspeksi — Maintenance Monitoring System" },
+      { title: "Inspection Checklist — Maintenance Monitoring System" },
       {
         name: "description",
         content:
-          "Template dan riwayat checklist harian/per-shift equipment beserta compliance rate tiap shift.",
+          "Daily and per-shift equipment inspection checklist templates and history with compliance rate per shift.",
       },
-      { property: "og:title", content: "Checklist Inspeksi — CMMS" },
+      { property: "og:title", content: "Inspection Checklist — CMMS" },
       {
         property: "og:description",
-        content: "Pengisian checklist equipment dan pembuatan work order otomatis dari temuan.",
+        content: "Equipment checklist completion and automatic work order creation from findings.",
       },
     ],
   }),
@@ -27,19 +27,19 @@ function ChecklistPage() {
     <div className="space-y-6">
       <PageHeader
         title="Checklist"
-        description="Pemeriksaan rutin kondisi equipment per shift — temuan gagal otomatis menawarkan Work Order"
+        description="Routine equipment condition checks per shift — failed findings automatically offer Work Order creation"
         actions={
           <button className="inline-flex h-10 items-center gap-2 rounded-lg bg-primary px-4 text-sm font-semibold text-primary-foreground hover:opacity-90">
-            <Plus className="size-4" /> Template Baru
+            <Plus className="size-4" /> New Template
           </button>
         }
       />
 
       <div className="grid gap-4 sm:grid-cols-3">
         {[
-          { label: "Compliance Hari Ini", value: "86%" },
-          { label: "Checklist Terisi", value: "24 / 28" },
-          { label: "Temuan Gagal", value: "5 item" },
+          { label: "Today's Compliance", value: "86%" },
+          { label: "Checklists Filled", value: "24 / 28" },
+          { label: "Failed Findings", value: "5 items" },
         ].map((s) => (
           <div key={s.label} className="card-surface p-4">
             <p className="text-xs text-muted-foreground">{s.label}</p>
@@ -48,9 +48,9 @@ function ChecklistPage() {
         ))}
       </div>
 
-      <Panel title="Riwayat Pengisian" actions={<SearchBar placeholder="Cari checklist..." />}>
+      <Panel title="Completion History" actions={<SearchBar placeholder="Search checklist..." />}>
         <DataTable
-          columns={["Nama Checklist", "Equipment", "Frekuensi", "Jml Item", "Shift", "Petugas", "Status"]}
+          columns={["Checklist Name", "Equipment", "Frequency", "Items", "Shift", "Inspector", "Status"]}
           rows={checklists.map((c) => [
             <span className="font-medium">{c.name}</span>,
             c.equipment,
@@ -61,11 +61,11 @@ function ChecklistPage() {
             <StatusPill
               label={c.status}
               tone={
-                c.status === "Selesai"
+                c.status === "Completed"
                   ? "success"
-                  : c.status === "Ada Temuan"
+                  : c.status === "Finding Found"
                     ? "warning"
-                    : c.status === "Terlewat"
+                    : c.status === "Missed"
                       ? "destructive"
                       : "info"
               }

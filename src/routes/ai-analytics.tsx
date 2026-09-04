@@ -16,16 +16,16 @@ import { aiInsights, forecast, purchaseReminders } from "@/lib/mock-data";
 export const Route = createFileRoute("/ai-analytics")({
   head: () => ({
     meta: [
-      { title: "AI Analytics Sparepart — Prediksi Stok & Risiko" },
+      { title: "AI Analytics — Sparepart Stock & Risk Prediction" },
       {
         name: "description",
         content:
-          "Prediksi habis stok sparepart dengan confidence band, penjelasan alasan, dan rekomendasi reorder.",
+          "Predict sparepart stock depletion with confidence bands, explainable reasoning, and reorder recommendations.",
       },
-      { property: "og:title", content: "AI Analytics Sparepart" },
+      { property: "og:title", content: "AI Sparepart Analytics" },
       {
         property: "og:description",
-        content: "Forecast konsumsi sparepart dan rekomendasi AI yang bisa dijelaskan.",
+        content: "Sparepart consumption forecast and explainable AI recommendations.",
       },
     ],
   }),
@@ -37,14 +37,14 @@ function AiAnalytics() {
     <div className="space-y-6">
       <PageHeader
         title="AI Analytics — Predictive Sparepart"
-        description="Prediksi kebutuhan sparepart berbasis pola historis, dengan alasan yang bisa dipahami teknisi"
+        description="Sparepart demand prediction based on historical patterns, with technician-friendly explanations"
       />
 
       <div className="grid gap-5 lg:grid-cols-3">
         <Panel
           className="lg:col-span-2"
-          title="Forecast Stok — Bearing SKF-6205"
-          description="Garis prediksi dengan confidence band 80%"
+          title="Stock Forecast — Bearing SKF-6205"
+          description="Prediction line with 80% confidence band"
         >
           <div className="h-72">
             <ResponsiveContainer width="100%" height="100%">
@@ -82,7 +82,7 @@ function AiAnalytics() {
         <section className="ai-surface rounded-xl p-5">
           <div className="flex items-center gap-2">
             <Sparkles className="size-5 text-primary" />
-            <h3 className="font-display text-base font-bold">Kenapa direkomendasikan?</h3>
+            <h3 className="font-display text-base font-bold">Why is this recommended?</h3>
           </div>
           <ul className="mt-3 space-y-3">
             {aiInsights.map((i) => (
@@ -90,9 +90,9 @@ function AiAnalytics() {
                 <p className="text-sm font-semibold">{i.part}</p>
                 <p className="mt-1 text-xs text-muted-foreground">{i.reason}</p>
                 <div className="mt-2 flex gap-2">
-                  <StatusPill label={`± ${i.days} hari`} tone="destructive" />
+                  <StatusPill label={`± ${i.days} days`} tone="destructive" />
                   <StatusPill
-                    label={`akurasi ${Math.round(i.confidence * 100)}%`}
+                    label={`accuracy ${Math.round(i.confidence * 100)}%`}
                     tone="primary"
                   />
                 </div>
@@ -102,9 +102,9 @@ function AiAnalytics() {
         </section>
       </div>
 
-      <Panel title="Rekomendasi Reorder" description="Disusun dari prediksi konsumsi + lead time supplier">
+      <Panel title="Reorder Recommendations" description="Based on consumption prediction + supplier lead time">
         <DataTable
-          columns={["Sparepart", "Stok", "Min", "Lead Time", "Prediksi Habis", "Rekomendasi"]}
+          columns={["Sparepart", "Stock", "Min", "Lead Time", "Predicted Depletion", "Recommendation"]}
           rows={purchaseReminders.map((p) => [
             <span className="font-medium">{p.part}</span>,
             p.stock,
@@ -113,7 +113,7 @@ function AiAnalytics() {
             p.predicted,
             <StatusPill
               label={p.action}
-              tone={p.action === "Pantau" ? "warning" : "destructive"}
+              tone={p.action === "Monitor" ? "warning" : "destructive"}
             />,
           ])}
         />
