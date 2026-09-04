@@ -12,6 +12,7 @@ import { useEffect, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { AppShell } from "@/components/layout/app-shell";
+import { AiAssistant } from "@/components/layout/ai-assistant";
 import { Toaster } from "@/components/ui/sonner";
 
 
@@ -129,6 +130,7 @@ function RootComponent() {
         {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
         <Outlet />
       </AppShell>
+      <AiAssistant />
       <Toaster />
     </QueryClientProvider>
   );
