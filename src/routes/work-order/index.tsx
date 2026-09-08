@@ -1,6 +1,14 @@
 import { Link, createFileRoute } from "@tanstack/react-router";
-import { Plus, Eye, Calendar } from "lucide-react";
-import { DataTable, PageHeader, Panel, SearchBar, StatusPill } from "@/components/ui-kit/page";
+import { Plus, Eye, Calendar, Search } from "lucide-react";
+import { DataTable, PageHeader, StatusPill } from "@/components/ui-kit/page";
+import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { historyWorkOrders } from "@/lib/mock-data";
 
 export const Route = createFileRoute("/work-order/")({
@@ -31,12 +39,9 @@ const statusTone = (s: string) =>
         ? "warning"
         : "primary";
 
-const prioTone = (p: string) =>
-  p === "Critical" ? "destructive" : p === "High" ? "warning" : p === "Low" ? "muted" : "info";
-
 function WorkOrderPage() {
   return (
-    <div>
+    <div className="space-y-6">
       <PageHeader
         title="History Work Order"
         description="List of reports that have been created"
@@ -49,23 +54,49 @@ function WorkOrderPage() {
           </Link>
         }
       />
-      <Panel actions={
-        <div className="flex flex-wrap items-center gap-4 w-full">
-            <SearchBar placeholder="Search" />
-            <select className="h-10 rounded-lg border border-input bg-surface px-3 text-sm outline-none focus:border-ring focus:ring-2 focus:ring-ring/20">
-              <option>Filter by status</option>
-            </select>
-            <select className="h-10 rounded-lg border border-input bg-surface px-3 text-sm outline-none focus:border-ring focus:ring-2 focus:ring-ring/20">
-              <option>Filter by type</option>
-            </select>
-            <div className="h-10 rounded-lg border border-input bg-surface px-3 text-sm flex items-center justify-center text-muted-foreground ml-auto">
-               <Calendar className="mr-2 size-4" /> dd/mm/yyyy - dd/mm/yyyy
+      
+      <div className="bg-white border rounded-xl shadow-sm flex flex-col">
+        {/* Filter Bar styled like users management */}
+        <div className="p-4 border-b flex flex-wrap md:flex-nowrap items-center gap-4 justify-between">
+          <div className="relative flex-1 max-w-sm">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
+            <Input placeholder="Search work order..." className="pl-9 bg-slate-50/50" />
+          </div>
+
+          <div className="flex flex-wrap items-center gap-3">
+            <Select defaultValue="all">
+              <SelectTrigger className="w-[140px] bg-white">
+                <SelectValue placeholder="All Status" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All Status</SelectItem>
+                <SelectItem value="completed">Completed</SelectItem>
+                <SelectItem value="open">Open</SelectItem>
+                <SelectItem value="awaiting">Awaiting Sparepart</SelectItem>
+              </SelectContent>
+            </Select>
+
+            <Select defaultValue="all">
+              <SelectTrigger className="w-[140px] bg-white">
+                <SelectValue placeholder="All Type" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All Type</SelectItem>
+                <SelectItem value="corrective">Corrective</SelectItem>
+                <SelectItem value="preventive">Preventive</SelectItem>
+              </SelectContent>
+            </Select>
+
+            <div className="h-9 px-3 rounded-md border border-input bg-white text-xs flex items-center justify-center text-muted-foreground">
+              <Calendar className="mr-2 size-3.5" /> dd/mm/yyyy - dd/mm/yyyy
             </div>
           </div>
-      } className="mt-4 border-0 p-0 card-surface-none">
+        </div>
+
         <DataTable
           columns={[
-            "Preview",
+            "Action",
+            "Status",
             "Work Order ID",
             "Submit Form",
             "Approved Date",
@@ -74,12 +105,15 @@ function WorkOrderPage() {
             "Department",
             "Area",
             "Line",
-            "Status",
           ]}
           rows={historyWorkOrders.map((w) => [
-            <Link to={`/work-order/${w.no}` as any} className="flex size-8 items-center justify-center rounded bg-blue-600 text-white hover:bg-blue-700">
+            <Link
+              to={`/work-order/${w.no}` as any}
+              className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 border border-input bg-background shadow-sm hover:bg-accent hover:text-primary h-8 w-8 text-slate-400"
+            >
               <Eye className="size-4" />
             </Link>,
+            <StatusPill label={w.status} tone={statusTone(w.status)} />,
             <span className="font-medium">{w.no}</span>,
             <span className="text-muted-foreground">{w.submit}</span>,
             <span className="text-muted-foreground">{w.approved}</span>,
@@ -88,26 +122,9 @@ function WorkOrderPage() {
             w.department,
             w.area,
             w.line,
-            <StatusPill label={w.status} tone={statusTone(w.status)} />,
           ])}
         />
-        
-        <div className="flex items-center justify-end gap-4 p-4 text-sm text-muted-foreground border-t border-border mt-4">
-          <div className="flex items-center gap-2">
-            <span>Rows per page</span>
-            <select className="rounded border border-input px-2 py-1 bg-surface">
-              <option>10</option>
-            </select>
-          </div>
-          <div>Page 1 of 10</div>
-          <div className="flex items-center gap-1">
-            <button className="px-2 py-1 rounded border border-border disabled:opacity-50" disabled>&laquo;</button>
-            <button className="px-2 py-1 rounded border border-border disabled:opacity-50" disabled>&lsaquo;</button>
-            <button className="px-2 py-1 rounded border border-border">&rsaquo;</button>
-            <button className="px-2 py-1 rounded border border-border">&raquo;</button>
-          </div>
-        </div>
-      </Panel>
+      </div>
     </div>
   );
 }

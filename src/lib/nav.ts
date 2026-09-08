@@ -57,7 +57,6 @@ export const navSections: NavSection[] = [
           { title: "Manpower", url: "/dashboard/manpower" },
         ],
       },
-      { title: "Checklist", url: "/checklist", icon: ClipboardList },
       { title: "Schedule", url: "/schedule", icon: Calendar },
       { title: "Work Order", url: "/work-order", icon: Wrench },
       {

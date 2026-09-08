@@ -48,10 +48,10 @@ function RequestOrderList() {
 
       <div className="bg-white rounded-xl border shadow-sm flex flex-col">
         {/* Filters */}
-        <div className="p-4 border-b flex flex-wrap md:flex-nowrap items-center gap-4">
-          <div className="relative flex-1 max-w-sm">
+        <div className="p-4 border-b flex flex-wrap items-center gap-4">
+          <div className="relative flex-1 min-w-[240px]">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
-            <Input placeholder="Search by item name" className="pl-9 bg-slate-50/50" />
+            <Input placeholder="Search by item name" className="pl-9 bg-slate-50/50 w-full" />
           </div>
           
           <Select defaultValue="all">
@@ -117,8 +117,8 @@ function RequestOrderList() {
                       >
                         <Eye className="size-4" />
                       </Button>
-                      <Button variant="outline" size="icon" className="h-8 w-8 text-slate-400 hover:text-primary">
-                        <RotateCcw className="size-4" />
+                      <Button variant="outline" size="icon" className="h-8 w-8 text-slate-400 hover:text-primary" title="Download">
+                        <Download className="size-4" />
                       </Button>
                       <Button variant="outline" size="icon" className="h-8 w-8 text-slate-400 hover:text-primary">
                         <Edit2 className="size-4" />

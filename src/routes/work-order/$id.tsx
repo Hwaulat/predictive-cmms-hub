@@ -64,10 +64,7 @@ function WorkOrderDetailPage() {
           
           <div className="space-y-4">
             <div className="text-sm font-semibold">Approved by:</div>
-            <div className="flex items-center gap-2">
-              <div className="flex size-8 items-center justify-center rounded-full bg-blue-500 text-white font-bold">H</div>
-            </div>
-            <div className="flex items-center gap-2 text-sm text-muted-foreground">
+            <div className="flex items-center gap-2 text-sm font-medium text-slate-800">
               <CheckCircle2 className="size-4 text-green-500" /> Hasan
             </div>
             <div className="flex items-center gap-2 text-sm mt-4">
