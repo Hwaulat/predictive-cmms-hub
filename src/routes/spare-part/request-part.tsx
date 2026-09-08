@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Plus } from "lucide-react";
+import { Calendar, Plus } from "lucide-react";
 import { DataTable, PageHeader, Panel, SearchBar, StatusPill } from "@/components/ui-kit/page";
 import { requests } from "@/lib/mock-data";
 
@@ -39,7 +39,20 @@ function RequestPartPage() {
 
       <Panel
         title="Request List"
-        actions={<SearchBar placeholder="Search request..." />}
+        actions={
+          <div className="flex flex-wrap items-center gap-4 w-full">
+            <SearchBar placeholder="Search request..." />
+            <select className="h-10 rounded-lg border border-input bg-surface px-3 text-sm outline-none focus:border-ring focus:ring-2 focus:ring-ring/20">
+              <option>Filter by status</option>
+            </select>
+            <select className="h-10 rounded-lg border border-input bg-surface px-3 text-sm outline-none focus:border-ring focus:ring-2 focus:ring-ring/20">
+              <option>Filter by category</option>
+            </select>
+            <div className="h-10 rounded-lg border border-input bg-surface px-3 text-sm flex items-center justify-center text-muted-foreground ml-auto">
+               <Calendar className="mr-2 size-4" /> dd/mm/yyyy - dd/mm/yyyy
+            </div>
+          </div>
+        }
       >
         <DataTable
           columns={["Request No.", "Date", "Part Name", "Qty", "Requester", "Department", "Status"]}

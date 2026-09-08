@@ -9,6 +9,8 @@ import {
   Sparkles,
   ClipboardList,
   Wrench,
+  GitMerge,
+  Users,
   type LucideIcon,
 } from "lucide-react";
 
@@ -26,36 +28,56 @@ export type NavSection = {
 
 export const navSections: NavSection[] = [
   {
-    label: "Core Functions",
+    label: "AI & Analytics",
+    items: [
+      {
+        title: "AI Analytics",
+        icon: Sparkles,
+        children: [
+          { title: "Sparepart", url: "/ai/sparepart" },
+          { title: "Forecast Part", url: "/ai/forecast-part" },
+          { title: "Maintenance", url: "/ai/maintenance" },
+        ],
+      },
+      { title: "AI for Breakdown Sparepart", url: "/ai/breakdown-sparepart", icon: Sparkles },
+      { title: "AI for KPI", url: "/ai/kpi", icon: Sparkles },
+    ],
+  },
+  {
+    label: "Main Menu",
     items: [
       {
         title: "Dashboard",
         icon: LayoutGrid,
         children: [
-          { title: "Overview", url: "/" },
-          { title: "AI Analytics", url: "/ai-analytics" },
+          { title: "General", url: "/" },
+          { title: "Corrective", url: "/dashboard/corrective" },
+          { title: "Machine", url: "/dashboard/machine" },
+          { title: "Sparepart", url: "/dashboard/sparepart" },
+          { title: "Manpower", url: "/dashboard/manpower" },
         ],
       },
       { title: "Checklist", url: "/checklist", icon: ClipboardList },
+      { title: "Schedule", url: "/schedule", icon: Calendar },
       { title: "Work Order", url: "/work-order", icon: Wrench },
       {
-        title: "Spare part",
+        title: "Sparepart",
         icon: Layers,
         children: [
-          { title: "Inventory", url: "/spare-part/inventory" },
+          { title: "Request Order List", url: "/spare-part/request-order-list" },
+          { title: "Order Request", url: "/spare-part/order-request" },
           { title: "Log Part", url: "/spare-part/log-part" },
           { title: "Stock Transaction", url: "/spare-part/stock-transaction" },
-          { title: "Request Part", url: "/spare-part/request-part" },
+          { title: "Stock Opname", url: "/spare-part/stock-opname" },
           { title: "Purchase Reminder", url: "/spare-part/purchase-reminder" },
         ],
       },
-      { title: "Schedule", url: "/schedule", icon: Calendar },
       {
         title: "Approval",
         icon: CheckSquare,
         children: [
           { title: "Maintenance", url: "/approval/maintenance" },
-          { title: "Spare Part", url: "/approval/spare-part" },
+          { title: "Sparepart", url: "/approval/spare-part" },
         ],
       },
     ],
@@ -67,8 +89,10 @@ export const navSections: NavSection[] = [
         title: "Report",
         icon: FileText,
         children: [
-          { title: "Maintenance Report", url: "/report/maintenance" },
-          { title: "Sparepart Report", url: "/report/sparepart" },
+          { title: "Checklist", url: "/report/checklist" },
+          { title: "Preventive", url: "/report/preventive" },
+          { title: "Corrective", url: "/report/corrective" },
+          { title: "Sparepart", url: "/report/sparepart" },
         ],
       },
       { title: "Documentation", url: "/documentation", icon: FileSpreadsheet },
@@ -82,11 +106,14 @@ export const navSections: NavSection[] = [
         icon: Box,
         children: [
           { title: "Department", url: "/master-data/department" },
-          { title: "Parameter", url: "/master-data/parameter" },
-          { title: "Document Number", url: "/master-data/document-number" },
-          { title: "Machine/Equipment", url: "/master-data/machine" },
+          { title: "Machine", url: "/master-data/machine" },
+          { title: "Sparepart", url: "/master-data/sparepart" },
+          { title: "Checklist Form", url: "/master-data/checklist-form" },
+          { title: "Preventive Form", url: "/master-data/preventive-form" },
         ],
       },
+      { title: "Workflow Approval", url: "/setup/workflow-approval", icon: GitMerge },
+      { title: "Users Management", url: "/users-management", icon: Users },
     ],
   },
 ];

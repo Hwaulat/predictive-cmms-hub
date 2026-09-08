@@ -1,6 +1,24 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { Plus, Search } from "lucide-react";
 import { DataTable, PageHeader, Panel, StatusPill } from "@/components/ui-kit/page";
 import { schedule } from "@/lib/mock-data";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
 export const Route = createFileRoute("/schedule")({
   head: () => ({
@@ -37,6 +55,85 @@ function SchedulePage() {
       <PageHeader
         title="Schedule"
         description="Scheduled preventive maintenance based on time or usage"
+        actions={
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button className="bg-[#2563eb] hover:bg-[#1d4ed8]">
+                <Plus className="size-4 mr-2" /> Create Schedule
+              </Button>
+            </DialogTrigger>
+            <DialogContent className="max-w-2xl">
+              <DialogHeader>
+                <DialogTitle className="flex items-center gap-2 text-xl pb-4 border-b">
+                  <div className="p-1.5 bg-blue-50 text-blue-600 rounded-full">
+                    <Plus className="size-5" />
+                  </div>
+                  Create Preventive Schedule
+                </DialogTitle>
+              </DialogHeader>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 py-4">
+                <div className="space-y-2">
+                  <Label>Equipment / Machine<span className="text-destructive">*</span></Label>
+                  <Select>
+                    <SelectTrigger><SelectValue placeholder="Select machine" /></SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="crn-01">CRN-01 - Crane</SelectItem>
+                      <SelectItem value="cmpr-01">CMPR-01 - Compressor</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div className="space-y-2">
+                  <Label>Maintenance Type<span className="text-destructive">*</span></Label>
+                  <Select>
+                    <SelectTrigger><SelectValue placeholder="Select type" /></SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="time">Time-based</SelectItem>
+                      <SelectItem value="meter">Meter-based (Running Hours)</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div className="space-y-2">
+                  <Label>Frequency<span className="text-destructive">*</span></Label>
+                  <Select>
+                    <SelectTrigger><SelectValue placeholder="Select frequency" /></SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="daily">Daily</SelectItem>
+                      <SelectItem value="weekly">Weekly</SelectItem>
+                      <SelectItem value="monthly">Monthly</SelectItem>
+                      <SelectItem value="yearly">Yearly</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div className="space-y-2">
+                  <Label>Start Date<span className="text-destructive">*</span></Label>
+                  <Input type="date" />
+                </div>
+                <div className="space-y-2">
+                  <Label>Assigned Technician</Label>
+                  <Select>
+                    <SelectTrigger><SelectValue placeholder="Select technician" /></SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="t1">Andre (Mechanic)</SelectItem>
+                      <SelectItem value="t2">Budi (Electric)</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div className="space-y-2">
+                  <Label>Estimated Duration (Hours)</Label>
+                  <Input type="number" placeholder="e.g. 2" />
+                </div>
+                <div className="space-y-2 col-span-2">
+                  <Label>Description / Instructions</Label>
+                  <Input placeholder="General inspection and lubrication" />
+                </div>
+              </div>
+              <div className="flex justify-end gap-3 pt-4 border-t">
+                <Button variant="outline">Cancel</Button>
+                <Button className="bg-slate-100 text-slate-400 hover:bg-slate-200" disabled>Save Schedule</Button>
+              </div>
+            </DialogContent>
+          </Dialog>
+        }
       />
 
       <div className="grid gap-5 lg:grid-cols-3">
@@ -89,7 +186,29 @@ function SchedulePage() {
         </Panel>
       </div>
 
-      <Panel title="PM Schedule List">
+      <Panel 
+        title="PM Schedule List"
+        actions={
+          <div className="flex items-center gap-3">
+            <div className="relative min-w-[200px]">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
+              <Input placeholder="Search PM No. or Equipment" className="pl-9 h-9 text-xs bg-white w-full" />
+            </div>
+            <Select defaultValue="all">
+              <SelectTrigger className="w-[140px] h-9 text-xs bg-white">
+                <SelectValue placeholder="All Status" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All Status</SelectItem>
+                <SelectItem value="scheduled">Scheduled</SelectItem>
+                <SelectItem value="due">Due Today</SelectItem>
+                <SelectItem value="overdue">Overdue</SelectItem>
+                <SelectItem value="completed">Completed</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+        }
+      >
         <DataTable
           columns={["PM No.", "Equipment", "Trigger", "Due Date", "Technician", "Status"]}
           rows={schedule.map((s) => [

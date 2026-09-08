@@ -14,10 +14,21 @@ import { Route as AiAnalyticsRouteImport } from './routes/ai-analytics'
 import { Route as ChecklistRouteImport } from './routes/checklist'
 import { Route as DocumentationRouteImport } from './routes/documentation'
 import { Route as ScheduleRouteImport } from './routes/schedule'
-import { Route as WorkOrderRouteImport } from './routes/work-order'
+import { Route as UsersManagementRouteImport } from './routes/users-management'
+import { Route as AiBreakdownSparepartRouteImport } from './routes/ai/breakdown-sparepart'
+import { Route as AiForecastPartRouteImport } from './routes/ai/forecast-part'
+import { Route as AiKpiRouteImport } from './routes/ai/kpi'
+import { Route as AiMaintenanceRouteImport } from './routes/ai/maintenance'
+import { Route as AiSparepartRouteImport } from './routes/ai/sparepart'
 import { Route as ApprovalMaintenanceRouteImport } from './routes/approval/maintenance'
 import { Route as ApprovalSparePartRouteImport } from './routes/approval/spare-part'
-import { Route as MasterDataDepartmentRouteImport } from './routes/master-data/department'
+import { Route as DashboardBreakdownRouteImport } from './routes/dashboard/breakdown'
+import { Route as DashboardCorrectiveRouteImport } from './routes/dashboard/corrective'
+import { Route as DashboardKpiReportRouteImport } from './routes/dashboard/kpi-report'
+import { Route as DashboardMachineRouteImport } from './routes/dashboard/machine'
+import { Route as DashboardMachineProblemTrendRouteImport } from './routes/dashboard/machine-problem-trend'
+import { Route as DashboardManpowerRouteImport } from './routes/dashboard/manpower'
+import { Route as DashboardSparepartRouteImport } from './routes/dashboard/sparepart'
 import { Route as MasterDataDocumentNumberRouteImport } from './routes/master-data/document-number'
 import { Route as MasterDataMachineRouteImport } from './routes/master-data/machine'
 import { Route as MasterDataParameterRouteImport } from './routes/master-data/parameter'
@@ -28,6 +39,16 @@ import { Route as SparePartLogPartRouteImport } from './routes/spare-part/log-pa
 import { Route as SparePartPurchaseReminderRouteImport } from './routes/spare-part/purchase-reminder'
 import { Route as SparePartRequestPartRouteImport } from './routes/spare-part/request-part'
 import { Route as SparePartStockTransactionRouteImport } from './routes/spare-part/stock-transaction'
+import { Route as WorkOrderIndexRouteImport } from './routes/work-order/index'
+import { Route as WorkOrderIdRouteImport } from './routes/work-order/$id'
+import { Route as WorkOrderAddRouteImport } from './routes/work-order/add'
+import { Route as ApprovalMaintenanceIdRouteImport } from './routes/approval/maintenance.$id'
+import { Route as MasterDataDepartmentIndexRouteImport } from './routes/master-data/department/index'
+import { Route as MasterDataDepartmentIdRouteImport } from './routes/master-data/department/$id'
+import { Route as MasterDataDepartmentNewRouteImport } from './routes/master-data/department/new'
+import { Route as SparePartRequestOrderListIndexRouteImport } from './routes/spare-part/request-order-list/index'
+import { Route as SparePartRequestOrderListIdRouteImport } from './routes/spare-part/request-order-list/$id'
+import { Route as SparePartRequestOrderListNewRouteImport } from './routes/spare-part/request-order-list/new'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -54,9 +75,34 @@ const ScheduleRoute = ScheduleRouteImport.update({
   path: '/schedule',
   getParentRoute: () => rootRouteImport,
 } as any)
-const WorkOrderRoute = WorkOrderRouteImport.update({
-  id: '/work-order',
-  path: '/work-order',
+const UsersManagementRoute = UsersManagementRouteImport.update({
+  id: '/users-management',
+  path: '/users-management',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AiBreakdownSparepartRoute = AiBreakdownSparepartRouteImport.update({
+  id: '/ai/breakdown-sparepart',
+  path: '/ai/breakdown-sparepart',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AiForecastPartRoute = AiForecastPartRouteImport.update({
+  id: '/ai/forecast-part',
+  path: '/ai/forecast-part',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AiKpiRoute = AiKpiRouteImport.update({
+  id: '/ai/kpi',
+  path: '/ai/kpi',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AiMaintenanceRoute = AiMaintenanceRouteImport.update({
+  id: '/ai/maintenance',
+  path: '/ai/maintenance',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AiSparepartRoute = AiSparepartRouteImport.update({
+  id: '/ai/sparepart',
+  path: '/ai/sparepart',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApprovalMaintenanceRoute = ApprovalMaintenanceRouteImport.update({
@@ -69,9 +115,40 @@ const ApprovalSparePartRoute = ApprovalSparePartRouteImport.update({
   path: '/approval/spare-part',
   getParentRoute: () => rootRouteImport,
 } as any)
-const MasterDataDepartmentRoute = MasterDataDepartmentRouteImport.update({
-  id: '/master-data/department',
-  path: '/master-data/department',
+const DashboardBreakdownRoute = DashboardBreakdownRouteImport.update({
+  id: '/dashboard/breakdown',
+  path: '/dashboard/breakdown',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardCorrectiveRoute = DashboardCorrectiveRouteImport.update({
+  id: '/dashboard/corrective',
+  path: '/dashboard/corrective',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardKpiReportRoute = DashboardKpiReportRouteImport.update({
+  id: '/dashboard/kpi-report',
+  path: '/dashboard/kpi-report',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardMachineRoute = DashboardMachineRouteImport.update({
+  id: '/dashboard/machine',
+  path: '/dashboard/machine',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardMachineProblemTrendRoute =
+  DashboardMachineProblemTrendRouteImport.update({
+    id: '/dashboard/machine-problem-trend',
+    path: '/dashboard/machine-problem-trend',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const DashboardManpowerRoute = DashboardManpowerRouteImport.update({
+  id: '/dashboard/manpower',
+  path: '/dashboard/manpower',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardSparepartRoute = DashboardSparepartRouteImport.update({
+  id: '/dashboard/sparepart',
+  path: '/dashboard/sparepart',
   getParentRoute: () => rootRouteImport,
 } as any)
 const MasterDataDocumentNumberRoute =
@@ -127,6 +204,60 @@ const SparePartStockTransactionRoute =
     path: '/spare-part/stock-transaction',
     getParentRoute: () => rootRouteImport,
   } as any)
+const WorkOrderIndexRoute = WorkOrderIndexRouteImport.update({
+  id: '/work-order/',
+  path: '/work-order/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WorkOrderIdRoute = WorkOrderIdRouteImport.update({
+  id: '/work-order/$id',
+  path: '/work-order/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WorkOrderAddRoute = WorkOrderAddRouteImport.update({
+  id: '/work-order/add',
+  path: '/work-order/add',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApprovalMaintenanceIdRoute = ApprovalMaintenanceIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => ApprovalMaintenanceRoute,
+} as any)
+const MasterDataDepartmentIndexRoute =
+  MasterDataDepartmentIndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () => MasterDataDepartmentRoute,
+  } as any)
+const MasterDataDepartmentIdRoute = MasterDataDepartmentIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => MasterDataDepartmentRoute,
+} as any)
+const MasterDataDepartmentNewRoute = MasterDataDepartmentNewRouteImport.update({
+  id: '/new',
+  path: '/new',
+  getParentRoute: () => MasterDataDepartmentRoute,
+} as any)
+const SparePartRequestOrderListIndexRoute =
+  SparePartRequestOrderListIndexRouteImport.update({
+    id: '/spare-part/request-order-list/',
+    path: '/spare-part/request-order-list/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const SparePartRequestOrderListIdRoute =
+  SparePartRequestOrderListIdRouteImport.update({
+    id: '/spare-part/request-order-list/$id',
+    path: '/spare-part/request-order-list/$id',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const SparePartRequestOrderListNewRoute =
+  SparePartRequestOrderListNewRouteImport.update({
+    id: '/spare-part/request-order-list/new',
+    path: '/spare-part/request-order-list/new',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -134,10 +265,21 @@ export interface FileRoutesByFullPath {
   '/checklist': typeof ChecklistRoute
   '/documentation': typeof DocumentationRoute
   '/schedule': typeof ScheduleRoute
-  '/work-order': typeof WorkOrderRoute
-  '/approval/maintenance': typeof ApprovalMaintenanceRoute
+  '/users-management': typeof UsersManagementRoute
+  '/ai/breakdown-sparepart': typeof AiBreakdownSparepartRoute
+  '/ai/forecast-part': typeof AiForecastPartRoute
+  '/ai/kpi': typeof AiKpiRoute
+  '/ai/maintenance': typeof AiMaintenanceRoute
+  '/ai/sparepart': typeof AiSparepartRoute
+  '/approval/maintenance': typeof ApprovalMaintenanceRouteWithChildren
   '/approval/spare-part': typeof ApprovalSparePartRoute
-  '/master-data/department': typeof MasterDataDepartmentRoute
+  '/dashboard/breakdown': typeof DashboardBreakdownRoute
+  '/dashboard/corrective': typeof DashboardCorrectiveRoute
+  '/dashboard/kpi-report': typeof DashboardKpiReportRoute
+  '/dashboard/machine': typeof DashboardMachineRoute
+  '/dashboard/machine-problem-trend': typeof DashboardMachineProblemTrendRoute
+  '/dashboard/manpower': typeof DashboardManpowerRoute
+  '/dashboard/sparepart': typeof DashboardSparepartRoute
   '/master-data/document-number': typeof MasterDataDocumentNumberRoute
   '/master-data/machine': typeof MasterDataMachineRoute
   '/master-data/parameter': typeof MasterDataParameterRoute
@@ -148,6 +290,16 @@ export interface FileRoutesByFullPath {
   '/spare-part/purchase-reminder': typeof SparePartPurchaseReminderRoute
   '/spare-part/request-part': typeof SparePartRequestPartRoute
   '/spare-part/stock-transaction': typeof SparePartStockTransactionRoute
+  '/work-order/$id': typeof WorkOrderIdRoute
+  '/work-order/add': typeof WorkOrderAddRoute
+  '/work-order/': typeof WorkOrderIndexRoute
+  '/approval/maintenance/$id': typeof ApprovalMaintenanceIdRoute
+  '/master-data/department/$id': typeof MasterDataDepartmentIdRoute
+  '/master-data/department/new': typeof MasterDataDepartmentNewRoute
+  '/spare-part/request-order-list/$id': typeof SparePartRequestOrderListIdRoute
+  '/spare-part/request-order-list/new': typeof SparePartRequestOrderListNewRoute
+  '/master-data/department/': typeof MasterDataDepartmentIndexRoute
+  '/spare-part/request-order-list/': typeof SparePartRequestOrderListIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -155,10 +307,21 @@ export interface FileRoutesByTo {
   '/checklist': typeof ChecklistRoute
   '/documentation': typeof DocumentationRoute
   '/schedule': typeof ScheduleRoute
-  '/work-order': typeof WorkOrderRoute
-  '/approval/maintenance': typeof ApprovalMaintenanceRoute
+  '/users-management': typeof UsersManagementRoute
+  '/ai/breakdown-sparepart': typeof AiBreakdownSparepartRoute
+  '/ai/forecast-part': typeof AiForecastPartRoute
+  '/ai/kpi': typeof AiKpiRoute
+  '/ai/maintenance': typeof AiMaintenanceRoute
+  '/ai/sparepart': typeof AiSparepartRoute
+  '/approval/maintenance': typeof ApprovalMaintenanceRouteWithChildren
   '/approval/spare-part': typeof ApprovalSparePartRoute
-  '/master-data/department': typeof MasterDataDepartmentRoute
+  '/dashboard/breakdown': typeof DashboardBreakdownRoute
+  '/dashboard/corrective': typeof DashboardCorrectiveRoute
+  '/dashboard/kpi-report': typeof DashboardKpiReportRoute
+  '/dashboard/machine': typeof DashboardMachineRoute
+  '/dashboard/machine-problem-trend': typeof DashboardMachineProblemTrendRoute
+  '/dashboard/manpower': typeof DashboardManpowerRoute
+  '/dashboard/sparepart': typeof DashboardSparepartRoute
   '/master-data/document-number': typeof MasterDataDocumentNumberRoute
   '/master-data/machine': typeof MasterDataMachineRoute
   '/master-data/parameter': typeof MasterDataParameterRoute
@@ -169,6 +332,16 @@ export interface FileRoutesByTo {
   '/spare-part/purchase-reminder': typeof SparePartPurchaseReminderRoute
   '/spare-part/request-part': typeof SparePartRequestPartRoute
   '/spare-part/stock-transaction': typeof SparePartStockTransactionRoute
+  '/work-order/$id': typeof WorkOrderIdRoute
+  '/work-order/add': typeof WorkOrderAddRoute
+  '/work-order': typeof WorkOrderIndexRoute
+  '/approval/maintenance/$id': typeof ApprovalMaintenanceIdRoute
+  '/master-data/department/$id': typeof MasterDataDepartmentIdRoute
+  '/master-data/department/new': typeof MasterDataDepartmentNewRoute
+  '/spare-part/request-order-list/$id': typeof SparePartRequestOrderListIdRoute
+  '/spare-part/request-order-list/new': typeof SparePartRequestOrderListNewRoute
+  '/master-data/department': typeof MasterDataDepartmentIndexRoute
+  '/spare-part/request-order-list': typeof SparePartRequestOrderListIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -177,10 +350,21 @@ export interface FileRoutesById {
   '/checklist': typeof ChecklistRoute
   '/documentation': typeof DocumentationRoute
   '/schedule': typeof ScheduleRoute
-  '/work-order': typeof WorkOrderRoute
-  '/approval/maintenance': typeof ApprovalMaintenanceRoute
+  '/users-management': typeof UsersManagementRoute
+  '/ai/breakdown-sparepart': typeof AiBreakdownSparepartRoute
+  '/ai/forecast-part': typeof AiForecastPartRoute
+  '/ai/kpi': typeof AiKpiRoute
+  '/ai/maintenance': typeof AiMaintenanceRoute
+  '/ai/sparepart': typeof AiSparepartRoute
+  '/approval/maintenance': typeof ApprovalMaintenanceRouteWithChildren
   '/approval/spare-part': typeof ApprovalSparePartRoute
-  '/master-data/department': typeof MasterDataDepartmentRoute
+  '/dashboard/breakdown': typeof DashboardBreakdownRoute
+  '/dashboard/corrective': typeof DashboardCorrectiveRoute
+  '/dashboard/kpi-report': typeof DashboardKpiReportRoute
+  '/dashboard/machine': typeof DashboardMachineRoute
+  '/dashboard/machine-problem-trend': typeof DashboardMachineProblemTrendRoute
+  '/dashboard/manpower': typeof DashboardManpowerRoute
+  '/dashboard/sparepart': typeof DashboardSparepartRoute
   '/master-data/document-number': typeof MasterDataDocumentNumberRoute
   '/master-data/machine': typeof MasterDataMachineRoute
   '/master-data/parameter': typeof MasterDataParameterRoute
@@ -191,6 +375,16 @@ export interface FileRoutesById {
   '/spare-part/purchase-reminder': typeof SparePartPurchaseReminderRoute
   '/spare-part/request-part': typeof SparePartRequestPartRoute
   '/spare-part/stock-transaction': typeof SparePartStockTransactionRoute
+  '/work-order/$id': typeof WorkOrderIdRoute
+  '/work-order/add': typeof WorkOrderAddRoute
+  '/work-order/': typeof WorkOrderIndexRoute
+  '/approval/maintenance/$id': typeof ApprovalMaintenanceIdRoute
+  '/master-data/department/$id': typeof MasterDataDepartmentIdRoute
+  '/master-data/department/new': typeof MasterDataDepartmentNewRoute
+  '/spare-part/request-order-list/$id': typeof SparePartRequestOrderListIdRoute
+  '/spare-part/request-order-list/new': typeof SparePartRequestOrderListNewRoute
+  '/master-data/department/': typeof MasterDataDepartmentIndexRoute
+  '/spare-part/request-order-list/': typeof SparePartRequestOrderListIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -200,10 +394,21 @@ export interface FileRouteTypes {
     | '/checklist'
     | '/documentation'
     | '/schedule'
-    | '/work-order'
+    | '/users-management'
+    | '/ai/breakdown-sparepart'
+    | '/ai/forecast-part'
+    | '/ai/kpi'
+    | '/ai/maintenance'
+    | '/ai/sparepart'
     | '/approval/maintenance'
     | '/approval/spare-part'
-    | '/master-data/department'
+    | '/dashboard/breakdown'
+    | '/dashboard/corrective'
+    | '/dashboard/kpi-report'
+    | '/dashboard/machine'
+    | '/dashboard/machine-problem-trend'
+    | '/dashboard/manpower'
+    | '/dashboard/sparepart'
     | '/master-data/document-number'
     | '/master-data/machine'
     | '/master-data/parameter'
@@ -214,6 +419,16 @@ export interface FileRouteTypes {
     | '/spare-part/purchase-reminder'
     | '/spare-part/request-part'
     | '/spare-part/stock-transaction'
+    | '/work-order/$id'
+    | '/work-order/add'
+    | '/work-order/'
+    | '/approval/maintenance/$id'
+    | '/master-data/department/$id'
+    | '/master-data/department/new'
+    | '/spare-part/request-order-list/$id'
+    | '/spare-part/request-order-list/new'
+    | '/master-data/department/'
+    | '/spare-part/request-order-list/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -221,10 +436,21 @@ export interface FileRouteTypes {
     | '/checklist'
     | '/documentation'
     | '/schedule'
-    | '/work-order'
+    | '/users-management'
+    | '/ai/breakdown-sparepart'
+    | '/ai/forecast-part'
+    | '/ai/kpi'
+    | '/ai/maintenance'
+    | '/ai/sparepart'
     | '/approval/maintenance'
     | '/approval/spare-part'
-    | '/master-data/department'
+    | '/dashboard/breakdown'
+    | '/dashboard/corrective'
+    | '/dashboard/kpi-report'
+    | '/dashboard/machine'
+    | '/dashboard/machine-problem-trend'
+    | '/dashboard/manpower'
+    | '/dashboard/sparepart'
     | '/master-data/document-number'
     | '/master-data/machine'
     | '/master-data/parameter'
@@ -235,6 +461,16 @@ export interface FileRouteTypes {
     | '/spare-part/purchase-reminder'
     | '/spare-part/request-part'
     | '/spare-part/stock-transaction'
+    | '/work-order/$id'
+    | '/work-order/add'
+    | '/work-order'
+    | '/approval/maintenance/$id'
+    | '/master-data/department/$id'
+    | '/master-data/department/new'
+    | '/spare-part/request-order-list/$id'
+    | '/spare-part/request-order-list/new'
+    | '/master-data/department'
+    | '/spare-part/request-order-list'
   id:
     | '__root__'
     | '/'
@@ -242,10 +478,21 @@ export interface FileRouteTypes {
     | '/checklist'
     | '/documentation'
     | '/schedule'
-    | '/work-order'
+    | '/users-management'
+    | '/ai/breakdown-sparepart'
+    | '/ai/forecast-part'
+    | '/ai/kpi'
+    | '/ai/maintenance'
+    | '/ai/sparepart'
     | '/approval/maintenance'
     | '/approval/spare-part'
-    | '/master-data/department'
+    | '/dashboard/breakdown'
+    | '/dashboard/corrective'
+    | '/dashboard/kpi-report'
+    | '/dashboard/machine'
+    | '/dashboard/machine-problem-trend'
+    | '/dashboard/manpower'
+    | '/dashboard/sparepart'
     | '/master-data/document-number'
     | '/master-data/machine'
     | '/master-data/parameter'
@@ -256,6 +503,16 @@ export interface FileRouteTypes {
     | '/spare-part/purchase-reminder'
     | '/spare-part/request-part'
     | '/spare-part/stock-transaction'
+    | '/work-order/$id'
+    | '/work-order/add'
+    | '/work-order/'
+    | '/approval/maintenance/$id'
+    | '/master-data/department/$id'
+    | '/master-data/department/new'
+    | '/spare-part/request-order-list/$id'
+    | '/spare-part/request-order-list/new'
+    | '/master-data/department/'
+    | '/spare-part/request-order-list/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -264,10 +521,21 @@ export interface RootRouteChildren {
   ChecklistRoute: typeof ChecklistRoute
   DocumentationRoute: typeof DocumentationRoute
   ScheduleRoute: typeof ScheduleRoute
-  WorkOrderRoute: typeof WorkOrderRoute
-  ApprovalMaintenanceRoute: typeof ApprovalMaintenanceRoute
+  UsersManagementRoute: typeof UsersManagementRoute
+  AiBreakdownSparepartRoute: typeof AiBreakdownSparepartRoute
+  AiForecastPartRoute: typeof AiForecastPartRoute
+  AiKpiRoute: typeof AiKpiRoute
+  AiMaintenanceRoute: typeof AiMaintenanceRoute
+  AiSparepartRoute: typeof AiSparepartRoute
+  ApprovalMaintenanceRoute: typeof ApprovalMaintenanceRouteWithChildren
   ApprovalSparePartRoute: typeof ApprovalSparePartRoute
-  MasterDataDepartmentRoute: typeof MasterDataDepartmentRoute
+  DashboardBreakdownRoute: typeof DashboardBreakdownRoute
+  DashboardCorrectiveRoute: typeof DashboardCorrectiveRoute
+  DashboardKpiReportRoute: typeof DashboardKpiReportRoute
+  DashboardMachineRoute: typeof DashboardMachineRoute
+  DashboardMachineProblemTrendRoute: typeof DashboardMachineProblemTrendRoute
+  DashboardManpowerRoute: typeof DashboardManpowerRoute
+  DashboardSparepartRoute: typeof DashboardSparepartRoute
   MasterDataDocumentNumberRoute: typeof MasterDataDocumentNumberRoute
   MasterDataMachineRoute: typeof MasterDataMachineRoute
   MasterDataParameterRoute: typeof MasterDataParameterRoute
@@ -278,6 +546,12 @@ export interface RootRouteChildren {
   SparePartPurchaseReminderRoute: typeof SparePartPurchaseReminderRoute
   SparePartRequestPartRoute: typeof SparePartRequestPartRoute
   SparePartStockTransactionRoute: typeof SparePartStockTransactionRoute
+  WorkOrderIdRoute: typeof WorkOrderIdRoute
+  WorkOrderAddRoute: typeof WorkOrderAddRoute
+  WorkOrderIndexRoute: typeof WorkOrderIndexRoute
+  SparePartRequestOrderListIdRoute: typeof SparePartRequestOrderListIdRoute
+  SparePartRequestOrderListNewRoute: typeof SparePartRequestOrderListNewRoute
+  SparePartRequestOrderListIndexRoute: typeof SparePartRequestOrderListIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -317,11 +591,46 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ScheduleRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/work-order': {
-      id: '/work-order'
-      path: '/work-order'
-      fullPath: '/work-order'
-      preLoaderRoute: typeof WorkOrderRouteImport
+    '/users-management': {
+      id: '/users-management'
+      path: '/users-management'
+      fullPath: '/users-management'
+      preLoaderRoute: typeof UsersManagementRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ai/breakdown-sparepart': {
+      id: '/ai/breakdown-sparepart'
+      path: '/ai/breakdown-sparepart'
+      fullPath: '/ai/breakdown-sparepart'
+      preLoaderRoute: typeof AiBreakdownSparepartRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ai/forecast-part': {
+      id: '/ai/forecast-part'
+      path: '/ai/forecast-part'
+      fullPath: '/ai/forecast-part'
+      preLoaderRoute: typeof AiForecastPartRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ai/kpi': {
+      id: '/ai/kpi'
+      path: '/ai/kpi'
+      fullPath: '/ai/kpi'
+      preLoaderRoute: typeof AiKpiRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ai/maintenance': {
+      id: '/ai/maintenance'
+      path: '/ai/maintenance'
+      fullPath: '/ai/maintenance'
+      preLoaderRoute: typeof AiMaintenanceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ai/sparepart': {
+      id: '/ai/sparepart'
+      path: '/ai/sparepart'
+      fullPath: '/ai/sparepart'
+      preLoaderRoute: typeof AiSparepartRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/approval/maintenance': {
@@ -338,11 +647,53 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApprovalSparePartRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/master-data/department': {
-      id: '/master-data/department'
-      path: '/master-data/department'
-      fullPath: '/master-data/department'
-      preLoaderRoute: typeof MasterDataDepartmentRouteImport
+    '/dashboard/breakdown': {
+      id: '/dashboard/breakdown'
+      path: '/dashboard/breakdown'
+      fullPath: '/dashboard/breakdown'
+      preLoaderRoute: typeof DashboardBreakdownRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard/corrective': {
+      id: '/dashboard/corrective'
+      path: '/dashboard/corrective'
+      fullPath: '/dashboard/corrective'
+      preLoaderRoute: typeof DashboardCorrectiveRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard/kpi-report': {
+      id: '/dashboard/kpi-report'
+      path: '/dashboard/kpi-report'
+      fullPath: '/dashboard/kpi-report'
+      preLoaderRoute: typeof DashboardKpiReportRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard/machine': {
+      id: '/dashboard/machine'
+      path: '/dashboard/machine'
+      fullPath: '/dashboard/machine'
+      preLoaderRoute: typeof DashboardMachineRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard/machine-problem-trend': {
+      id: '/dashboard/machine-problem-trend'
+      path: '/dashboard/machine-problem-trend'
+      fullPath: '/dashboard/machine-problem-trend'
+      preLoaderRoute: typeof DashboardMachineProblemTrendRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard/manpower': {
+      id: '/dashboard/manpower'
+      path: '/dashboard/manpower'
+      fullPath: '/dashboard/manpower'
+      preLoaderRoute: typeof DashboardManpowerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard/sparepart': {
+      id: '/dashboard/sparepart'
+      path: '/dashboard/sparepart'
+      fullPath: '/dashboard/sparepart'
+      preLoaderRoute: typeof DashboardSparepartRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/master-data/document-number': {
@@ -415,8 +766,89 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SparePartStockTransactionRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/work-order/': {
+      id: '/work-order/'
+      path: '/work-order'
+      fullPath: '/work-order/'
+      preLoaderRoute: typeof WorkOrderIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/work-order/$id': {
+      id: '/work-order/$id'
+      path: '/work-order/$id'
+      fullPath: '/work-order/$id'
+      preLoaderRoute: typeof WorkOrderIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/work-order/add': {
+      id: '/work-order/add'
+      path: '/work-order/add'
+      fullPath: '/work-order/add'
+      preLoaderRoute: typeof WorkOrderAddRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/approval/maintenance/$id': {
+      id: '/approval/maintenance/$id'
+      path: '/$id'
+      fullPath: '/approval/maintenance/$id'
+      preLoaderRoute: typeof ApprovalMaintenanceIdRouteImport
+      parentRoute: typeof ApprovalMaintenanceRoute
+    }
+    '/master-data/department/': {
+      id: '/master-data/department/'
+      path: '/'
+      fullPath: '/master-data/department/'
+      preLoaderRoute: typeof MasterDataDepartmentIndexRouteImport
+      parentRoute: typeof MasterDataDepartmentRoute
+    }
+    '/master-data/department/$id': {
+      id: '/master-data/department/$id'
+      path: '/$id'
+      fullPath: '/master-data/department/$id'
+      preLoaderRoute: typeof MasterDataDepartmentIdRouteImport
+      parentRoute: typeof MasterDataDepartmentRoute
+    }
+    '/master-data/department/new': {
+      id: '/master-data/department/new'
+      path: '/new'
+      fullPath: '/master-data/department/new'
+      preLoaderRoute: typeof MasterDataDepartmentNewRouteImport
+      parentRoute: typeof MasterDataDepartmentRoute
+    }
+    '/spare-part/request-order-list/': {
+      id: '/spare-part/request-order-list/'
+      path: '/spare-part/request-order-list'
+      fullPath: '/spare-part/request-order-list/'
+      preLoaderRoute: typeof SparePartRequestOrderListIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/spare-part/request-order-list/$id': {
+      id: '/spare-part/request-order-list/$id'
+      path: '/spare-part/request-order-list/$id'
+      fullPath: '/spare-part/request-order-list/$id'
+      preLoaderRoute: typeof SparePartRequestOrderListIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/spare-part/request-order-list/new': {
+      id: '/spare-part/request-order-list/new'
+      path: '/spare-part/request-order-list/new'
+      fullPath: '/spare-part/request-order-list/new'
+      preLoaderRoute: typeof SparePartRequestOrderListNewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
+
+interface ApprovalMaintenanceRouteChildren {
+  ApprovalMaintenanceIdRoute: typeof ApprovalMaintenanceIdRoute
+}
+
+const ApprovalMaintenanceRouteChildren: ApprovalMaintenanceRouteChildren = {
+  ApprovalMaintenanceIdRoute: ApprovalMaintenanceIdRoute,
+}
+
+const ApprovalMaintenanceRouteWithChildren =
+  ApprovalMaintenanceRoute._addFileChildren(ApprovalMaintenanceRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
@@ -424,10 +856,21 @@ const rootRouteChildren: RootRouteChildren = {
   ChecklistRoute: ChecklistRoute,
   DocumentationRoute: DocumentationRoute,
   ScheduleRoute: ScheduleRoute,
-  WorkOrderRoute: WorkOrderRoute,
-  ApprovalMaintenanceRoute: ApprovalMaintenanceRoute,
+  UsersManagementRoute: UsersManagementRoute,
+  AiBreakdownSparepartRoute: AiBreakdownSparepartRoute,
+  AiForecastPartRoute: AiForecastPartRoute,
+  AiKpiRoute: AiKpiRoute,
+  AiMaintenanceRoute: AiMaintenanceRoute,
+  AiSparepartRoute: AiSparepartRoute,
+  ApprovalMaintenanceRoute: ApprovalMaintenanceRouteWithChildren,
   ApprovalSparePartRoute: ApprovalSparePartRoute,
-  MasterDataDepartmentRoute: MasterDataDepartmentRoute,
+  DashboardBreakdownRoute: DashboardBreakdownRoute,
+  DashboardCorrectiveRoute: DashboardCorrectiveRoute,
+  DashboardKpiReportRoute: DashboardKpiReportRoute,
+  DashboardMachineRoute: DashboardMachineRoute,
+  DashboardMachineProblemTrendRoute: DashboardMachineProblemTrendRoute,
+  DashboardManpowerRoute: DashboardManpowerRoute,
+  DashboardSparepartRoute: DashboardSparepartRoute,
   MasterDataDocumentNumberRoute: MasterDataDocumentNumberRoute,
   MasterDataMachineRoute: MasterDataMachineRoute,
   MasterDataParameterRoute: MasterDataParameterRoute,
@@ -438,6 +881,12 @@ const rootRouteChildren: RootRouteChildren = {
   SparePartPurchaseReminderRoute: SparePartPurchaseReminderRoute,
   SparePartRequestPartRoute: SparePartRequestPartRoute,
   SparePartStockTransactionRoute: SparePartStockTransactionRoute,
+  WorkOrderIdRoute: WorkOrderIdRoute,
+  WorkOrderAddRoute: WorkOrderAddRoute,
+  WorkOrderIndexRoute: WorkOrderIndexRoute,
+  SparePartRequestOrderListIdRoute: SparePartRequestOrderListIdRoute,
+  SparePartRequestOrderListNewRoute: SparePartRequestOrderListNewRoute,
+  SparePartRequestOrderListIndexRoute: SparePartRequestOrderListIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Upload } from "lucide-react";
+import { Calendar, Upload } from "lucide-react";
 import { DataTable, PageHeader, Panel, SearchBar, StatusPill } from "@/components/ui-kit/page";
 import { documents } from "@/lib/mock-data";
 
@@ -33,7 +33,20 @@ function DocumentationPage() {
           </button>
         }
       />
-      <Panel actions={<SearchBar placeholder="Search documents..." />} title="Document List">
+      <Panel actions={
+          <div className="flex flex-wrap items-center gap-4 w-full">
+            <SearchBar placeholder="Search documents..." />
+            <select className="h-10 rounded-lg border border-input bg-surface px-3 text-sm outline-none focus:border-ring focus:ring-2 focus:ring-ring/20">
+              <option>Filter by status</option>
+            </select>
+            <select className="h-10 rounded-lg border border-input bg-surface px-3 text-sm outline-none focus:border-ring focus:ring-2 focus:ring-ring/20">
+              <option>Filter by category</option>
+            </select>
+            <div className="h-10 rounded-lg border border-input bg-surface px-3 text-sm flex items-center justify-center text-muted-foreground ml-auto">
+               <Calendar className="mr-2 size-4" /> dd/mm/yyyy - dd/mm/yyyy
+            </div>
+          </div>
+        } title="Document List">
         <DataTable
           columns={["Document Name", "Type", "Equipment", "Version", "Last Updated"]}
           rows={documents.map((d) => [
