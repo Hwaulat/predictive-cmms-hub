@@ -91,7 +91,7 @@ function CreateSorPage() {
           <div className="border rounded-lg overflow-x-auto w-full bg-white">
             <table className="w-full text-sm border-collapse">
               <thead>
-                <tr className="bg-slate-100/80 border-b text-slate-600 uppercase text-[11px] font-bold tracking-wider whitespace-nowrap text-left">
+                <tr className="bg-slate-100/50 border-b text-slate-500 uppercase text-xs font-bold tracking-wider whitespace-nowrap text-left">
                   <th className="py-3 px-4 text-center w-12">ACTION</th>
                   <th className="py-3 px-4">NO.</th>
                   <th className="py-3 px-4 min-w-[140px]">

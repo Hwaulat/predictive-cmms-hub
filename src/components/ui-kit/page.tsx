@@ -146,24 +146,24 @@ export function DataTable({
   return (
     <div className="flex flex-col w-full">
       <div className="overflow-x-auto">
-        <table className="w-full min-w-[720px] border-collapse text-sm">
+        <table className="w-full min-w-[720px] text-sm">
           <thead>
-            <tr className="border-b border-border bg-muted/60">
+            <tr className="bg-slate-100/50 text-slate-500 uppercase text-xs font-bold tracking-wider border-b">
               {columns.map((c) => (
                 <th
                   key={c}
-                  className="px-4 py-3 text-left text-[11px] font-semibold tracking-wider text-muted-foreground uppercase"
+                  className="py-4 px-4 text-left font-semibold whitespace-nowrap"
                 >
                   {c}
                 </th>
               ))}
             </tr>
           </thead>
-          <tbody>
+          <tbody className="divide-y">
             {rows.map((row, i) => (
-              <tr key={i} className="border-b border-border/70 last:border-0 hover:bg-muted/40">
+              <tr key={i} className="hover:bg-slate-50/50 transition-colors">
                 {row.map((cell, j) => (
-                  <td key={j} className="px-4 py-3 align-middle">
+                  <td key={j} className="py-3 px-4 align-middle">
                     {cell}
                   </td>
                 ))}

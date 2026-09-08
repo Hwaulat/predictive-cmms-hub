@@ -296,8 +296,8 @@ function OrderRequestPage() {
           <div className="overflow-x-auto w-full">
             <table className="w-full text-sm border-collapse">
               <thead>
-                <tr className="bg-slate-100/70 border-b text-slate-600 uppercase text-[11px] font-bold tracking-wider whitespace-nowrap">
-                  <th className="py-3.5 px-4 text-center w-10">
+                <tr className="bg-slate-100/50 border-b text-slate-500 uppercase text-xs font-bold tracking-wider whitespace-nowrap">
+                  <th className="py-4 px-4 text-center w-10">
                     <Checkbox
                       checked={selectAll}
                       onCheckedChange={(checked) => handleSelectAll(Boolean(checked))}
@@ -405,8 +405,8 @@ function OrderRequestPage() {
           <div className="overflow-x-auto w-full">
             <table className="w-full text-sm border-collapse">
               <thead>
-                <tr className="bg-slate-100/70 border-b text-slate-600 uppercase text-[11px] font-bold tracking-wider whitespace-nowrap">
-                  <th className="py-3.5 px-4 text-left font-semibold">ACTION</th>
+                <tr className="bg-slate-100/50 border-b text-slate-500 uppercase text-xs font-bold tracking-wider whitespace-nowrap">
+                  <th className="py-4 px-4 text-left font-semibold">ACTION</th>
                   <th className="py-3.5 px-4 text-left font-semibold">UPDATE PO</th>
                   <th className="py-3.5 px-4 text-left font-semibold">
                     <div className="inline-flex items-center gap-1 cursor-pointer">

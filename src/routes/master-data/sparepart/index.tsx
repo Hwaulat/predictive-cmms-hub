@@ -87,8 +87,8 @@ function SparepartPage() {
 
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
-                <thead className="bg-white">
-                  <tr className="border-b text-left text-slate-500 font-semibold">
+                <thead>
+                  <tr className="bg-slate-100/50 text-slate-500 uppercase text-xs font-bold tracking-wider border-b">
                     <th className="py-4 px-6 whitespace-nowrap">Part No</th>
                     <th className="py-4 px-4 whitespace-nowrap">Part Name</th>
                     <th className="py-4 px-4 whitespace-nowrap">Category</th>
@@ -149,8 +149,8 @@ function SparepartPage() {
 
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
-                <thead className="bg-white">
-                  <tr className="border-b text-left text-slate-500 font-semibold">
+                <thead>
+                  <tr className="bg-slate-100/50 text-slate-500 uppercase text-xs font-bold tracking-wider border-b">
                     <th className="py-4 px-6 whitespace-nowrap">Department</th>
                     <th className="py-4 px-4 whitespace-nowrap">Area</th>
                     <th className="py-4 px-4 whitespace-nowrap">Location</th>

@@ -109,9 +109,9 @@ function WorkflowApprovalPage() {
         <div className="flex-1">
           <table className="w-full text-sm">
             <thead className="bg-slate-100/50">
-              <tr className="text-slate-500 uppercase text-xs font-semibold tracking-wider border-b">
-                <th className="py-4 px-6 text-left w-1/3">Position Name</th>
-                <th className="py-4 px-6 text-left w-2/3">Approval Name</th>
+              <tr className="text-slate-500 uppercase text-xs font-bold tracking-wider border-b">
+                <th className="py-4 px-6 text-left w-1/3 font-semibold">Position Name</th>
+                <th className="py-4 px-6 text-left w-2/3 font-semibold">Approval Name</th>
               </tr>
             </thead>
             <tbody className="divide-y">

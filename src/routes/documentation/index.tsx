@@ -55,7 +55,7 @@ function DocumentationList() {
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
-              <tr className="bg-white text-slate-500 font-semibold border-b">
+              <tr className="bg-slate-100/50 text-slate-500 uppercase text-xs font-bold tracking-wider border-b">
                 <th className="py-4 px-6 text-left">Action</th>
                 <th className="py-4 px-6 text-left">Machine Code</th>
                 <th className="py-4 px-6 text-left">Machine Name</th>

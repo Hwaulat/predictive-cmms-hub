@@ -72,8 +72,8 @@ function MachinePage() {
         {/* Table */}
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
-            <thead className="bg-white">
-              <tr className="border-b text-left text-slate-500 font-semibold">
+            <thead>
+              <tr className="bg-slate-100/50 text-slate-500 uppercase text-xs font-bold tracking-wider border-b">
                 <th className="py-4 px-6 w-12"><Checkbox /></th>
                 <th className="py-4 px-4 whitespace-nowrap">Machine Code</th>
                 <th className="py-4 px-4 whitespace-nowrap">Machine Name</th>

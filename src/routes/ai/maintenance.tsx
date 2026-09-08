@@ -79,10 +79,10 @@ function StandardTable({
 
       <div className="overflow-x-auto">
         <table className="w-full text-sm">
-          <thead className="bg-slate-50">
-            <tr>
+          <thead>
+            <tr className="bg-slate-100/50 border-b">
               {columns.map((h) => (
-                <th key={h} className="px-4 py-3 text-left text-[11px] font-bold text-slate-500 uppercase whitespace-nowrap">
+                <th key={h} className="py-4 px-4 text-left text-xs font-bold text-slate-500 uppercase tracking-wider whitespace-nowrap">
                   {h}
                 </th>
               ))}

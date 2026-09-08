@@ -45,7 +45,7 @@ function DepartmentList() {
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
-              <tr className="bg-slate-50 text-slate-500 text-sm font-medium">
+              <tr className="bg-slate-100/50 text-slate-500 uppercase text-xs font-bold tracking-wider border-b">
                 <th className="py-4 px-6 text-left w-32">Action</th>
                 <th className="py-4 px-6 text-left w-1/4">Department</th>
                 <th className="py-4 px-6 text-left w-1/4">Type</th>
