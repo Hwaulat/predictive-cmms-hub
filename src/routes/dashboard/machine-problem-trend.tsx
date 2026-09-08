@@ -36,8 +36,8 @@ function MachineProblemTrendDashboard() {
 
 
       <div className="flex items-center gap-4">
-        <Button variant="outline" size="icon" className="bg-white" onClick={() => navigate({ to: "/dashboard/corrective" })}>
-          <ArrowLeft className="size-4" />
+        <Button variant="outline" className="bg-white text-slate-700" onClick={() => navigate({ to: "/dashboard/corrective" })}>
+          <ArrowLeft className="size-4 mr-2" /> Back
         </Button>
         <PageHeader 
           title="Tren Masalah Mesin" 

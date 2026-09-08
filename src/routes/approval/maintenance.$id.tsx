@@ -1,5 +1,6 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { Clock, Image as ImageIcon, Download } from "lucide-react";
+import { Link, createFileRoute } from "@tanstack/react-router";
+import { Clock, Image as ImageIcon, Download, ArrowLeft } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import { approvalChecklistReport } from "@/lib/mock-data";
 
 export const Route = createFileRoute("/approval/maintenance/$id")({
@@ -12,7 +13,14 @@ function MaintenanceApprovalDetails() {
   return (
     <div className="space-y-6 w-full pb-20">
       <div className="flex items-center justify-between">
-        <h2 className="text-xl font-bold font-display">Maintenance Informations</h2>
+        <div className="flex items-center gap-3">
+          <Link to="/approval/maintenance">
+            <Button variant="outline" size="sm" className="bg-white text-slate-700">
+              <ArrowLeft className="size-4 mr-2" /> Back
+            </Button>
+          </Link>
+          <h2 className="text-xl font-bold font-display">Maintenance Informations</h2>
+        </div>
         <span className="text-sm font-medium text-muted-foreground">
           Submit Form : <span className="text-foreground">12/12/2023 12:02</span>
         </span>

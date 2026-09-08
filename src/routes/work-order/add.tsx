@@ -37,8 +37,8 @@ function AddWorkOrderPage() {
   return (
     <div className="space-y-6 pb-20 animate-in fade-in-50 duration-500">
       <div className="flex items-center gap-4">
-        <Button variant="outline" size="icon" onClick={() => navigate({ to: "/work-order" })}>
-          <ArrowLeft className="size-4" />
+        <Button variant="outline" className="text-slate-700 bg-white" onClick={() => navigate({ to: "/work-order" })}>
+          <ArrowLeft className="size-4 mr-2" /> Back
         </Button>
         <PageHeader title="Add New Work Order" description="Create a new maintenance request" />
       </div>

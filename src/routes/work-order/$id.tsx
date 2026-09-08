@@ -14,8 +14,8 @@ function WorkOrderDetailPage() {
   return (
     <div className="space-y-6 w-full pb-20">
       <div className="flex items-center gap-4">
-        <Button variant="outline" size="icon" onClick={() => navigate({ to: "/work-order" })}>
-          <ArrowLeft className="size-4" />
+        <Button variant="outline" className="text-slate-700 bg-white" onClick={() => navigate({ to: "/work-order" })}>
+          <ArrowLeft className="size-4 mr-2" /> Back
         </Button>
         <PageHeader title="Work Order Detail" description="View work order information" />
       </div>
