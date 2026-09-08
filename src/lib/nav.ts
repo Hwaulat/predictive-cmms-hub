@@ -67,7 +67,6 @@ export const navSections: NavSection[] = [
           { title: "Order Request", url: "/spare-part/order-request" },
           { title: "Log Part", url: "/spare-part/log-part" },
           { title: "Stock Transaction", url: "/spare-part/stock-transaction" },
-          { title: "Stock Opname", url: "/spare-part/stock-opname" },
           { title: "Purchase Reminder", url: "/spare-part/purchase-reminder" },
         ],
       },
