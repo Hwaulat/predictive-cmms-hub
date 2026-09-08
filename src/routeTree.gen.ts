@@ -60,6 +60,7 @@ import { Route as SparePartRequestOrderListIndexRouteImport } from './routes/spa
 import { Route as SparePartRequestOrderListIdRouteImport } from './routes/spare-part/request-order-list/$id'
 import { Route as SparePartRequestOrderListNewRouteImport } from './routes/spare-part/request-order-list/new'
 import { Route as SparePartStockTransactionIndexRouteImport } from './routes/spare-part/stock-transaction/index'
+import { Route as SparePartStockTransactionIdRouteImport } from './routes/spare-part/stock-transaction/$id'
 import { Route as SparePartStockTransactionCreateRouteImport } from './routes/spare-part/stock-transaction/create'
 import { Route as DocumentationMachineIdHistoryIndexRouteImport } from './routes/documentation/$machineId/history/index'
 import { Route as DocumentationMachineIdHistoryHistoryIdRouteImport } from './routes/documentation/$machineId/history/$historyId'
@@ -333,6 +334,12 @@ const SparePartStockTransactionIndexRoute =
     path: '/spare-part/stock-transaction/',
     getParentRoute: () => rootRouteImport,
   } as any)
+const SparePartStockTransactionIdRoute =
+  SparePartStockTransactionIdRouteImport.update({
+    id: '/spare-part/stock-transaction/$id',
+    path: '/spare-part/stock-transaction/$id',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const SparePartStockTransactionCreateRoute =
   SparePartStockTransactionCreateRouteImport.update({
     id: '/spare-part/stock-transaction/create',
@@ -403,6 +410,7 @@ export interface FileRoutesByFullPath {
   '/spare-part/order-request/edit': typeof SparePartOrderRequestEditRoute
   '/spare-part/request-order-list/$id': typeof SparePartRequestOrderListIdRoute
   '/spare-part/request-order-list/new': typeof SparePartRequestOrderListNewRoute
+  '/spare-part/stock-transaction/$id': typeof SparePartStockTransactionIdRoute
   '/spare-part/stock-transaction/create': typeof SparePartStockTransactionCreateRoute
   '/documentation/$machineId/': typeof DocumentationMachineIdIndexRoute
   '/master-data/department/': typeof MasterDataDepartmentIndexRoute
@@ -460,6 +468,7 @@ export interface FileRoutesByTo {
   '/spare-part/order-request/edit': typeof SparePartOrderRequestEditRoute
   '/spare-part/request-order-list/$id': typeof SparePartRequestOrderListIdRoute
   '/spare-part/request-order-list/new': typeof SparePartRequestOrderListNewRoute
+  '/spare-part/stock-transaction/$id': typeof SparePartStockTransactionIdRoute
   '/spare-part/stock-transaction/create': typeof SparePartStockTransactionCreateRoute
   '/documentation/$machineId': typeof DocumentationMachineIdIndexRoute
   '/master-data/department': typeof MasterDataDepartmentIndexRoute
@@ -518,6 +527,7 @@ export interface FileRoutesById {
   '/spare-part/order-request/edit': typeof SparePartOrderRequestEditRoute
   '/spare-part/request-order-list/$id': typeof SparePartRequestOrderListIdRoute
   '/spare-part/request-order-list/new': typeof SparePartRequestOrderListNewRoute
+  '/spare-part/stock-transaction/$id': typeof SparePartStockTransactionIdRoute
   '/spare-part/stock-transaction/create': typeof SparePartStockTransactionCreateRoute
   '/documentation/$machineId/': typeof DocumentationMachineIdIndexRoute
   '/master-data/department/': typeof MasterDataDepartmentIndexRoute
@@ -577,6 +587,7 @@ export interface FileRouteTypes {
     | '/spare-part/order-request/edit'
     | '/spare-part/request-order-list/$id'
     | '/spare-part/request-order-list/new'
+    | '/spare-part/stock-transaction/$id'
     | '/spare-part/stock-transaction/create'
     | '/documentation/$machineId/'
     | '/master-data/department/'
@@ -634,6 +645,7 @@ export interface FileRouteTypes {
     | '/spare-part/order-request/edit'
     | '/spare-part/request-order-list/$id'
     | '/spare-part/request-order-list/new'
+    | '/spare-part/stock-transaction/$id'
     | '/spare-part/stock-transaction/create'
     | '/documentation/$machineId'
     | '/master-data/department'
@@ -691,6 +703,7 @@ export interface FileRouteTypes {
     | '/spare-part/order-request/edit'
     | '/spare-part/request-order-list/$id'
     | '/spare-part/request-order-list/new'
+    | '/spare-part/stock-transaction/$id'
     | '/spare-part/stock-transaction/create'
     | '/documentation/$machineId/'
     | '/master-data/department/'
@@ -748,6 +761,7 @@ export interface RootRouteChildren {
   SparePartOrderRequestEditRoute: typeof SparePartOrderRequestEditRoute
   SparePartRequestOrderListIdRoute: typeof SparePartRequestOrderListIdRoute
   SparePartRequestOrderListNewRoute: typeof SparePartRequestOrderListNewRoute
+  SparePartStockTransactionIdRoute: typeof SparePartStockTransactionIdRoute
   SparePartStockTransactionCreateRoute: typeof SparePartStockTransactionCreateRoute
   DocumentationMachineIdIndexRoute: typeof DocumentationMachineIdIndexRoute
   MasterDataDepartmentIndexRoute: typeof MasterDataDepartmentIndexRoute
@@ -1120,6 +1134,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SparePartStockTransactionIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/spare-part/stock-transaction/$id': {
+      id: '/spare-part/stock-transaction/$id'
+      path: '/spare-part/stock-transaction/$id'
+      fullPath: '/spare-part/stock-transaction/$id'
+      preLoaderRoute: typeof SparePartStockTransactionIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/spare-part/stock-transaction/create': {
       id: '/spare-part/stock-transaction/create'
       path: '/spare-part/stock-transaction/create'
@@ -1206,6 +1227,7 @@ const rootRouteChildren: RootRouteChildren = {
   SparePartOrderRequestEditRoute: SparePartOrderRequestEditRoute,
   SparePartRequestOrderListIdRoute: SparePartRequestOrderListIdRoute,
   SparePartRequestOrderListNewRoute: SparePartRequestOrderListNewRoute,
+  SparePartStockTransactionIdRoute: SparePartStockTransactionIdRoute,
   SparePartStockTransactionCreateRoute: SparePartStockTransactionCreateRoute,
   DocumentationMachineIdIndexRoute: DocumentationMachineIdIndexRoute,
   MasterDataDepartmentIndexRoute: MasterDataDepartmentIndexRoute,

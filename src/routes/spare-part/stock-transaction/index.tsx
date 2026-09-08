@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import {
   ArrowLeftRight,
@@ -29,6 +29,9 @@ export const Route = createFileRoute("/spare-part/stock-transaction/")({
       { name: "description", content: "Sparepart Stock Transaction Management" },
     ],
   }),
+  validateSearch: (search: Record<string, unknown>) => ({
+    tab: (search["tab"] as string) || "in",
+  }),
   component: StockTransactionPage,
 });
 
@@ -42,9 +45,9 @@ interface TransactionItem {
   sparepartName: string;
 }
 
-const mockTransactions: TransactionItem[] = [
+const mockTransactionsIn: TransactionItem[] = [
   {
-    id: "1",
+    id: "in-1",
     no: 1,
     statusActivity: "Submitted",
     statusApproval: "Approved",
@@ -54,16 +57,40 @@ const mockTransactions: TransactionItem[] = [
   },
 ];
 
+const mockTransactionsOut: TransactionItem[] = [
+  {
+    id: "out-1",
+    no: 1,
+    statusActivity: "Submitted",
+    statusApproval: "Approved",
+    transactionDate: "27/08/2026, 17:42",
+    receiveBy: "Tester01",
+    sparepartName: "SOLENOID VALVE",
+  },
+];
+
 function StockTransactionPage() {
   const navigate = useNavigate();
-  const [activeTab, setActiveTab] = useState<"in" | "out">("in");
+  const searchParams = Route.useSearch();
+
+  const [activeTab, setActiveTab] = useState<"in" | "out">(
+    searchParams["tab"] === "out" ? "out" : "in"
+  );
   const [searchTerm, setSearchTerm] = useState("");
   const [statusActivity, setStatusActivity] = useState("all");
   const [statusApproval, setStatusApproval] = useState("all");
 
+  useEffect(() => {
+    if (searchParams["tab"] === "out" || searchParams["tab"] === "in") {
+      setActiveTab(searchParams["tab"] as "in" | "out");
+    }
+  }, [searchParams]);
+
+  const currentItems = activeTab === "in" ? mockTransactionsIn : mockTransactionsOut;
+
   return (
     <div className="space-y-6 pb-20 animate-in fade-in-50 duration-500">
-      {/* Header Bar with Inventory In / Out Tabs (SS 3) */}
+      {/* Header Bar with Inventory In / Out Tabs (SS 2 & 3) */}
       <div className="flex items-center justify-between border-b pb-4">
         <div className="flex items-center gap-2">
           <ArrowLeftRight className="size-6 text-slate-800" />
@@ -152,14 +179,19 @@ function StockTransactionPage() {
             {/* Create New Transaction Button */}
             <Button
               className="bg-[#1e3a8a] hover:bg-[#1e3a8a]/90 text-white flex items-center gap-2 font-medium px-4 h-10 shadow-sm"
-              onClick={() => navigate({ to: "/spare-part/stock-transaction/create" as any })}
+              onClick={() =>
+                navigate({
+                  to: "/spare-part/stock-transaction/create",
+                  search: { type: activeTab },
+                } as any)
+              }
             >
               <Plus className="size-4" /> Create New Transaction
             </Button>
           </div>
         </div>
 
-        {/* Table (SS 3) */}
+        {/* Table */}
         <div className="border rounded-lg overflow-x-auto w-full bg-white">
           <table className="w-full text-sm border-collapse">
             <thead>
@@ -186,7 +218,7 @@ function StockTransactionPage() {
               </tr>
             </thead>
             <tbody className="divide-y divide-border/60">
-              {mockTransactions.map((item) => (
+              {currentItems.map((item) => (
                 <tr key={item.id} className="hover:bg-slate-50/70 transition-colors whitespace-nowrap">
                   <td className="py-3 px-4 text-center">
                     <div className="flex items-center justify-center gap-1.5">
@@ -194,7 +226,12 @@ function StockTransactionPage() {
                         variant="outline"
                         size="icon"
                         className="size-8 text-slate-400 hover:text-primary border bg-white shadow-xs"
-                        title="View"
+                        title="View Details"
+                        onClick={() =>
+                          navigate({
+                            to: `/spare-part/stock-transaction/${item.id}` as any,
+                          })
+                        }
                       >
                         <Eye className="size-4" />
                       </Button>

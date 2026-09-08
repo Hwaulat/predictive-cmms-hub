@@ -18,15 +18,19 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { TablePagination } from "@/components/ui-kit/page";
 
 export const Route = createFileRoute("/spare-part/stock-transaction/create")({
   head: () => ({
     meta: [
-      { title: "Create New (Inventory IN) — Predictive CMMS Hub" },
-      { name: "description", content: "Create Inventory IN and Confirm Location" },
+      { title: "Create Stock Transaction — Predictive CMMS Hub" },
+      { name: "description", content: "Create Inventory Transaction and Confirm Location" },
     ],
   }),
-  component: CreateInventoryInPage,
+  validateSearch: (search: Record<string, unknown>) => ({
+    type: (search["type"] as string) || "in",
+  }),
+  component: CreateStockTransactionPage,
 });
 
 interface SparepartRow {
@@ -36,6 +40,8 @@ interface SparepartRow {
   sparepartDetail: string;
   quantity: number;
   price: string;
+  currentStock: number;
+  estimateCost: string;
   remarks: string;
 }
 
@@ -47,11 +53,14 @@ const initialSparepartRows: SparepartRow[] = [
     sparepartDetail: "Choose sparepart code",
     quantity: 0,
     price: "0",
+    currentStock: 0,
+    estimateCost: "0",
     remarks: "",
   },
 ];
 
-const storeLocations = [
+// Stores for Inventory In (SS 5 previous)
+const storeLocationsIn = [
   { id: "wh", name: "WH", racks: "1 Rack" },
   { id: "cct", name: "CCT", racks: "0 Rack" },
   { id: "orphaned", name: "ORPHANED", racks: "529 Rack" },
@@ -60,7 +69,7 @@ const storeLocations = [
   { id: "sp1", name: "SP1", racks: "5 Rack" },
 ];
 
-const rackLocations = [
+const rackLocationsIn = [
   { id: "1", name: "RCK000784 - 02-1" },
   { id: "2", name: "RCK000783 - 02-2" },
   { id: "3", name: "RCK000782 - 02-4" },
@@ -70,17 +79,33 @@ const rackLocations = [
   { id: "7", name: "RCK000778 - 02-9" },
 ];
 
-function CreateInventoryInPage() {
-  const navigate = useNavigate();
+// Racks for Inventory Out (SS 4 of current prompt)
+const rackLocationsOut = [
+  { id: "1", store: "WH", rack: "3A", currentStock: 5 },
+  { id: "2", store: "SP5", rack: "BLUESTAND", currentStock: 20 },
+  { id: "3", store: "ORPHANED", rack: "02-1", currentStock: 53 },
+  { id: "4", store: "SPR", rack: "101 C", currentStock: 2 },
+  { id: "5", store: "SP3", rack: "01-1", currentStock: 10 },
+  { id: "6", store: "CCT", rack: "RACK-1", currentStock: 4 },
+  { id: "7", store: "SP2", rack: "04-2", currentStock: 8 },
+  { id: "8", store: "SP1", rack: "05-1", currentStock: 12 },
+];
 
-  // Current view step: "create" (SS 4) or "confirm-location" (SS 5)
+function CreateStockTransactionPage() {
+  const navigate = useNavigate();
+  const searchParams = Route.useSearch();
+  const isOut = searchParams["type"] === "out";
+
+  // Current view step: "create" or "confirm-location"
   const [step, setStep] = useState<"create" | "confirm-location">("create");
 
   // Form State for Step 1
   const [items, setItems] = useState<SparepartRow[]>(initialSparepartRows);
 
   // Form State for Step 2
-  const [selectedSparepartForLocation, setSelectedSparepartForLocation] = useState("SOLENOID VALVE (120)");
+  const [selectedSparepartForLocation, setSelectedSparepartForLocation] = useState(
+    isOut ? "GASKET (54)" : "SOLENOID VALVE (120)"
+  );
   const [selectedStore, setSelectedStore] = useState("orphaned");
   const [storeSearch, setStoreSearch] = useState("");
   const [rackSearch, setRackSearch] = useState("");
@@ -97,6 +122,8 @@ function CreateInventoryInPage() {
         sparepartDetail: "Choose sparepart code",
         quantity: 0,
         price: "0",
+        currentStock: 0,
+        estimateCost: "0",
         remarks: "",
       },
     ]);
@@ -126,16 +153,16 @@ function CreateInventoryInPage() {
     );
   };
 
-  const filteredStores = storeLocations.filter((s) =>
+  const filteredStoresIn = storeLocationsIn.filter((s) =>
     s.name.toLowerCase().includes(storeSearch.toLowerCase())
   );
 
-  const filteredRacks = rackLocations.filter((r) =>
+  const filteredRacksIn = rackLocationsIn.filter((r) =>
     r.name.toLowerCase().includes(rackSearch.toLowerCase())
   );
 
   // ==========================================
-  // VIEW: CONFIRM LOCATION (SS 5)
+  // VIEW: CONFIRM LOCATION (SS 4 for OUT, SS 5 for IN)
   // ==========================================
   if (step === "confirm-location") {
     return (
@@ -162,14 +189,19 @@ function CreateInventoryInPage() {
             </Button>
             <Button
               className="bg-[#1e3a8a] hover:bg-[#1e3a8a]/90 text-white px-6 font-medium shadow-sm"
-              onClick={() => navigate({ to: "/spare-part/stock-transaction" })}
+              onClick={() =>
+                navigate({
+                  to: "/spare-part/stock-transaction",
+                  search: { tab: isOut ? "out" : "in" },
+                } as any)
+              }
             >
               Submit
             </Button>
           </div>
         </div>
 
-        {/* Top Section: List Sparepart Selection (SS 5) */}
+        {/* Top Section: List Sparepart Radio Selection */}
         <div className="bg-white rounded-xl border shadow-sm p-6 space-y-4">
           <h2 className="font-bold text-base text-slate-800">List Sparepart</h2>
           <div className="pt-1">
@@ -177,89 +209,47 @@ function CreateInventoryInPage() {
               <input
                 type="radio"
                 name="sparepartLocation"
-                checked={selectedSparepartForLocation === "SOLENOID VALVE (120)"}
-                onChange={() => setSelectedSparepartForLocation("SOLENOID VALVE (120)")}
+                checked={selectedSparepartForLocation === (isOut ? "GASKET (54)" : "SOLENOID VALVE (120)")}
+                onChange={() =>
+                  setSelectedSparepartForLocation(isOut ? "GASKET (54)" : "SOLENOID VALVE (120)")
+                }
                 className="size-4 text-blue-600 accent-blue-600 cursor-pointer"
               />
-              <span>SOLENOID VALVE (120)</span>
+              <span>{isOut ? "GASKET (54)" : "SOLENOID VALVE (120)"}</span>
             </label>
           </div>
         </div>
 
-        {/* Bottom Split Section: Store Location & Rack Location (SS 5) */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-          {/* Left Card: Store Location */}
-          <div className="lg:col-span-5 bg-white rounded-xl border shadow-sm p-6 space-y-4">
-            <div className="flex items-center justify-between">
-              <h2 className="font-bold text-base text-slate-800">Store Location</h2>
-              <div className="relative w-44">
-                <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 size-3.5 text-slate-400" />
-                <Input
-                  placeholder="Search by store"
-                  value={storeSearch}
-                  onChange={(e) => setStoreSearch(e.target.value)}
-                  className="pl-8 bg-white h-9 text-xs"
-                />
-              </div>
-            </div>
-
-            <div className="space-y-2 max-h-[420px] overflow-y-auto pr-1">
-              {filteredStores.map((store) => {
-                const isSelected = selectedStore === store.id;
-                return (
-                  <div
-                    key={store.id}
-                    onClick={() => setSelectedStore(store.id)}
-                    className={`p-3.5 rounded-lg border transition-all cursor-pointer ${
-                      isSelected
-                        ? "bg-[#1e3a8a] text-white border-[#1e3a8a] shadow-sm"
-                        : "bg-slate-50/50 hover:bg-slate-100 border-border/60 text-slate-800"
-                    }`}
-                  >
-                    <div className="font-bold text-sm leading-tight">{store.name}</div>
-                    <div
-                      className={`text-xs mt-0.5 ${
-                        isSelected ? "text-slate-200" : "text-slate-500"
-                      }`}
-                    >
-                      {store.racks}
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-
-          {/* Right Card: Rack Location */}
-          <div className="lg:col-span-7 bg-white rounded-xl border shadow-sm p-6 space-y-4">
-            <div className="flex items-center justify-between">
-              <h2 className="font-bold text-base text-slate-800">Rack Location</h2>
-              <div className="relative w-48">
-                <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 size-3.5 text-slate-400" />
-                <Input
-                  placeholder="Search by rack name"
-                  value={rackSearch}
-                  onChange={(e) => setRackSearch(e.target.value)}
-                  className="pl-8 bg-white h-9 text-xs"
-                />
-              </div>
-            </div>
+        {/* INVENTORY OUT: Single Card Rack Location (SS 4) */}
+        {isOut ? (
+          <div className="bg-white rounded-xl border shadow-sm p-6 space-y-4">
+            <h2 className="font-bold text-base text-slate-800">Rack Location</h2>
 
             <div className="border rounded-lg overflow-x-auto w-full bg-white">
               <table className="w-full text-sm border-collapse">
                 <thead>
                   <tr className="bg-slate-100/50 border-b text-slate-500 uppercase text-xs font-bold tracking-wider whitespace-nowrap text-left">
-                    <th className="py-3 px-4">
+                    <th className="py-4 px-4 min-w-[150px]">
                       <div className="inline-flex items-center gap-1 cursor-pointer">
-                        RACK NAME <ArrowUpDown className="size-3 text-slate-400" />
+                        STORE LOCATION <ArrowUpDown className="size-3 text-slate-400" />
                       </div>
                     </th>
-                    <th className="py-3 px-4 text-center w-32">
+                    <th className="py-4 px-4 min-w-[150px]">
+                      <div className="inline-flex items-center gap-1 cursor-pointer">
+                        RACK LOCATION <ArrowUpDown className="size-3 text-slate-400" />
+                      </div>
+                    </th>
+                    <th className="py-4 px-4 min-w-[140px]">
+                      <div className="inline-flex items-center gap-1 cursor-pointer">
+                        CURRENT STOCK <ArrowUpDown className="size-3 text-slate-400" />
+                      </div>
+                    </th>
+                    <th className="py-4 px-4 text-center w-36">
                       <div className="inline-flex items-center gap-1 cursor-pointer">
                         ALL QUANTITY <ArrowUpDown className="size-3 text-slate-400" />
                       </div>
                     </th>
-                    <th className="py-3 px-4 min-w-[160px]">
+                    <th className="py-4 px-4 min-w-[160px]">
                       <div className="inline-flex items-center gap-1 cursor-pointer">
                         QUANTITY <ArrowUpDown className="size-3 text-slate-400" />
                       </div>
@@ -267,18 +257,18 @@ function CreateInventoryInPage() {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-border/60">
-                  {filteredRacks.map((rack) => (
-                    <tr key={rack.id} className="hover:bg-slate-50/70 transition-colors whitespace-nowrap">
-                      <td className="py-3 px-4 font-mono font-medium text-slate-800 text-xs">
-                        {rack.name}
-                      </td>
+                  {rackLocationsOut.map((row) => (
+                    <tr key={row.id} className="hover:bg-slate-50/70 transition-colors whitespace-nowrap">
+                      <td className="py-3 px-4 font-medium text-slate-800">{row.store}</td>
+                      <td className="py-3 px-4 text-slate-700 font-mono">{row.rack}</td>
+                      <td className="py-3 px-4 text-slate-800 font-semibold">{row.currentStock}</td>
                       <td className="py-3 px-4 text-center">
                         <Checkbox
-                          checked={rackAllChecked[rack.id] || false}
+                          checked={rackAllChecked[row.id] || false}
                           onCheckedChange={(checked) =>
                             setRackAllChecked((prev) => ({
                               ...prev,
-                              [rack.id]: Boolean(checked),
+                              [row.id]: Boolean(checked),
                             }))
                           }
                           className="size-4"
@@ -287,11 +277,11 @@ function CreateInventoryInPage() {
                       <td className="py-3 px-4">
                         <Input
                           placeholder="ex. 10"
-                          value={rackQuantities[rack.id] || ""}
+                          value={rackQuantities[row.id] || ""}
                           onChange={(e) =>
                             setRackQuantities((prev) => ({
                               ...prev,
-                              [rack.id]: e.target.value,
+                              [row.id]: e.target.value,
                             }))
                           }
                           className="w-32 bg-white h-8 text-xs"
@@ -302,14 +292,136 @@ function CreateInventoryInPage() {
                 </tbody>
               </table>
             </div>
+
+            {/* Pagination 1-8 of 8 */}
+            <TablePagination />
           </div>
-        </div>
+        ) : (
+          /* INVENTORY IN: Two Column Card (Store Location & Rack Location) */
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+            {/* Left Card: Store Location */}
+            <div className="lg:col-span-5 bg-white rounded-xl border shadow-sm p-6 space-y-4">
+              <div className="flex items-center justify-between">
+                <h2 className="font-bold text-base text-slate-800">Store Location</h2>
+                <div className="relative w-44">
+                  <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 size-3.5 text-slate-400" />
+                  <Input
+                    placeholder="Search by store"
+                    value={storeSearch}
+                    onChange={(e) => setStoreSearch(e.target.value)}
+                    className="pl-8 bg-white h-9 text-xs"
+                  />
+                </div>
+              </div>
+
+              <div className="space-y-2 max-h-[420px] overflow-y-auto pr-1">
+                {filteredStoresIn.map((store) => {
+                  const isSelected = selectedStore === store.id;
+                  return (
+                    <div
+                      key={store.id}
+                      onClick={() => setSelectedStore(store.id)}
+                      className={`p-3.5 rounded-lg border transition-all cursor-pointer ${
+                        isSelected
+                          ? "bg-[#1e3a8a] text-white border-[#1e3a8a] shadow-sm"
+                          : "bg-slate-50/50 hover:bg-slate-100 border-border/60 text-slate-800"
+                      }`}
+                    >
+                      <div className="font-bold text-sm leading-tight">{store.name}</div>
+                      <div
+                        className={`text-xs mt-0.5 ${
+                          isSelected ? "text-slate-200" : "text-slate-500"
+                        }`}
+                      >
+                        {store.racks}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Right Card: Rack Location */}
+            <div className="lg:col-span-7 bg-white rounded-xl border shadow-sm p-6 space-y-4">
+              <div className="flex items-center justify-between">
+                <h2 className="font-bold text-base text-slate-800">Rack Location</h2>
+                <div className="relative w-48">
+                  <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 size-3.5 text-slate-400" />
+                  <Input
+                    placeholder="Search by rack name"
+                    value={rackSearch}
+                    onChange={(e) => setRackSearch(e.target.value)}
+                    className="pl-8 bg-white h-9 text-xs"
+                  />
+                </div>
+              </div>
+
+              <div className="border rounded-lg overflow-x-auto w-full bg-white">
+                <table className="w-full text-sm border-collapse">
+                  <thead>
+                    <tr className="bg-slate-100/50 border-b text-slate-500 uppercase text-xs font-bold tracking-wider whitespace-nowrap text-left">
+                      <th className="py-3 px-4">
+                        <div className="inline-flex items-center gap-1 cursor-pointer">
+                          RACK NAME <ArrowUpDown className="size-3 text-slate-400" />
+                        </div>
+                      </th>
+                      <th className="py-3 px-4 text-center w-32">
+                        <div className="inline-flex items-center gap-1 cursor-pointer">
+                          ALL QUANTITY <ArrowUpDown className="size-3 text-slate-400" />
+                        </div>
+                      </th>
+                      <th className="py-3 px-4 min-w-[160px]">
+                        <div className="inline-flex items-center gap-1 cursor-pointer">
+                          QUANTITY <ArrowUpDown className="size-3 text-slate-400" />
+                        </div>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-border/60">
+                    {filteredRacksIn.map((rack) => (
+                      <tr key={rack.id} className="hover:bg-slate-50/70 transition-colors whitespace-nowrap">
+                        <td className="py-3 px-4 font-mono font-medium text-slate-800 text-xs">
+                          {rack.name}
+                        </td>
+                        <td className="py-3 px-4 text-center">
+                          <Checkbox
+                            checked={rackAllChecked[rack.id] || false}
+                            onCheckedChange={(checked) =>
+                              setRackAllChecked((prev) => ({
+                                ...prev,
+                                [rack.id]: Boolean(checked),
+                              }))
+                            }
+                            className="size-4"
+                          />
+                        </td>
+                        <td className="py-3 px-4">
+                          <Input
+                            placeholder="ex. 10"
+                            value={rackQuantities[rack.id] || ""}
+                            onChange={(e) =>
+                              setRackQuantities((prev) => ({
+                                ...prev,
+                                [rack.id]: e.target.value,
+                              }))
+                            }
+                            className="w-32 bg-white h-8 text-xs"
+                          />
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     );
   }
 
   // ==========================================
-  // VIEW: CREATE NEW (INVENTORY IN) (SS 4)
+  // VIEW: CREATE NEW (INVENTORY IN / OUT) (SS 3 for OUT, SS 4 for IN)
   // ==========================================
   return (
     <div className="space-y-6 pb-20 animate-in fade-in-50 duration-500">
@@ -319,14 +431,19 @@ function CreateInventoryInPage() {
           <Button
             variant="outline"
             className="bg-white text-slate-700"
-            onClick={() => navigate({ to: "/spare-part/stock-transaction" })}
+            onClick={() =>
+              navigate({
+                to: "/spare-part/stock-transaction",
+                search: { tab: isOut ? "out" : "in" },
+              } as any)
+            }
           >
             <ArrowLeft className="size-4 mr-2" /> Back
           </Button>
           <div className="flex items-center gap-2">
             <Plus className="size-5 text-slate-700" />
             <h1 className="text-xl font-bold text-slate-800 font-display">
-              Create New (Inventory IN)
+              Create New {isOut ? "(Inventory OUT)" : "(Inventory IN)"}
             </h1>
           </div>
         </div>
@@ -344,7 +461,7 @@ function CreateInventoryInPage() {
         </div>
       </div>
 
-      {/* Main Container Card (SS 4) */}
+      {/* Main Container Card */}
       <div className="bg-white rounded-xl border shadow-sm p-6 space-y-6">
         <h2 className="font-bold text-base text-slate-800">List Sparepart</h2>
 
@@ -357,8 +474,17 @@ function CreateInventoryInPage() {
                 <th className="py-4 px-4">NO.</th>
                 <th className="py-4 px-4 min-w-[200px]">SPAREPART CODE</th>
                 <th className="py-4 px-4 min-w-[280px]">SPAREPART DETAIL</th>
-                <th className="py-4 px-4 min-w-[120px]">QUANTITY</th>
-                <th className="py-4 px-4 min-w-[150px]">PRICE</th>
+                {isOut ? (
+                  <>
+                    <th className="py-4 px-4 min-w-[130px]">CURRENT STOCK</th>
+                    <th className="py-4 px-4 min-w-[170px]">ESTIMATE PART COST</th>
+                  </>
+                ) : (
+                  <>
+                    <th className="py-4 px-4 min-w-[120px]">QUANTITY</th>
+                    <th className="py-4 px-4 min-w-[150px]">PRICE</th>
+                  </>
+                )}
                 <th className="py-4 px-4 min-w-[180px]">REMARKS</th>
               </tr>
             </thead>
@@ -396,34 +522,54 @@ function CreateInventoryInPage() {
                       {row.sparepartDetail}
                     </div>
                   </td>
-                  <td className="py-3 px-4">
-                    <Input
-                      type="number"
-                      value={row.quantity}
-                      onChange={(e) => {
-                        const val = parseInt(e.target.value) || 0;
-                        setItems((prev) =>
-                          prev.map((it) => (it.id === row.id ? { ...it, quantity: val } : it))
-                        );
-                      }}
-                      className="w-24 bg-white h-9 text-xs"
-                    />
-                  </td>
-                  <td className="py-3 px-4">
-                    <div className="flex items-center gap-1">
-                      <span className="text-xs text-slate-500 font-medium">Rp.</span>
-                      <Input
-                        value={row.price}
-                        onChange={(e) => {
-                          const val = e.target.value;
-                          setItems((prev) =>
-                            prev.map((it) => (it.id === row.id ? { ...it, price: val } : it))
-                          );
-                        }}
-                        className="w-28 bg-white h-9 text-xs"
-                      />
-                    </div>
-                  </td>
+                  {isOut ? (
+                    <>
+                      <td className="py-3 px-4">
+                        <div className="bg-slate-200/80 text-slate-600 rounded-md px-3 py-2 text-xs w-24">
+                          {row.currentStock}
+                        </div>
+                      </td>
+                      <td className="py-3 px-4">
+                        <div className="flex items-center gap-1">
+                          <span className="text-xs text-slate-500 font-medium">Rp.</span>
+                          <div className="bg-slate-200/80 text-slate-600 rounded-md px-3 py-2 text-xs w-28">
+                            {row.estimateCost}
+                          </div>
+                        </div>
+                      </td>
+                    </>
+                  ) : (
+                    <>
+                      <td className="py-3 px-4">
+                        <Input
+                          type="number"
+                          value={row.quantity}
+                          onChange={(e) => {
+                            const val = parseInt(e.target.value) || 0;
+                            setItems((prev) =>
+                              prev.map((it) => (it.id === row.id ? { ...it, quantity: val } : it))
+                            );
+                          }}
+                          className="w-24 bg-white h-9 text-xs"
+                        />
+                      </td>
+                      <td className="py-3 px-4">
+                        <div className="flex items-center gap-1">
+                          <span className="text-xs text-slate-500 font-medium">Rp.</span>
+                          <Input
+                            value={row.price}
+                            onChange={(e) => {
+                              const val = e.target.value;
+                              setItems((prev) =>
+                                prev.map((it) => (it.id === row.id ? { ...it, price: val } : it))
+                              );
+                            }}
+                            className="w-28 bg-white h-9 text-xs"
+                          />
+                        </div>
+                      </td>
+                    </>
+                  )}
                   <td className="py-3 px-4">
                     <Input
                       placeholder="Remarks"
