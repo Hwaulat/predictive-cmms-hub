@@ -435,6 +435,9 @@ function OrderRequestPage() {
                           size="icon"
                           className="h-8 w-8 text-slate-400 hover:text-primary bg-white shadow-xs"
                           title="View"
+                          onClick={() =>
+                            navigate({ to: `/spare-part/order-request/${sor.id}` as any })
+                          }
                         >
                           <Eye className="size-4" />
                         </Button>
@@ -451,6 +454,12 @@ function OrderRequestPage() {
                           size="icon"
                           className="h-8 w-8 text-slate-400 hover:text-primary bg-white shadow-xs"
                           title="Edit"
+                          onClick={() =>
+                            navigate({
+                              to: "/spare-part/order-request/edit",
+                              search: { id: sor.id },
+                            } as any)
+                          }
                         >
                           <Edit2 className="size-4" />
                         </Button>
