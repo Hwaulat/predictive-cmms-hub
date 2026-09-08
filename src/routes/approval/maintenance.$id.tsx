@@ -10,7 +10,7 @@ function MaintenanceApprovalDetails() {
   const { id } = Route.useParams();
 
   return (
-    <div className="space-y-6 max-w-6xl mx-auto pb-20">
+    <div className="space-y-6 w-full pb-20">
       <div className="flex items-center justify-between">
         <h2 className="text-xl font-bold font-display">Maintenance Informations</h2>
         <span className="text-sm font-medium text-muted-foreground">

@@ -1,6 +1,7 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { ArrowLeft, FileText } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { TablePagination } from "@/components/ui-kit/page";
 import {
   Select,
   SelectContent,
@@ -26,7 +27,16 @@ function RequestOrderDetail() {
   const navigate = useNavigate();
   const { id } = Route.useParams();
   
-  const order = mockRequestOrders.find(o => o.id === id) || mockRequestOrders[0];
+  const order = mockRequestOrders.find(o => o.id === id) || mockRequestOrders[0] || {
+    id: "RO-2026-001",
+    transactionDate: "01 Sep 2026",
+    groupInCharge: "Mechanical",
+    teamLeader: "Approved",
+    approvedBy: "John Doe",
+    deliveryPlan: "15 Sep 2026",
+    reasonRejected: "-",
+    parts: []
+  };
 
   return (
     <div className="space-y-6 pb-20 animate-in fade-in-50 duration-500">
@@ -140,48 +150,9 @@ function RequestOrderDetail() {
               )}
             </tbody>
           </table>
-          
-          <div className="w-full mt-4">
-            <div className="h-2 w-full bg-slate-200 rounded-full relative overflow-hidden">
-              <div className="absolute left-0 top-0 h-full w-1/3 bg-slate-500 rounded-full"></div>
-            </div>
-          </div>
         </div>
 
-        {/* Pagination Details */}
-        <div className="pt-4 flex items-center justify-between text-sm text-muted-foreground">
-          <div className="flex items-center gap-2">
-            <span>Rows per page</span>
-            <Select defaultValue="10">
-              <SelectTrigger className="w-[70px] h-8 bg-slate-50">
-                <SelectValue placeholder="10" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="10">10</SelectItem>
-                <SelectItem value="20">20</SelectItem>
-              </SelectContent>
-            </Select>
-            <span className="ml-2">1-{Math.max(1, order.parts.length)} of {Math.max(1, order.parts.length)}</span>
-          </div>
-          
-          <div className="flex items-center gap-1">
-            <Button variant="outline" size="icon" className="size-8 opacity-50 cursor-not-allowed">
-              {"<<"}
-            </Button>
-            <Button variant="outline" size="icon" className="size-8 opacity-50 cursor-not-allowed">
-              {"<"}
-            </Button>
-            <Button variant="outline" size="icon" className="size-8 bg-[#2563eb] text-white hover:bg-[#1d4ed8]">
-              1
-            </Button>
-            <Button variant="outline" size="icon" className="size-8 opacity-50 cursor-not-allowed">
-              {">"}
-            </Button>
-            <Button variant="outline" size="icon" className="size-8 opacity-50 cursor-not-allowed">
-              {">>"}
-            </Button>
-          </div>
-        </div>
+        <TablePagination />
       </div>
     </div>
   );

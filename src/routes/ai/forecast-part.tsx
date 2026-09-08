@@ -11,7 +11,7 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import { Panel, PageHeader } from "@/components/ui-kit/page";
+import { PageHeader, Panel, TablePagination } from "@/components/ui-kit/page";
 import { forecast, aiForecastKpis, aiForecastTable } from "@/lib/mock-data";
 import { cn } from "@/lib/utils";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
@@ -247,71 +247,7 @@ function AIForecastPartDashboard() {
                 </tbody>
               </table>
             </div>
-
-            {/* Pagination Footer */}
-            <div className="p-4 border-t flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-sm text-muted-foreground bg-white">
-              <div className="flex items-center gap-4">
-                <div className="flex items-center gap-2">
-                  <span>Rows per page</span>
-                  <Select value={itemsPerPage.toString()} onValueChange={(v) => { setItemsPerPage(Number(v)); setCurrentPage(1); }}>
-                    <SelectTrigger className="h-8 w-[70px] bg-muted/30 border-none rounded-md">
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="5">5</SelectItem>
-                      <SelectItem value="10">10</SelectItem>
-                      <SelectItem value="20">20</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-                <span>
-                  {totalItems > 0 ? startIndex + 1 : 0}–{endIndex} of {totalItems}
-                </span>
-              </div>
-              
-              <div className="flex items-center gap-1.5">
-                <Button 
-                  variant="outline" 
-                  size="icon" 
-                  className="h-8 w-8 rounded-md text-muted-foreground border-border/50"
-                  onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
-                  disabled={currentPage === 1}
-                >
-                  <ChevronLeft className="h-4 w-4" />
-                </Button>
-                
-                {Array.from({ length: Math.max(1, totalPages) }).map((_, idx) => {
-                  const page = idx + 1;
-                  const isActive = currentPage === page;
-                  return (
-                    <Button
-                      key={page}
-                      variant={isActive ? "default" : "outline"}
-                      size="icon"
-                      className={cn(
-                        "h-8 w-8 rounded-md",
-                        isActive 
-                          ? "bg-primary text-primary-foreground hover:bg-primary/90" 
-                          : "border-border/50 text-muted-foreground hover:bg-muted/50"
-                      )}
-                      onClick={() => setCurrentPage(page)}
-                    >
-                      {page}
-                    </Button>
-                  );
-                })}
-
-                <Button 
-                  variant="outline" 
-                  size="icon" 
-                  className="h-8 w-8 rounded-md text-muted-foreground border-border/50"
-                  onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
-                  disabled={currentPage === Math.max(1, totalPages)}
-                >
-                  <ChevronRight className="h-4 w-4" />
-                </Button>
-              </div>
-            </div>
+            <TablePagination />
           </div>
         </div>
 

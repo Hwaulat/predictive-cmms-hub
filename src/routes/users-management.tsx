@@ -4,7 +4,7 @@ import {
   Users, UserCheck, UserX, Search, Eye, RotateCcw, Edit2, Trash2, Plus, 
   Image as ImageIcon
 } from "lucide-react";
-import { PageHeader } from "@/components/ui-kit/page";
+import { PageHeader, TablePagination } from "@/components/ui-kit/page";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -20,6 +20,7 @@ import {
 } from "@/components/ui/dialog";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
+import { ConfirmDialog } from "@/components/ui-kit/confirm-dialog";
 import {
   mockUsers,
   mockRoles,
@@ -38,10 +39,14 @@ function UsersManagementPage() {
   const [selectedUser, setSelectedUser] = useState<any>(null);
 
   // Role permissions state
-  const [selectedRole, setSelectedRole] = useState(mockRoles[0]);
+  const [selectedRole, setSelectedRole] = useState(mockRoles[0] || { id: "1", name: "Super Admin", usersCount: 3 });
+
+  // Create User state
+  const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
+  const [isCreateConfirmOpen, setIsCreateConfirmOpen] = useState(false);
 
   return (
-    <div className="space-y-6 max-w-7xl mx-auto pb-20 animate-in fade-in-50 duration-500">
+    <div className="space-y-6 w-full pb-20 animate-in fade-in-50 duration-500">
       <PageHeader
         title="Users Management"
         description="Manage users, roles, and permissions"
@@ -137,7 +142,7 @@ function UsersManagementPage() {
                 </Select>
                 
                 {/* Create New User Modal */}
-                <Dialog>
+                <Dialog open={isCreateModalOpen} onOpenChange={setIsCreateModalOpen}>
                   <DialogTrigger asChild>
                     <Button className="bg-[#1e3a8a] hover:bg-[#1e3a8a]/90 text-white ml-2">
                       <Plus className="size-4 mr-2" /> Create New User
@@ -154,6 +159,23 @@ function UsersManagementPage() {
                     </DialogHeader>
                     
                     <div className="grid grid-cols-2 gap-6 py-4">
+                      {/* Image Upload Field */}
+                      <div className="col-span-2 flex flex-col gap-2">
+                        <Label>Profile Photo</Label>
+                        <div className="flex items-center gap-4">
+                          <div className="size-20 rounded-full bg-slate-100 border-2 border-dashed flex items-center justify-center text-slate-400 overflow-hidden shrink-0">
+                            <ImageIcon className="size-8" />
+                          </div>
+                          <div>
+                            <Input type="file" id="photo-upload" className="hidden" accept="image/*" />
+                            <Label htmlFor="photo-upload" className="cursor-pointer inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground h-9 px-4 py-2">
+                              Choose Image
+                            </Label>
+                            <p className="text-xs text-muted-foreground mt-2">Recommended size: 500x500px (JPG/PNG)</p>
+                          </div>
+                        </div>
+                      </div>
+
                       <div className="space-y-2">
                         <Label>Username<span className="text-destructive">*</span></Label>
                         <Input placeholder="ex. andre" />
@@ -212,11 +234,24 @@ function UsersManagementPage() {
                     </div>
                     
                     <div className="flex justify-end gap-3 pt-4 border-t">
-                      <Button variant="outline">Cancel</Button>
-                      <Button className="bg-slate-100 text-slate-400 hover:bg-slate-200" disabled>Save</Button>
+                      <Button variant="outline" onClick={() => setIsCreateModalOpen(false)}>Cancel</Button>
+                      <Button className="bg-[#2563eb] hover:bg-[#1d4ed8] text-white" onClick={() => setIsCreateConfirmOpen(true)}>Save</Button>
                     </div>
                   </DialogContent>
                 </Dialog>
+
+                {/* Confirm Dialog for Save */}
+                <ConfirmDialog
+                  open={isCreateConfirmOpen}
+                  onOpenChange={setIsCreateConfirmOpen}
+                  title="Save New User"
+                  description="Are you sure you want to save this new user data?"
+                  actionText="Save"
+                  onConfirm={() => {
+                    // Actual save logic would go here
+                    setIsCreateModalOpen(false);
+                  }}
+                />
               </div>
             </div>
 
@@ -289,6 +324,7 @@ function UsersManagementPage() {
                 </tbody>
               </table>
             </div>
+            <TablePagination />
           </div>
         </TabsContent>
 

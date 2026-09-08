@@ -26,17 +26,17 @@ const aiResponses: Record<string, string> = {
 };
 
 function getAIResponse(input: string): string {
-  if (aiResponses[input]) return aiResponses[input];
+  if (aiResponses[input]) return aiResponses[input]!;
 
   const lower = input.toLowerCase();
   if (lower.includes("equipment") || lower.includes("machine") || lower.includes("status"))
-    return aiResponses["Equipment status today?"];
+    return aiResponses["Equipment status today?"]!;
   if (lower.includes("wo") || lower.includes("work order") || lower.includes("urgent"))
-    return aiResponses["Most urgent Work Orders?"];
+    return aiResponses["Most urgent Work Orders?"]!;
   if (lower.includes("spare") || lower.includes("part") || lower.includes("reorder") || lower.includes("stock"))
-    return aiResponses["Spareparts to reorder?"];
+    return aiResponses["Spareparts to reorder?"]!;
   if (lower.includes("pm") || lower.includes("compliance") || lower.includes("preventive"))
-    return aiResponses["What is the PM compliance?"];
+    return aiResponses["What is the PM compliance?"]!;
 
   return "Thank you for asking! 🤖\n\nCurrently, I can assist you with:\n• Equipment status & availability\n• Urgent/critical work orders\n• Sparepart prediction & reordering\n• PM compliance & schedule\n\nPlease ask me about one of the topics above!";
 }

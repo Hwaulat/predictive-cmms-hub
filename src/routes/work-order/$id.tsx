@@ -12,7 +12,7 @@ function WorkOrderDetailPage() {
   const navigate = useNavigate();
 
   return (
-    <div className="space-y-6 max-w-5xl mx-auto pb-20">
+    <div className="space-y-6 w-full pb-20">
       <div className="flex items-center gap-4">
         <Button variant="outline" size="icon" onClick={() => navigate({ to: "/work-order" })}>
           <ArrowLeft className="size-4" />

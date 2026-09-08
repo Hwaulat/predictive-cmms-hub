@@ -706,3 +706,161 @@ export const mockRequestOrders = [
     parts: []
   }
 ];
+
+// --- New Mock Data for Dashboards ---
+
+export const sparepartCostByArea = [
+  { month: 'Jan', BuildingA: 6500000, BuildingA1: 7500000, BuildingB: 9500000, BuildingB1: 2000000, BuildingC1: 5500000, PartQuantity: 65 },
+  { month: 'Feb', BuildingA: 3000000, BuildingA1: 1500000, BuildingB: 12500000, BuildingB1: 2000000, BuildingC1: 3000000, PartQuantity: 65 },
+  { month: 'Mar', BuildingA: 5500000, BuildingA1: 2500000, BuildingB: 8000000, BuildingB1: 4500000, BuildingC1: 6500000, PartQuantity: 67 },
+  { month: 'Apr', BuildingA: 11000000, BuildingA1: 12500000, BuildingB: 3500000, BuildingB1: 7500000, BuildingC1: 13500000, PartQuantity: 73 },
+  { month: 'May', BuildingA: 7500000, BuildingA1: 7500000, BuildingB: 13500000, BuildingB1: 15000000, BuildingC1: 4500000, PartQuantity: 82 },
+  { month: 'Jun', BuildingA: 3000000, BuildingA1: 4000000, BuildingB: 2000000, BuildingB1: 3500000, BuildingC1: 7500000, PartQuantity: 35 },
+  { month: 'Jul', BuildingA: 5500000, BuildingA1: 4500000, BuildingB: 3500000, BuildingB1: 2500000, BuildingC1: 6000000, PartQuantity: 42 },
+  { month: 'Aug', BuildingA: 9500000, BuildingA1: 6000000, BuildingB: 8500000, BuildingB1: 9500000, BuildingC1: 12500000, PartQuantity: 74 },
+  { month: 'Sep', BuildingA: 13500000, BuildingA1: 9500000, BuildingB: 13500000, BuildingB1: 10000000, BuildingC1: 12500000, PartQuantity: 73 },
+  { month: 'Oct', BuildingA: 8500000, BuildingA1: 15000000, BuildingB: 5000000, BuildingB1: 2000000, BuildingC1: 4000000, PartQuantity: 65 },
+  { month: 'Nov', BuildingA: 7500000, BuildingA1: 3500000, BuildingB: 4500000, BuildingB1: 2500000, BuildingC1: 6500000, PartQuantity: 58 },
+  { month: 'Dec', BuildingA: 5500000, BuildingA1: 6500000, BuildingB: 4500000, BuildingB1: 1500000, BuildingC1: 4500000, PartQuantity: 52 },
+];
+
+export const sparepartUsageComposition = [
+  { name: 'Preventive', value: 55, fill: '#f59e0b' },
+  { name: 'Corrective', value: 30, fill: '#ef4444' },
+  { name: 'Other', value: 15, fill: '#94a3b8' },
+];
+
+export const sparepartUsage = [
+  { month: 'Jan', PartQuantity: 500 },
+  { month: 'Feb', PartQuantity: 250 },
+  { month: 'Mar', PartQuantity: 850 },
+  { month: 'Apr', PartQuantity: 350 },
+  { month: 'May', PartQuantity: 180 },
+  { month: 'Jun', PartQuantity: 450 },
+  { month: 'Jul', PartQuantity: 280 },
+  { month: 'Aug', PartQuantity: 650 },
+  { month: 'Sep', PartQuantity: 850 },
+  { month: 'Oct', PartQuantity: 100 },
+  { month: 'Nov', PartQuantity: 600 },
+  { month: 'Dec', PartQuantity: 180 },
+];
+
+export const sparepartCost = [
+  { month: 'Jan', cost: 2500000 },
+  { month: 'Feb', cost: 4000000 },
+  { month: 'Mar', cost: 4500000 },
+  { month: 'Apr', cost: 3500000 },
+  { month: 'May', cost: 5000000 },
+  { month: 'Jun', cost: 6000000 },
+  { month: 'Jul', cost: 7500000 },
+  { month: 'Aug', cost: 8500000 },
+  { month: 'Sep', cost: 9500000 },
+  { month: 'Oct', cost: 7000000 },
+  { month: 'Nov', cost: 5000000 },
+  { month: 'Dec', cost: 5000000 },
+];
+
+export const manpowerProductivityPerformance = [
+  { month: 'January', Checklist: 480, Preventive: 210 },
+  { month: 'February', Checklist: 320, Preventive: 580 },
+  { month: 'March', Checklist: 320, Preventive: 580 },
+  { month: 'April', Checklist: 540, Preventive: 750 },
+  { month: 'May', Checklist: 170, Preventive: 260 },
+  { month: 'June', Checklist: 170, Preventive: 650 },
+  { month: 'July', Checklist: 430, Preventive: 260 },
+  { month: 'August', Checklist: 430, Preventive: 260 },
+  { month: 'September', Checklist: 170, Preventive: 650 },
+  { month: 'October', Checklist: 430, Preventive: 650 },
+  { month: 'November', Checklist: 170, Preventive: 650 },
+  { month: 'December', Checklist: 430, Preventive: 260 },
+];
+
+export const manpowerProgressStatus = [
+  { name: 'Done', value: 75, fill: '#10b981' },
+  { name: 'Late', value: 25, fill: '#f59e0b' },
+];
+
+export const manpowerTeamProductivityByArea = [
+  { name: 'Building A', value: 43, fill: '#fca5a5' },
+  { name: 'Building A1', value: 20, fill: '#fde047' },
+  { name: 'Building B', value: 15, fill: '#93c5fd' },
+  { name: 'Building B1', value: 10, fill: '#67e8f9' },
+  { name: 'Building C1', value: 15, fill: '#86efac' },
+];
+
+// --- Documentation Module Mock Data ---
+
+export const docMachines = [
+  { id: "CRN-01", name: "Crane", department: "Department A", area: "Building A", line: "Progresive Medium" },
+  { id: "CRN-02", name: "Crane", department: "Department A", area: "Building A", line: "Progresive Small" },
+  { id: "CRN-03", name: "Crane", department: "Department C", area: "Building A", line: "Progresive Medium" },
+  { id: "CRN-04", name: "Hoist", department: "Department B", area: "Building A", line: "Progresive Medium" },
+  { id: "CRN-05", name: "Hoist", department: "Department A", area: "Building A", line: "Progresive Medium" },
+  { id: "CRN-06", name: "Hoist", department: "Department A", area: "Building A", line: "Progresive Medium" },
+  { id: "CRN-07", name: "Hoist", department: "Department D", area: "Building A", line: "Progresive Medium" },
+  { id: "CRN-08", name: "Hoist", department: "Department A", area: "Building A", line: "Progresive Medium" },
+];
+
+export const docMachineDetails: Record<string, any> = {
+  "CRN-01": {
+    code: "CRN-01",
+    name: "Crane",
+    department: "Department A",
+    area: "Building A",
+    line: "Progresive Medium",
+    manualBook: "Manual-Book.pdf",
+    sop: "SOP1-Book.pdf",
+    otherDoc: "-",
+    image: "https://images.unsplash.com/photo-1565159190117-641571f30206?auto=format&fit=crop&q=80&w=600",
+    info: [
+      { name: "Machine Item", value: "Injection" },
+      { name: "Brand", value: "HAITAN" },
+      { name: "Type / Model", value: "MA 200011" },
+      { name: "Serial Number", value: "201307020031893" },
+      { name: "Manufacturing Date", value: "04/06/2013" },
+      { name: "Fix Asset MW", value: "MW001043" }
+    ],
+    spareparts: [
+      { no: "1345", name: "Air Filter", category: "Mechanical", hours: "1 Hour 23 Minute" },
+      { no: "1346", name: "Gear", category: "Electrical", hours: "2 Hour 19 Minute" },
+      { no: "1356", name: "Gear Box", category: "Fasteners", hours: "23 Minute" },
+      { no: "1378", name: "Pin Knock Out", category: "Shaft Part", hours: "5 Hour 01 Minute" },
+      { no: "1367", name: "Pulley", category: "O-Ring & Seal", hours: "3 Hour 50 Minute" },
+      { no: "1387", name: "Gear Box", category: "O-Ring & Seal", hours: "1 Hour" },
+      { no: "1387", name: "Dinamo", category: "Shaft Part", hours: "8 Hour 12 Minute" },
+      { no: "1387", name: "Gear Box", category: "Oil & Gerase", hours: "4 Hour 12 Minute" },
+      { no: "1387", name: "Pulley", category: "Oil & Gerase", hours: "12 Hour 4 Minute" },
+      { no: "1387", name: "Pulley", category: "Oil & Gerase", hours: "6 Hour 34 Minute" },
+    ]
+  }
+};
+
+export const docHistoricalData = [
+  { id: "CID12345", typeMTC: "Checklist", submitForm: "12/08/2024 10:58", docNum: "TCF2/Form/ME/01/01", machine: "CRN-01 - Crane", department: "Department A", area: "Building A", line: "Progresive Medium", status: { label: "OK", type: "ok" } },
+  { id: "CID12346", typeMTC: "Checklist", submitForm: "12/08/2024 10:58", docNum: "TCF2/Form/ME/01/01", machine: "CRN-02 - Crane", department: "Department A", area: "Building A", line: "Progresive Medium", status: { label: "NG : 3", type: "ng" } },
+  { id: "CID12347", typeMTC: "Checklist", submitForm: "12/08/2024 10:58", docNum: "TCF2/Form/ME/01/01", machine: "CRN-03 - Crane", department: "Department A", area: "Building A", line: "Progresive Medium", status: { label: "OK", type: "ok" } },
+  { id: "PID12348", typeMTC: "Preventive", submitForm: "12/08/2024 10:58", docNum: "TCF2/Form/ME/01/01", machine: "CRN-04 - Hoist", department: "Department A", area: "Building A", line: "Progresive Medium", status: { a: 6, b: 9, c: 5 } },
+  { id: "PID12349", typeMTC: "Preventive", submitForm: "12/08/2024 10:58", docNum: "TCF2/Form/ME/01/01", machine: "CRN-05 - Hoist", department: "Department A", area: "Building A", line: "Progresive Medium", status: { a: 6, b: 9, c: 5 } },
+  { id: "CID12310", typeMTC: "Checklist", submitForm: "12/08/2024 10:58", docNum: "TCF2/Form/ME/01/01", machine: "CRN-06 - Hoist", department: "Department A", area: "Building A", line: "Progresive Medium", status: { label: "NG : 4", type: "ng" } },
+  { id: "CWID12311", typeMTC: "Corrective", submitForm: "12/08/2024 10:58", docNum: "TCF2/Form/ME/01/01", machine: "CRN-07 - Hoist", department: "Department A", area: "Building A", line: "Progresive Medium", status: null },
+  { id: "CID12312", typeMTC: "Checklist", submitForm: "12/08/2024 10:58", docNum: "TCF2/Form/ME/01/01", machine: "CRN-08 - Hoist", department: "Department A", area: "Building A", line: "Progresive Medium", status: { label: "OK", type: "ok" } },
+];
+
+export const docChecklistDetails = {
+  id: "CID12345",
+  docNum: "TCF2/Form/ME/01/01",
+  machine: "CRN-01 - Crane",
+  revision: "1",
+  department: "Production",
+  area: "Building A",
+  line: "Progresive Medium",
+  executor: "Andre Wifi",
+  workingHours: "1 hours 23 minute",
+  submitForm: "12/12/2023 12:02",
+  ngCount: 3,
+  items: [
+    { title: "1. Safety Door", status: "Not Good (NG)", pressure: "35 N/m²", temp: "-", desc: "Open but no error", image: "https://images.unsplash.com/photo-1541888087817-2993883a8b27?auto=format&fit=crop&q=80&w=400" },
+    { title: "2. Oil Pump Compling", status: "Not Good (NG)", pressure: "35 N/m²", temp: "-", desc: "Open but no error", image: "https://images.unsplash.com/photo-1541888087817-2993883a8b27?auto=format&fit=crop&q=80&w=400" },
+    { title: "3. 5 S", status: "Not Good (NG)", pressure: "-", temp: "60 °C", desc: "-", image: "https://images.unsplash.com/photo-1541888087817-2993883a8b27?auto=format&fit=crop&q=80&w=400" },
+  ]
+};

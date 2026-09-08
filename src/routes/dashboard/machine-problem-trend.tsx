@@ -1,6 +1,5 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import {
-  ChevronRight,
   ArrowLeft,
   CalendarIcon,
 } from "lucide-react";
@@ -32,18 +31,9 @@ function MachineProblemTrendDashboard() {
   const navigate = useNavigate();
 
   return (
-    <div className="space-y-6 animate-in fade-in-50 duration-500 pb-20 max-w-7xl mx-auto">
+    <div className="space-y-6 animate-in fade-in-50 duration-500 pb-20 w-full">
       
-      {/* Header Bar */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-4 rounded-xl border shadow-sm">
-        <div className="flex items-center gap-2 text-sm text-muted-foreground">
-          <Link to="/" className="hover:text-primary transition-colors">Dashboard</Link>
-          <ChevronRight className="size-4" />
-          <Link to="/dashboard/corrective" className="hover:text-primary transition-colors">Corrective</Link>
-          <ChevronRight className="size-4" />
-          <span className="font-semibold text-foreground">Machine Problem Trend</span>
-        </div>
-      </div>
+
 
       <div className="flex items-center gap-4">
         <Button variant="outline" size="icon" className="bg-white" onClick={() => navigate({ to: "/dashboard/corrective" })}>

@@ -16,7 +16,12 @@ function EditDepartment() {
   const { id } = Route.useParams();
   
   // Find department or use default
-  const dept = departments.find(d => d.id === id) || departments[0];
+  const dept = departments.find(d => d.id === id) || departments[0] || {
+    id: "1",
+    name: "General",
+    type: "Production",
+    areas: [{ name: "Area 1", lines: ["Line 1"] }]
+  };
 
   // Initialize state from mock data
   const [name, setName] = useState(dept.name);
@@ -58,7 +63,7 @@ function EditDepartment() {
   };
 
   return (
-    <div className="space-y-6 pb-20 animate-in fade-in-50 duration-500 max-w-5xl">
+    <div className="space-y-6 pb-20 animate-in fade-in-50 duration-500 w-full">
       <div className="flex items-center justify-between border-b pb-4">
         <div className="flex items-center gap-4">
           <Button variant="outline" size="sm" onClick={() => navigate({ to: "/master-data/department" })}>

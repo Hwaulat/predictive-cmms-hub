@@ -1,6 +1,6 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { Plus, Search, Eye, Edit2, Trash2 } from "lucide-react";
-import { PageHeader } from "@/components/ui-kit/page";
+import { PageHeader, TablePagination } from "@/components/ui-kit/page";
 import { departments } from "@/lib/mock-data";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -46,11 +46,11 @@ function DepartmentList() {
           <table className="w-full text-sm">
             <thead>
               <tr className="bg-slate-50 text-slate-500 text-sm font-medium">
+                <th className="py-4 px-6 text-left w-32">Action</th>
                 <th className="py-4 px-6 text-left w-1/4">Department</th>
                 <th className="py-4 px-6 text-left w-1/4">Type</th>
                 <th className="py-4 px-6 text-left w-1/6">Area</th>
                 <th className="py-4 px-6 text-left w-1/6">Line</th>
-                <th className="py-4 px-6 text-center w-32">Action</th>
               </tr>
             </thead>
             <tbody className="divide-y">
@@ -60,43 +60,44 @@ function DepartmentList() {
                 
                 return (
                   <tr key={dept.id} className="hover:bg-slate-50/50">
+                    <td className="py-3 px-4">
+                      <div className="flex items-center gap-1">
+                        <Button 
+                          variant="outline" 
+                          size="icon" 
+                          className="h-8 w-8 text-slate-400 hover:text-primary"
+                          onClick={() => navigate({ to: `/master-data/department/${dept.id}` })}
+                        >
+                          <Eye className="size-4" />
+                        </Button>
+                        <Button 
+                          variant="outline" 
+                          size="icon" 
+                          className="h-8 w-8 text-slate-400 hover:text-primary"
+                          onClick={() => navigate({ to: `/master-data/department/${dept.id}` })}
+                        >
+                          <Edit2 className="size-4" />
+                        </Button>
+                        <Button 
+                          variant="outline" 
+                          size="icon" 
+                          className="h-8 w-8 text-slate-400 hover:text-destructive"
+                        >
+                          <Trash2 className="size-4" />
+                        </Button>
+                      </div>
+                    </td>
                     <td className="py-4 px-6 text-slate-700">{dept.name}</td>
                     <td className="py-4 px-6 text-slate-700">{dept.type}</td>
                     <td className="py-4 px-6 text-slate-700">{totalAreas}</td>
                     <td className="py-4 px-6 text-slate-700">{totalLines}</td>
-                    <td className="py-4 px-6">
-                      <div className="flex items-center justify-center gap-2">
-                        <Button 
-                          variant="outline" 
-                          size="icon" 
-                          className="h-9 w-9 rounded-xl bg-slate-50/50 border-slate-200 text-slate-500 hover:text-primary hover:bg-slate-100 shadow-sm transition-all"
-                          onClick={() => navigate({ to: `/master-data/department/${dept.id}` })}
-                        >
-                          <Eye className="size-[18px]" />
-                        </Button>
-                        <Button 
-                          variant="outline" 
-                          size="icon" 
-                          className="h-9 w-9 rounded-xl bg-slate-50/50 border-slate-200 text-slate-500 hover:text-primary hover:bg-slate-100 shadow-sm transition-all"
-                          onClick={() => navigate({ to: `/master-data/department/${dept.id}` })}
-                        >
-                          <Edit2 className="size-[18px]" />
-                        </Button>
-                        <Button 
-                          variant="outline" 
-                          size="icon" 
-                          className="h-9 w-9 rounded-xl bg-slate-50/50 border-slate-200 text-slate-500 hover:text-destructive hover:bg-red-50 hover:border-red-200 shadow-sm transition-all"
-                        >
-                          <Trash2 className="size-[18px]" />
-                        </Button>
-                      </div>
-                    </td>
                   </tr>
                 );
               })}
             </tbody>
           </table>
         </div>
+        <TablePagination />
       </div>
     </div>
   );

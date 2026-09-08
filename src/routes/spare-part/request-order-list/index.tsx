@@ -1,7 +1,8 @@
-import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { Download, Plus, Eye, Edit2, Trash2, Search, RotateCcw } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { TablePagination } from "@/components/ui-kit/page";
 import {
   Select,
   SelectContent,
@@ -107,23 +108,23 @@ function RequestOrderList() {
               {mockRequestOrders.map((order) => (
                 <tr key={order.id} className="hover:bg-slate-50/50">
                   <td className="py-3 px-4">
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-1">
                       <Button 
                         variant="outline" 
                         size="icon" 
-                        className="h-9 w-9 rounded-xl bg-slate-50/50 border-slate-200 text-slate-500 hover:text-primary hover:bg-slate-100 shadow-sm transition-all"
+                        className="h-8 w-8 text-slate-400 hover:text-primary"
                         onClick={() => navigate({ to: `/spare-part/request-order-list/${order.id}` })}
                       >
-                        <Eye className="size-[18px]" />
+                        <Eye className="size-4" />
                       </Button>
-                      <Button variant="outline" size="icon" className="h-9 w-9 rounded-xl bg-slate-50/50 border-slate-200 text-slate-500 hover:text-primary hover:bg-slate-100 shadow-sm transition-all">
-                        <RotateCcw className="size-[18px]" />
+                      <Button variant="outline" size="icon" className="h-8 w-8 text-slate-400 hover:text-primary">
+                        <RotateCcw className="size-4" />
                       </Button>
-                      <Button variant="outline" size="icon" className="h-9 w-9 rounded-xl bg-slate-50/50 border-slate-200 text-slate-500 hover:text-primary hover:bg-slate-100 shadow-sm transition-all">
-                        <Edit2 className="size-[18px]" />
+                      <Button variant="outline" size="icon" className="h-8 w-8 text-slate-400 hover:text-primary">
+                        <Edit2 className="size-4" />
                       </Button>
-                      <Button variant="outline" size="icon" className="h-9 w-9 rounded-xl bg-slate-50/50 border-slate-200 text-slate-500 hover:text-destructive hover:bg-red-50 hover:border-red-200 shadow-sm transition-all">
-                        <Trash2 className="size-[18px]" />
+                      <Button variant="outline" size="icon" className="h-8 w-8 text-slate-400 hover:text-destructive">
+                        <Trash2 className="size-4" />
                       </Button>
                     </div>
                   </td>
@@ -148,39 +149,7 @@ function RequestOrderList() {
         </div>
         
         {/* Pagination */}
-        <div className="p-4 border-t flex items-center justify-between text-sm text-muted-foreground">
-          <div className="flex items-center gap-2">
-            <span>Rows per page</span>
-            <Select defaultValue="10">
-              <SelectTrigger className="w-[70px] h-8 bg-slate-50">
-                <SelectValue placeholder="10" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="10">10</SelectItem>
-                <SelectItem value="20">20</SelectItem>
-              </SelectContent>
-            </Select>
-            <span className="ml-2">1-6 of 6</span>
-          </div>
-          
-          <div className="flex items-center gap-1">
-            <Button variant="outline" size="icon" className="size-8 opacity-50 cursor-not-allowed">
-              {"<<"}
-            </Button>
-            <Button variant="outline" size="icon" className="size-8 opacity-50 cursor-not-allowed">
-              {"<"}
-            </Button>
-            <Button variant="outline" size="icon" className="size-8 bg-[#2563eb] text-white hover:bg-[#1d4ed8]">
-              1
-            </Button>
-            <Button variant="outline" size="icon" className="size-8 opacity-50 cursor-not-allowed">
-              {">"}
-            </Button>
-            <Button variant="outline" size="icon" className="size-8 opacity-50 cursor-not-allowed">
-              {">>"}
-            </Button>
-          </div>
-        </div>
+        <TablePagination />
       </div>
     </div>
   );

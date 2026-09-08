@@ -33,7 +33,7 @@ export const Route = createFileRoute("/ai/kpi")({
 
 function AIKpiDashboard() {
   return (
-    <div className="space-y-6 max-w-6xl mx-auto pb-20 animate-in fade-in-50 duration-500">
+    <div className="space-y-6 pb-20 animate-in fade-in-50 duration-500">
       <PageHeader
         title="AI for KPI"
         description="Analisis prediktif, deteksi anomali, dan wawasan operasional berbasis AI di atas KPI standar."
@@ -245,7 +245,7 @@ function MachineKpiTab() {
                     type="monotone" 
                     dataKey={(data) => {
                       const prevIdx = aiKpiForecast.indexOf(data) - 1;
-                      if (!data.predicted && prevIdx >= 0 && aiKpiForecast[prevIdx + 1].predicted) {
+                      if (!data.predicted && prevIdx >= 0 && aiKpiForecast[prevIdx + 1]?.predicted) {
                         return data[forecastMetric];
                       }
                       return data.predicted ? data[forecastMetric] : null;
@@ -469,7 +469,7 @@ function ManpowerKpiTab() {
                     type="monotone" 
                     dataKey={(data) => {
                       const prevIdx = aiManpowerForecast.indexOf(data) - 1;
-                      if (!data.predicted && prevIdx >= 0 && aiManpowerForecast[prevIdx + 1].predicted) {
+                      if (!data.predicted && prevIdx >= 0 && aiManpowerForecast[prevIdx + 1]?.predicted) {
                         return data[forecastMetric];
                       }
                       return data.predicted ? data[forecastMetric] : null;

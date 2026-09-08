@@ -30,7 +30,7 @@ function AIBreakdownDiagnosticPage() {
   };
 
   return (
-    <div className="space-y-6 max-w-5xl mx-auto pb-20 animate-in fade-in-50 duration-500">
+    <div className="space-y-6 pb-20 animate-in fade-in-50 duration-500">
       <PageHeader
         title="AI Diagnostic Assistant"
         description="Simulator fitur reaktif AI untuk menganalisis gejala kerusakan dan memberikan rekomendasi sparepart secara instan."

@@ -89,11 +89,11 @@ function ApprovalMaintenancePage() {
           <DataTable
             columns={["Action", "ID", "Document Number", "Submit Form", "Machine/Item", "Department", "Area", "Line", "Executor", "Summary", "Category"]}
             rows={filteredData.map((a) => [
-              <div className="flex items-center gap-2">
-                <button className="flex size-8 items-center justify-center rounded bg-green-500 text-white hover:bg-green-600 transition-colors">
+              <div className="flex items-center gap-1">
+                <button className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 border border-input bg-background shadow-sm hover:bg-accent hover:text-green-500 h-8 w-8 text-slate-400">
                   <Check className="size-4" />
                 </button>
-                <Link to={`/approval/maintenance/${a.id}`} className="flex size-8 items-center justify-center rounded bg-blue-600 text-white hover:bg-blue-700 transition-colors">
+                <Link to={`/approval/maintenance/${a.id}` as any} className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 border border-input bg-background shadow-sm hover:bg-accent hover:text-primary h-8 w-8 text-slate-400">
                   <Eye className="size-4" />
                 </Link>
               </div>,

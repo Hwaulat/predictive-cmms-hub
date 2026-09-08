@@ -77,7 +77,7 @@ function WorkOrderPage() {
             "Status",
           ]}
           rows={historyWorkOrders.map((w) => [
-            <Link to={`/work-order/${w.no}`} className="flex size-8 items-center justify-center rounded bg-blue-600 text-white hover:bg-blue-700">
+            <Link to={`/work-order/${w.no}` as any} className="flex size-8 items-center justify-center rounded bg-blue-600 text-white hover:bg-blue-700">
               <Eye className="size-4" />
             </Link>,
             <span className="font-medium">{w.no}</span>,
