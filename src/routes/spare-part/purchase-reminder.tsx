@@ -8,8 +8,6 @@ import {
   TrendingUp,
   Clock,
   CheckCircle2,
-  Calendar,
-  Layers,
   Wrench,
   ShoppingCart,
   Download,
@@ -420,10 +418,10 @@ function PurchaseReminderPage() {
         </div>
       </div>
 
-      {/* Main Container Card with Tabs */}
-      <div className="bg-white rounded-xl border shadow-sm p-6 space-y-6">
-        {/* Navigation Tablist Switcher */}
-        <div className="flex items-center justify-between flex-wrap gap-4 border-b pb-4">
+      {/* Main Container Card with Tabs - Styled matching Request Order List */}
+      <div className="bg-white rounded-xl border shadow-sm flex flex-col">
+        {/* Navigation Tablist Header */}
+        <div className="p-4 border-b flex items-center justify-between flex-wrap gap-4">
           <div className="bg-slate-100 p-1 rounded-lg inline-flex items-center gap-1 border border-border/50">
             <button
               type="button"
@@ -478,27 +476,27 @@ function PurchaseReminderPage() {
           </div>
 
           {/* Right Indicator */}
-          <div className="text-xs text-slate-500 flex items-center gap-1.5">
-            <Clock className="size-3.5 text-slate-400" />
+          <div className="text-xs text-muted-foreground flex items-center gap-1.5">
+            <Clock className="size-3.5 text-muted-foreground" />
             Updated today at 14:00
           </div>
         </div>
 
-        {/* Filter Toolbar */}
-        <div className="flex flex-wrap items-center gap-3">
+        {/* Filter Toolbar matching Request Order List */}
+        <div className="p-4 border-b flex flex-wrap items-center gap-4">
           <div className="relative flex-1 min-w-[240px]">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-slate-400" />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
             <Input
               placeholder="Search by code, sparepart name, or machine..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="pl-9 bg-white text-xs h-10"
+              className="pl-9 bg-slate-50/50 w-full"
             />
           </div>
 
           {activeTab === "reorder" && (
             <Select value={statusFilter} onValueChange={setStatusFilter}>
-              <SelectTrigger className="w-[180px] bg-white text-xs text-slate-700 h-10">
+              <SelectTrigger className="w-[180px] bg-white">
                 <SelectValue placeholder="All Recommendations" />
               </SelectTrigger>
               <SelectContent>
@@ -512,7 +510,7 @@ function PurchaseReminderPage() {
 
           {activeTab === "rank" && (
             <Select value={statusFilter} onValueChange={setStatusFilter}>
-              <SelectTrigger className="w-[180px] bg-white text-xs text-slate-700 h-10">
+              <SelectTrigger className="w-[180px] bg-white">
                 <SelectValue placeholder="All Priorities" />
               </SelectTrigger>
               <SelectContent>
@@ -527,7 +525,7 @@ function PurchaseReminderPage() {
 
           {activeTab === "consumption" && (
             <Select value={statusFilter} onValueChange={setStatusFilter}>
-              <SelectTrigger className="w-[190px] bg-white text-xs text-slate-700 h-10">
+              <SelectTrigger className="w-[190px] bg-white">
                 <SelectValue placeholder="All Risk Alerts" />
               </SelectTrigger>
               <SelectContent>
@@ -542,33 +540,33 @@ function PurchaseReminderPage() {
 
         {/* TAB 1: REORDER REMINDER */}
         {activeTab === "reorder" && (
-          <div className="border rounded-lg overflow-x-auto w-full bg-white">
-            <table className="w-full text-sm border-collapse">
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm">
               <thead>
-                <tr className="bg-slate-100/50 border-b text-slate-500 uppercase text-xs font-bold tracking-wider whitespace-nowrap text-left">
-                  <th className="py-4 px-4 min-w-[140px]">
+                <tr className="bg-slate-100/50 text-slate-500 uppercase text-xs font-bold tracking-wider border-b whitespace-nowrap text-left">
+                  <th className="py-4 px-4 font-semibold min-w-[140px]">
                     <div className="inline-flex items-center gap-1 cursor-pointer">
-                      SPAREPART CODE <ArrowUpDown className="size-3 text-slate-400" />
+                      Sparepart Code <ArrowUpDown className="size-3 text-slate-400" />
                     </div>
                   </th>
-                  <th className="py-4 px-4 min-w-[240px]">SPAREPART NAME</th>
-                  <th className="py-4 px-4 min-w-[120px]">CATEGORY</th>
-                  <th className="py-4 px-4 min-w-[110px]">CURRENT STOCK</th>
-                  <th className="py-4 px-4 min-w-[90px]">MIN</th>
-                  <th className="py-4 px-4 min-w-[90px]">MAX</th>
-                  <th className="py-4 px-4 min-w-[110px]">LEAD TIME</th>
-                  <th className="py-4 px-4 min-w-[150px]">
+                  <th className="py-4 px-4 font-semibold min-w-[240px]">Sparepart Name</th>
+                  <th className="py-4 px-4 font-semibold min-w-[120px]">Category</th>
+                  <th className="py-4 px-4 font-semibold min-w-[110px]">Current Stock</th>
+                  <th className="py-4 px-4 font-semibold min-w-[90px]">Min</th>
+                  <th className="py-4 px-4 font-semibold min-w-[90px]">Max</th>
+                  <th className="py-4 px-4 font-semibold min-w-[110px]">Lead Time</th>
+                  <th className="py-4 px-4 font-semibold min-w-[150px]">
                     <div className="inline-flex items-center gap-1 cursor-pointer">
-                      PREDICTED DEPLETION <ArrowUpDown className="size-3 text-slate-400" />
+                      Predicted Depletion <ArrowUpDown className="size-3 text-slate-400" />
                     </div>
                   </th>
-                  <th className="py-4 px-4 min-w-[170px]">RECOMMENDATION</th>
-                  <th className="py-4 px-4 min-w-[120px]">EST. REORDER QTY</th>
+                  <th className="py-4 px-4 font-semibold min-w-[170px]">Recommendation</th>
+                  <th className="py-4 px-4 font-semibold min-w-[120px]">Est. Reorder Qty</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-border/60">
+              <tbody className="divide-y">
                 {filteredReorders.map((item) => (
-                  <tr key={item.id} className="hover:bg-slate-50/70 transition-colors whitespace-nowrap">
+                  <tr key={item.id} className="hover:bg-slate-50/50 transition-colors whitespace-nowrap">
                     <td className="py-3.5 px-4 font-mono font-medium text-slate-800 text-xs">
                       {item.code}
                     </td>
@@ -585,7 +583,7 @@ function PurchaseReminderPage() {
                     </td>
                     <td className="py-3.5 px-4 text-slate-600">{item.min}</td>
                     <td className="py-3.5 px-4 text-slate-600">{item.max}</td>
-                    <td className="py-3.5 px-4 text-slate-700 font-medium">{item.leadTime}</td>
+                    <td className="py-3.5 px-4 text-slate-600 font-medium">{item.leadTime}</td>
                     <td className="py-3.5 px-4">
                       <span
                         className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold ${
@@ -624,32 +622,32 @@ function PurchaseReminderPage() {
 
         {/* TAB 2: ESTIMATED MAINTENANCE RANK */}
         {activeTab === "rank" && (
-          <div className="border rounded-lg overflow-x-auto w-full bg-white">
-            <table className="w-full text-sm border-collapse">
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm">
               <thead>
-                <tr className="bg-slate-100/50 border-b text-slate-500 uppercase text-xs font-bold tracking-wider whitespace-nowrap text-left">
-                  <th className="py-4 px-4 w-16 text-center">RANK</th>
-                  <th className="py-4 px-4 min-w-[140px]">SPAREPART CODE</th>
-                  <th className="py-4 px-4 min-w-[240px]">SPAREPART NAME</th>
-                  <th className="py-4 px-4 min-w-[220px]">EQUIPMENT / MACHINE</th>
-                  <th className="py-4 px-4 min-w-[180px]">
+                <tr className="bg-slate-100/50 text-slate-500 uppercase text-xs font-bold tracking-wider border-b whitespace-nowrap text-left">
+                  <th className="py-4 px-4 w-16 text-center font-semibold">Rank</th>
+                  <th className="py-4 px-4 font-semibold min-w-[140px]">Sparepart Code</th>
+                  <th className="py-4 px-4 font-semibold min-w-[240px]">Sparepart Name</th>
+                  <th className="py-4 px-4 font-semibold min-w-[220px]">Equipment / Machine</th>
+                  <th className="py-4 px-4 font-semibold min-w-[180px]">
                     <div className="inline-flex items-center gap-1 cursor-pointer">
-                      MAINTENANCE RATE <ArrowUpDown className="size-3 text-slate-400" />
+                      Maintenance Rate <ArrowUpDown className="size-3 text-slate-400" />
                     </div>
                   </th>
-                  <th className="py-4 px-4 min-w-[130px]">AVG MTBF</th>
-                  <th className="py-4 px-4 min-w-[140px]">REPLACEMENT FREQ</th>
-                  <th className="py-4 px-4 min-w-[130px]">PRIORITY</th>
-                  <th className="py-4 px-4 min-w-[140px]">
+                  <th className="py-4 px-4 font-semibold min-w-[130px]">Avg MTBF</th>
+                  <th className="py-4 px-4 font-semibold min-w-[140px]">Replacement Freq</th>
+                  <th className="py-4 px-4 font-semibold min-w-[130px]">Priority</th>
+                  <th className="py-4 px-4 font-semibold min-w-[140px]">
                     <div className="inline-flex items-center gap-1 cursor-pointer">
-                      NEXT SERVICE <ArrowUpDown className="size-3 text-slate-400" />
+                      Next Service <ArrowUpDown className="size-3 text-slate-400" />
                     </div>
                   </th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-border/60">
+              <tbody className="divide-y">
                 {filteredRanks.map((item) => (
-                  <tr key={item.rank} className="hover:bg-slate-50/70 transition-colors whitespace-nowrap">
+                  <tr key={item.rank} className="hover:bg-slate-50/50 transition-colors whitespace-nowrap">
                     <td className="py-3.5 px-4 text-center">
                       <span
                         className={`inline-flex items-center justify-center size-6 rounded-full text-xs font-bold ${
@@ -716,29 +714,29 @@ function PurchaseReminderPage() {
 
         {/* TAB 3: CONSUMPTION PREDICTION */}
         {activeTab === "consumption" && (
-          <div className="border rounded-lg overflow-x-auto w-full bg-white">
-            <table className="w-full text-sm border-collapse">
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm">
               <thead>
-                <tr className="bg-slate-100/50 border-b text-slate-500 uppercase text-xs font-bold tracking-wider whitespace-nowrap text-left">
-                  <th className="py-4 px-4 min-w-[140px]">SPAREPART CODE</th>
-                  <th className="py-4 px-4 min-w-[240px]">SPAREPART NAME</th>
-                  <th className="py-4 px-4 min-w-[120px]">CATEGORY</th>
-                  <th className="py-4 px-4 min-w-[130px]">HISTORICAL (30D)</th>
-                  <th className="py-4 px-4 min-w-[160px]">
+                <tr className="bg-slate-100/50 text-slate-500 uppercase text-xs font-bold tracking-wider border-b whitespace-nowrap text-left">
+                  <th className="py-4 px-4 font-semibold min-w-[140px]">Sparepart Code</th>
+                  <th className="py-4 px-4 font-semibold min-w-[240px]">Sparepart Name</th>
+                  <th className="py-4 px-4 font-semibold min-w-[120px]">Category</th>
+                  <th className="py-4 px-4 font-semibold min-w-[130px]">Historical (30D)</th>
+                  <th className="py-4 px-4 font-semibold min-w-[160px]">
                     <div className="inline-flex items-center gap-1 cursor-pointer">
-                      PREDICTED (NEXT 30D) <ArrowUpDown className="size-3 text-slate-400" />
+                      Predicted (Next 30D) <ArrowUpDown className="size-3 text-slate-400" />
                     </div>
                   </th>
-                  <th className="py-4 px-4 min-w-[150px]">PREDICTED (NEXT 90D)</th>
-                  <th className="py-4 px-4 min-w-[120px]">TREND</th>
-                  <th className="py-4 px-4 min-w-[140px]">RUN-OUT DATE</th>
-                  <th className="py-4 px-4 min-w-[130px]">CONFIDENCE</th>
-                  <th className="py-4 px-4 min-w-[170px]">RISK ALERT</th>
+                  <th className="py-4 px-4 font-semibold min-w-[150px]">Predicted (Next 90D)</th>
+                  <th className="py-4 px-4 font-semibold min-w-[120px]">Trend</th>
+                  <th className="py-4 px-4 font-semibold min-w-[140px]">Run-Out Date</th>
+                  <th className="py-4 px-4 font-semibold min-w-[130px]">Confidence</th>
+                  <th className="py-4 px-4 font-semibold min-w-[170px]">Risk Alert</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-border/60">
+              <tbody className="divide-y">
                 {filteredConsumption.map((item) => (
-                  <tr key={item.id} className="hover:bg-slate-50/70 transition-colors whitespace-nowrap">
+                  <tr key={item.id} className="hover:bg-slate-50/50 transition-colors whitespace-nowrap">
                     <td className="py-3.5 px-4 font-mono font-medium text-slate-800 text-xs">
                       {item.code}
                     </td>
@@ -746,7 +744,7 @@ function PurchaseReminderPage() {
                     <td className="py-3.5 px-4 text-slate-600">{item.category}</td>
                     <td className="py-3.5 px-4 text-slate-600 font-medium">{item.hist30d} pcs</td>
                     <td className="py-3.5 px-4 font-bold text-slate-800">{item.next30d} pcs</td>
-                    <td className="py-3.5 px-4 text-slate-700 font-medium">{item.next90d} pcs</td>
+                    <td className="py-3.5 px-4 text-slate-600 font-medium">{item.next90d} pcs</td>
                     <td className="py-3.5 px-4">
                       <span className="inline-flex items-center text-xs font-semibold text-rose-600 gap-0.5">
                         <TrendingUp className="size-3" />+{item.trendPct}%
@@ -778,7 +776,7 @@ function PurchaseReminderPage() {
           </div>
         )}
 
-        {/* Pagination at Bottom */}
+        {/* Pagination */}
         <TablePagination />
       </div>
     </div>

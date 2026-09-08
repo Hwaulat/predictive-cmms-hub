@@ -254,18 +254,18 @@ function LogPartPage() {
         </Button>
       </div>
 
-      {/* Main Container Card */}
-      <div className="bg-white rounded-xl border shadow-sm p-6 space-y-6">
-        {/* Filter Bar */}
-        <div className="flex flex-wrap items-center gap-4">
-          {/* Search Bar */}
-          <div className="relative flex-1 min-w-[280px]">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-slate-400" />
+      {/* Main Container Card - Styled matching Request Order List */}
+      <div className="bg-white rounded-xl border shadow-sm flex flex-col">
+        {/* Filters Header Bar */}
+        <div className="p-4 border-b flex flex-wrap items-center gap-4">
+          {/* Search Bar - Fill container */}
+          <div className="relative flex-1 min-w-[240px]">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
             <Input
               placeholder="Search by requested by, sparepart code, details, pr no &..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="pl-9 bg-white text-xs"
+              className="pl-9 bg-slate-50/50 w-full"
             />
           </div>
 
@@ -295,7 +295,7 @@ function LogPartPage() {
 
           {/* Dropdown: All Status Order */}
           <Select value={statusOrderFilter} onValueChange={setStatusOrderFilter}>
-            <SelectTrigger className="w-[170px] bg-white text-xs text-slate-700">
+            <SelectTrigger className="w-[160px] bg-white">
               <SelectValue placeholder="All Status Order" />
             </SelectTrigger>
             <SelectContent>
@@ -306,7 +306,7 @@ function LogPartPage() {
 
           {/* Dropdown: All Status Activity */}
           <Select value={statusActivityFilter} onValueChange={setStatusActivityFilter}>
-            <SelectTrigger className="w-[170px] bg-white text-xs text-slate-700">
+            <SelectTrigger className="w-[160px] bg-white">
               <SelectValue placeholder="All Status Activity" />
             </SelectTrigger>
             <SelectContent>
@@ -319,112 +319,112 @@ function LogPartPage() {
           </Select>
 
           {/* Date Range Picker */}
-          <div className="flex items-center gap-2 border rounded-md px-3 h-10 bg-white text-xs text-slate-400 cursor-pointer hover:bg-slate-50 min-w-[160px]">
-            <Calendar className="size-4 text-slate-400" />
+          <div className="flex items-center gap-2 border rounded-md px-3 h-10 bg-white text-xs text-muted-foreground cursor-pointer hover:bg-slate-50 min-w-[160px]">
+            <Calendar className="size-4 text-muted-foreground" />
             <span>Select date range</span>
           </div>
         </div>
 
-        {/* Horizontally Scrollable Table (SS 1 & 2) */}
-        <div className="border rounded-lg overflow-x-auto w-full bg-white">
-          <table className="w-full text-sm border-collapse">
+        {/* Table Container - Flush with card edges matching Request Order List */}
+        <div className="overflow-x-auto">
+          <table className="w-full text-sm">
             <thead>
-              <tr className="bg-slate-100/50 border-b text-slate-500 uppercase text-xs font-bold tracking-wider whitespace-nowrap text-left">
-                <th className="py-4 px-4 text-center w-12">ACTION</th>
-                <th className="py-4 px-4">NO.</th>
-                <th className="py-4 px-4 min-w-[160px]">
+              <tr className="bg-slate-100/50 text-slate-500 uppercase text-xs font-bold tracking-wider border-b whitespace-nowrap text-left">
+                <th className="py-4 px-4 text-center font-semibold w-16">Action</th>
+                <th className="py-4 px-4 font-semibold">No.</th>
+                <th className="py-4 px-4 font-semibold min-w-[160px]">
                   <div className="inline-flex items-center gap-1 cursor-pointer">
-                    REQUEST DATE <ArrowUpDown className="size-3 text-slate-400" />
+                    Request Date <ArrowUpDown className="size-3 text-slate-400" />
                   </div>
                 </th>
-                <th className="py-4 px-4 min-w-[140px]">
+                <th className="py-4 px-4 font-semibold min-w-[140px]">
                   <div className="inline-flex items-center gap-1 cursor-pointer">
-                    REQUESTED BY <ArrowUpDown className="size-3 text-slate-400" />
+                    Requested By <ArrowUpDown className="size-3 text-slate-400" />
                   </div>
                 </th>
-                <th className="py-4 px-4 min-w-[130px]">
+                <th className="py-4 px-4 font-semibold min-w-[130px]">
                   <div className="inline-flex items-center gap-1 cursor-pointer">
-                    STATUS ORDER <ArrowUpDown className="size-3 text-slate-400" />
+                    Status Order <ArrowUpDown className="size-3 text-slate-400" />
                   </div>
                 </th>
-                <th className="py-4 px-4 min-w-[140px]">
+                <th className="py-4 px-4 font-semibold min-w-[140px]">
                   <div className="inline-flex items-center gap-1 cursor-pointer">
-                    STATUS ACTIVITY <ArrowUpDown className="size-3 text-slate-400" />
+                    Status Activity <ArrowUpDown className="size-3 text-slate-400" />
                   </div>
                 </th>
-                <th className="py-4 px-4 min-w-[160px]">
+                <th className="py-4 px-4 font-semibold min-w-[160px]">
                   <div className="inline-flex items-center gap-1 cursor-pointer">
-                    SPAREPART CODE <ArrowUpDown className="size-3 text-slate-400" />
+                    Sparepart Code <ArrowUpDown className="size-3 text-slate-400" />
                   </div>
                 </th>
-                <th className="py-4 px-4 min-w-[280px]">
+                <th className="py-4 px-4 font-semibold min-w-[280px]">
                   <div className="inline-flex items-center gap-1 cursor-pointer">
-                    DETAILS <ArrowUpDown className="size-3 text-slate-400" />
+                    Details <ArrowUpDown className="size-3 text-slate-400" />
                   </div>
                 </th>
-                <th className="py-4 px-4 min-w-[120px]">
+                <th className="py-4 px-4 font-semibold min-w-[120px]">
                   <div className="inline-flex items-center gap-1 cursor-pointer">
-                    PR NO. <ArrowUpDown className="size-3 text-slate-400" />
+                    PR No. <ArrowUpDown className="size-3 text-slate-400" />
                   </div>
                 </th>
-                <th className="py-4 px-4 min-w-[140px]">
+                <th className="py-4 px-4 font-semibold min-w-[140px]">
                   <div className="inline-flex items-center gap-1 cursor-pointer">
-                    PR NAME <ArrowUpDown className="size-3 text-slate-400" />
+                    PR Name <ArrowUpDown className="size-3 text-slate-400" />
                   </div>
                 </th>
-                <th className="py-4 px-4 min-w-[130px]">
+                <th className="py-4 px-4 font-semibold min-w-[130px]">
                   <div className="inline-flex items-center gap-1 cursor-pointer">
-                    PO NUMBER <ArrowUpDown className="size-3 text-slate-400" />
+                    PO Number <ArrowUpDown className="size-3 text-slate-400" />
                   </div>
                 </th>
-                <th className="py-4 px-4 min-w-[120px]">
+                <th className="py-4 px-4 font-semibold min-w-[120px]">
                   <div className="inline-flex items-center gap-1 cursor-pointer">
-                    PRICE PR <ArrowUpDown className="size-3 text-slate-400" />
+                    Price PR <ArrowUpDown className="size-3 text-slate-400" />
                   </div>
                 </th>
-                <th className="py-4 px-4 min-w-[140px]">
+                <th className="py-4 px-4 font-semibold min-w-[140px]">
                   <div className="inline-flex items-center gap-1 cursor-pointer">
-                    TOTAL PRICE PR <ArrowUpDown className="size-3 text-slate-400" />
+                    Total Price PR <ArrowUpDown className="size-3 text-slate-400" />
                   </div>
                 </th>
-                <th className="py-4 px-4 min-w-[120px]">
+                <th className="py-4 px-4 font-semibold min-w-[120px]">
                   <div className="inline-flex items-center gap-1 cursor-pointer">
-                    PRICE PO <ArrowUpDown className="size-3 text-slate-400" />
+                    Price PO <ArrowUpDown className="size-3 text-slate-400" />
                   </div>
                 </th>
-                <th className="py-4 px-4 min-w-[140px]">
+                <th className="py-4 px-4 font-semibold min-w-[140px]">
                   <div className="inline-flex items-center gap-1 cursor-pointer">
-                    TOTAL PRICE PO <ArrowUpDown className="size-3 text-slate-400" />
+                    Total Price PO <ArrowUpDown className="size-3 text-slate-400" />
                   </div>
                 </th>
-                <th className="py-4 px-4 min-w-[110px]">
+                <th className="py-4 px-4 font-semibold min-w-[110px]">
                   <div className="inline-flex items-center gap-1 cursor-pointer">
-                    ORDER QTY <ArrowUpDown className="size-3 text-slate-400" />
+                    Order Qty <ArrowUpDown className="size-3 text-slate-400" />
                   </div>
                 </th>
-                <th className="py-4 px-4 min-w-[140px]">
+                <th className="py-4 px-4 font-semibold min-w-[140px]">
                   <div className="inline-flex items-center gap-1 cursor-pointer">
-                    DELIVERY PLAN <ArrowUpDown className="size-3 text-slate-400" />
+                    Delivery Plan <ArrowUpDown className="size-3 text-slate-400" />
                   </div>
                 </th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-border/60">
+            <tbody className="divide-y">
               {filteredData.map((item) => (
-                <tr key={item.id} className="hover:bg-slate-50/70 transition-colors whitespace-nowrap">
+                <tr key={item.id} className="hover:bg-slate-50/50 transition-colors whitespace-nowrap">
                   <td className="py-3 px-4 text-center">
                     <Button
                       variant="outline"
                       size="icon"
-                      className="size-8 text-slate-400 hover:text-primary border bg-white shadow-xs"
+                      className="h-8 w-8 text-slate-400 hover:text-primary bg-white shadow-xs"
                       title="View Details"
                     >
                       <Eye className="size-4" />
                     </Button>
                   </td>
                   <td className="py-3 px-4 text-slate-700">{item.no}</td>
-                  <td className="py-3 px-4 text-slate-700">{item.requestDate}</td>
-                  <td className="py-3 px-4 text-slate-800 font-medium">{item.requestedBy}</td>
+                  <td className="py-3 px-4 text-slate-600">{item.requestDate}</td>
+                  <td className="py-3 px-4 text-slate-700 font-medium">{item.requestedBy}</td>
                   <td className="py-3 px-4">
                     <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-purple-50 text-purple-600 border border-purple-200">
                       {item.statusOrder}
@@ -452,19 +452,19 @@ function LogPartPage() {
                       </span>
                     )}
                   </td>
-                  <td className="py-3 px-4 font-mono text-slate-800 font-medium">
+                  <td className="py-3 px-4 font-mono text-slate-700 font-medium">
                     {item.sparepartCode}
                   </td>
-                  <td className="py-3 px-4 text-slate-700 max-w-md truncate">{item.details}</td>
-                  <td className="py-3 px-4 text-slate-700 font-mono">{item.prNo}</td>
-                  <td className="py-3 px-4 text-slate-800 font-medium">{item.prName}</td>
+                  <td className="py-3 px-4 text-slate-600 max-w-md truncate">{item.details}</td>
+                  <td className="py-3 px-4 text-slate-600 font-mono">{item.prNo}</td>
+                  <td className="py-3 px-4 text-slate-700 font-medium">{item.prName}</td>
                   <td className="py-3 px-4 text-slate-600">{item.poNumber}</td>
-                  <td className="py-3 px-4 text-slate-700">{item.pricePr}</td>
-                  <td className="py-3 px-4 text-slate-700">{item.totalPricePr}</td>
-                  <td className="py-3 px-4 text-slate-700">{item.pricePo}</td>
-                  <td className="py-3 px-4 text-slate-700">{item.totalPricePo}</td>
+                  <td className="py-3 px-4 text-slate-600">{item.pricePr}</td>
+                  <td className="py-3 px-4 text-slate-600">{item.totalPricePr}</td>
+                  <td className="py-3 px-4 text-slate-600">{item.pricePo}</td>
+                  <td className="py-3 px-4 text-slate-600">{item.totalPricePo}</td>
                   <td className="py-3 px-4 text-slate-800 font-semibold">{item.orderQty}</td>
-                  <td className="py-3 px-4 text-slate-700">{item.deliveryPlan}</td>
+                  <td className="py-3 px-4 text-slate-600">{item.deliveryPlan}</td>
                 </tr>
               ))}
             </tbody>

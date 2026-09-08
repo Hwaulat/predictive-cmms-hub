@@ -88,9 +88,19 @@ function StockTransactionPage() {
 
   const currentItems = activeTab === "in" ? mockTransactionsIn : mockTransactionsOut;
 
+  const filteredItems = currentItems.filter((item) => {
+    const matchesSearch =
+      item.sparepartName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      item.receiveBy.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      item.transactionDate.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesActivity = statusActivity === "all" || item.statusActivity === statusActivity;
+    const matchesApproval = statusApproval === "all" || item.statusApproval === statusApproval;
+    return matchesSearch && matchesActivity && matchesApproval;
+  });
+
   return (
     <div className="space-y-6 pb-20 animate-in fade-in-50 duration-500">
-      {/* Header Bar with Inventory In / Out Tabs (SS 2 & 3) */}
+      {/* Header Bar with Inventory In / Out Tabs */}
       <div className="flex items-center justify-between border-b pb-4">
         <div className="flex items-center gap-2">
           <ArrowLeftRight className="size-6 text-slate-800" />
@@ -124,24 +134,24 @@ function StockTransactionPage() {
         </div>
       </div>
 
-      {/* Main Container Card */}
-      <div className="bg-white rounded-xl border shadow-sm p-6 space-y-6">
-        {/* Filter Bar */}
-        <div className="flex flex-wrap items-center gap-3">
+      {/* Main Container Card - Styled matching Request Order List */}
+      <div className="bg-white rounded-xl border shadow-sm flex flex-col">
+        {/* Filters Header Bar */}
+        <div className="p-4 border-b flex flex-wrap items-center gap-4">
           {/* Search Bar */}
-          <div className="relative w-44">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-slate-400" />
+          <div className="relative flex-1 min-w-[200px]">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
             <Input
               placeholder="Q S."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="pl-9 bg-white text-xs h-10"
+              className="pl-9 bg-slate-50/50 w-full text-xs"
             />
           </div>
 
           {/* Select: Choose Status Activity */}
           <Select value={statusActivity} onValueChange={setStatusActivity}>
-            <SelectTrigger className="w-[190px] bg-white text-xs text-slate-700 h-10">
+            <SelectTrigger className="w-[190px] bg-white text-xs text-slate-700">
               <SelectValue placeholder="Choose Status Activity" />
             </SelectTrigger>
             <SelectContent>
@@ -153,7 +163,7 @@ function StockTransactionPage() {
 
           {/* Select: Choose Status Approval */}
           <Select value={statusApproval} onValueChange={setStatusApproval}>
-            <SelectTrigger className="w-[190px] bg-white text-xs text-slate-700 h-10">
+            <SelectTrigger className="w-[190px] bg-white text-xs text-slate-700">
               <SelectValue placeholder="Choose Status Approval" />
             </SelectTrigger>
             <SelectContent>
@@ -165,12 +175,12 @@ function StockTransactionPage() {
           </Select>
 
           {/* Date range picker */}
-          <div className="flex items-center gap-2 border rounded-md px-3 h-10 bg-white text-xs text-slate-400 cursor-pointer hover:bg-slate-50 min-w-[200px]">
-            <Calendar className="size-4 text-slate-400" />
+          <div className="flex items-center gap-2 border rounded-md px-3 h-10 bg-white text-xs text-muted-foreground cursor-pointer hover:bg-slate-50 min-w-[200px]">
+            <Calendar className="size-4 text-muted-foreground" />
             <span>dd/mm/yyyy - dd/mm/yyyy</span>
           </div>
 
-          <div className="ml-auto flex items-center gap-3">
+          <div className="flex items-center gap-3">
             {/* Download Excel Button */}
             <Button className="bg-[#f97316] hover:bg-[#ea580c] text-white flex items-center gap-2 font-medium px-4 h-10 shadow-sm">
               <Download className="size-4" /> Download Excel
@@ -191,41 +201,41 @@ function StockTransactionPage() {
           </div>
         </div>
 
-        {/* Table */}
-        <div className="border rounded-lg overflow-x-auto w-full bg-white">
-          <table className="w-full text-sm border-collapse">
+        {/* Table Container - Flush with card edges matching Request Order List */}
+        <div className="overflow-x-auto">
+          <table className="w-full text-sm">
             <thead>
-              <tr className="bg-slate-100/50 border-b text-slate-500 uppercase text-xs font-bold tracking-wider whitespace-nowrap text-left">
-                <th className="py-4 px-4 text-center w-28">ACTION</th>
-                <th className="py-4 px-4">NO.</th>
-                <th className="py-4 px-4 min-w-[170px]">
+              <tr className="bg-slate-100/50 text-slate-500 uppercase text-xs font-bold tracking-wider border-b whitespace-nowrap text-left">
+                <th className="py-4 px-4 text-center font-semibold w-28">Action</th>
+                <th className="py-4 px-4 font-semibold">No.</th>
+                <th className="py-4 px-4 font-semibold min-w-[170px]">
                   <div className="inline-flex items-center gap-1 cursor-pointer">
-                    STATUS ACTIVITY <ArrowUpDown className="size-3 text-slate-400" />
+                    Status Activity <ArrowUpDown className="size-3 text-slate-400" />
                   </div>
                 </th>
-                <th className="py-4 px-4 min-w-[170px]">STATUS APPROVAL</th>
-                <th className="py-4 px-4 min-w-[180px]">
+                <th className="py-4 px-4 font-semibold min-w-[170px]">Status Approval</th>
+                <th className="py-4 px-4 font-semibold min-w-[180px]">
                   <div className="inline-flex items-center gap-1 cursor-pointer">
-                    TRANSACTION DATE <ArrowUpDown className="size-3 text-slate-400" />
+                    Transaction Date <ArrowUpDown className="size-3 text-slate-400" />
                   </div>
                 </th>
-                <th className="py-4 px-4 min-w-[160px]">
+                <th className="py-4 px-4 font-semibold min-w-[160px]">
                   <div className="inline-flex items-center gap-1 cursor-pointer">
-                    RECEIVE BY <ArrowUpDown className="size-3 text-slate-400" />
+                    Receive By <ArrowUpDown className="size-3 text-slate-400" />
                   </div>
                 </th>
-                <th className="py-4 px-4 min-w-[200px]">SPAREPART NAME</th>
+                <th className="py-4 px-4 font-semibold min-w-[200px]">Sparepart Name</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-border/60">
-              {currentItems.map((item) => (
-                <tr key={item.id} className="hover:bg-slate-50/70 transition-colors whitespace-nowrap">
+            <tbody className="divide-y">
+              {filteredItems.map((item) => (
+                <tr key={item.id} className="hover:bg-slate-50/50 transition-colors whitespace-nowrap">
                   <td className="py-3 px-4 text-center">
                     <div className="flex items-center justify-center gap-1.5">
                       <Button
                         variant="outline"
                         size="icon"
-                        className="size-8 text-slate-400 hover:text-primary border bg-white shadow-xs"
+                        className="h-8 w-8 text-slate-400 hover:text-primary bg-white shadow-xs"
                         title="View Details"
                         onClick={() =>
                           navigate({
@@ -238,7 +248,7 @@ function StockTransactionPage() {
                       <Button
                         variant="outline"
                         size="icon"
-                        className="size-8 text-slate-400 hover:text-primary border bg-white shadow-xs"
+                        className="h-8 w-8 text-slate-400 hover:text-primary bg-white shadow-xs"
                         title="Edit"
                       >
                         <Edit2 className="size-4" />
@@ -246,7 +256,7 @@ function StockTransactionPage() {
                       <Button
                         variant="outline"
                         size="icon"
-                        className="size-8 text-slate-400 hover:text-destructive border bg-white shadow-xs"
+                        className="h-8 w-8 text-slate-400 hover:text-destructive border bg-white shadow-xs"
                         title="Delete"
                       >
                         <Trash2 className="size-4" />
@@ -264,8 +274,8 @@ function StockTransactionPage() {
                       {item.statusApproval}
                     </span>
                   </td>
-                  <td className="py-3 px-4 text-slate-700">{item.transactionDate}</td>
-                  <td className="py-3 px-4 text-slate-800 font-medium">{item.receiveBy}</td>
+                  <td className="py-3 px-4 text-slate-600">{item.transactionDate}</td>
+                  <td className="py-3 px-4 text-slate-700 font-medium">{item.receiveBy}</td>
                   <td className="py-3 px-4 font-semibold text-slate-800">{item.sparepartName}</td>
                 </tr>
               ))}
