@@ -1,5 +1,5 @@
 import { Link, createFileRoute } from "@tanstack/react-router";
-import { Download, Eye, Pen, Plus, Trash2 } from "lucide-react";
+import { Download, Edit2, Eye, Pen, Plus, RotateCcw, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -37,11 +37,8 @@ function MachinePage() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <h1 className="text-2xl font-bold text-slate-800">Machine/Equipment</h1>
-        
+
         <div className="flex items-center gap-2">
-          <Button variant="outline" className="bg-slate-200 hover:bg-slate-300 text-slate-700 border-none font-semibold">
-            <Download className="size-4 mr-2" /> Download
-          </Button>
           <Link to="/master-data/machine/new">
             <Button className="bg-[#2563eb] hover:bg-[#1d4ed8] text-white font-semibold">
               <Plus className="size-4 mr-2" /> Add Machine/Equipment
@@ -58,7 +55,7 @@ function MachinePage() {
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-slate-400" />
             <Input placeholder="Search" className="pl-9 bg-white" />
           </div>
-          
+
           <Select defaultValue="section">
             <SelectTrigger className="w-[180px] bg-white">
               <SelectValue placeholder="Filter by section" />
@@ -74,48 +71,48 @@ function MachinePage() {
           <table className="w-full text-sm">
             <thead>
               <tr className="bg-slate-100/50 text-slate-500 uppercase text-xs font-bold tracking-wider border-b">
-                <th className="py-4 px-6 w-12"><Checkbox /></th>
-                <th className="py-4 px-4 whitespace-nowrap">Machine Code</th>
-                <th className="py-4 px-4 whitespace-nowrap">Machine Name</th>
-                <th className="py-4 px-4 whitespace-nowrap">Department</th>
-                <th className="py-4 px-4 whitespace-nowrap">Area</th>
+                <th className="py-4 px-4 whitespace-nowrap w-12">Action</th>
+                <th className="py-4 px-4 whitespace-nowrap w-12">Machine Code</th>
+                <th className="py-4 px-4 whitespace-nowrap w-12">Machine Name</th>
+                <th className="py-4 px-4 whitespace-nowrap w-12">Department</th>
+                <th className="py-4 px-4 whitespace-nowrap w-12">Area</th>
                 <th className="py-4 px-4 whitespace-nowrap">Line</th>
-                <th className="py-4 px-4 whitespace-nowrap">Action</th>
               </tr>
             </thead>
             <tbody className="divide-y">
               {machines.map((m, i) => (
                 <tr key={i} className="hover:bg-slate-50/50">
-                  <td className="py-3 px-6"><Checkbox /></td>
+                  <td className="py-3 px-4 flex justify-center">
+                    <div className="flex items-center gap-1">
+                      <Button
+                        variant="outline"
+                        size="icon"
+                        className="h-8 w-8 text-slate-400 hover:text-primary"
+                      >
+                        <Eye className="size-4" />
+                      </Button>
+                      <Button variant="outline" size="icon" className="h-8 w-8 text-slate-400 hover:text-primary">
+                        <RotateCcw className="size-4" />
+                      </Button>
+                      <Button variant="outline" size="icon" className="h-8 w-8 text-slate-400 hover:text-primary">
+                        <Edit2 className="size-4" />
+                      </Button>
+                      <Button variant="outline" size="icon" className="h-8 w-8 text-slate-400 hover:text-destructive">
+                        <Trash2 className="size-4" />
+                      </Button>
+                    </div>
+                  </td>
                   <td className="py-3 px-4 text-slate-600">{m.code}</td>
                   <td className="py-3 px-4 text-slate-600">{m.name}</td>
                   <td className="py-3 px-4 text-slate-600">{m.dept}</td>
                   <td className="py-3 px-4 text-slate-600">{m.area}</td>
                   <td className="py-3 px-4 text-slate-600">{m.line}</td>
-                  <td className="py-3 px-4">
-                    <div className="flex items-center gap-1.5">
-                      <Button variant="outline" size="icon" className="size-8 bg-[#22c55e] hover:bg-[#16a34a] text-white border-none shrink-0">
-                        <Download className="size-4" />
-                      </Button>
-                      <Link to="/master-data/machine/$id" params={{ id: m.code.toLowerCase().replace(/[^a-z0-9]+/g, '-') }}>
-                        <Button variant="outline" size="icon" className="size-8 bg-[#2563eb] hover:bg-[#1d4ed8] text-white border-none shrink-0">
-                          <Eye className="size-4" />
-                        </Button>
-                      </Link>
-                      <Button variant="outline" size="icon" className="size-8 bg-[#f59e0b] hover:bg-[#d97706] text-white border-none shrink-0">
-                        <Pen className="size-4" />
-                      </Button>
-                      <Button variant="outline" size="icon" className="size-8 bg-[#ef4444] hover:bg-[#dc2626] text-white border-none shrink-0">
-                        <Trash2 className="size-4" />
-                      </Button>
-                    </div>
-                  </td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
-        
+
         <TablePagination />
       </div>
     </div>

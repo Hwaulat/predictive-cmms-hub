@@ -24,18 +24,18 @@ export const Route = createFileRoute("/ai/maintenance")({
 });
 
 // Helper component for standardized table
-function StandardTable({ 
-  title, 
-  columns, 
-  data, 
-  renderRow, 
-  searchFields 
-}: { 
-  title: string, 
-  columns: string[], 
-  data: any[], 
+function StandardTable({
+  title,
+  columns,
+  data,
+  renderRow,
+  searchFields
+}: {
+  title: string,
+  columns: string[],
+  data: any[],
   renderRow: (row: any, index: number) => React.ReactNode,
-  searchFields: string[] 
+  searchFields: string[]
 }) {
   const [search, setSearch] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
@@ -44,7 +44,7 @@ function StandardTable({
   const filteredData = useMemo(() => {
     if (!search) return data;
     const lowerSearch = search.toLowerCase();
-    return data.filter(row => 
+    return data.filter(row =>
       searchFields.some(field => String(row[field] || "").toLowerCase().includes(lowerSearch))
     );
   }, [data, search, searchFields]);
@@ -67,8 +67,8 @@ function StandardTable({
         <div className="flex flex-col sm:flex-row items-center gap-3 w-full flex-1">
           <div className="relative w-full flex-1">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-            <Input 
-              placeholder="Search..." 
+            <Input
+              placeholder="Search..."
               className="w-full pl-9 bg-white"
               value={search}
               onChange={(e) => { setSearch(e.target.value); setCurrentPage(1); }}
@@ -101,7 +101,7 @@ function StandardTable({
         </table>
       </div>
 
-        <TablePagination />
+      <TablePagination />
     </div>
   );
 }
@@ -138,7 +138,7 @@ function AIMaintenanceDashboard() {
             <div className="bg-white border rounded-lg p-5 shadow-sm">
               <div className="flex items-center gap-2 mb-6">
                 <Sparkles className="size-5 text-primary" />
-                <h3 className="text-base font-bold text-foreground">Fail Frequency by Equipment</h3>
+                <h3 className="text-base font-bold text-foreground">Yearly Failure Frequency by Equipment</h3>
               </div>
               <div className="h-72">
                 <ResponsiveContainer width="100%" height="100%">
@@ -146,13 +146,13 @@ function AIMaintenanceDashboard() {
                     <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" vertical={false} />
                     <XAxis dataKey="name" fontSize={12} stroke="var(--color-muted-foreground)" axisLine={false} tickLine={false} />
                     <YAxis fontSize={12} stroke="var(--color-muted-foreground)" axisLine={false} tickLine={false} />
-                    <RechartsTooltip cursor={{fill: 'var(--color-muted)', opacity: 0.2}} />
+                    <RechartsTooltip cursor={{ fill: 'var(--color-muted)', opacity: 0.2 }} />
                     <Bar dataKey="fails" name="Fail Count" fill="#f59e0b" radius={[4, 4, 0, 0]} maxBarSize={60} />
                   </BarChart>
                 </ResponsiveContainer>
               </div>
             </div>
-            
+
             <StandardTable
               title="Checklist Analytics Data"
               columns={["Equipment", "Checklist Item", "Fail Count", "Timeframe", "Status", "AI Insight"]}
@@ -186,7 +186,7 @@ function AIMaintenanceDashboard() {
                     <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" vertical={false} />
                     <XAxis dataKey="name" fontSize={12} stroke="var(--color-muted-foreground)" axisLine={false} tickLine={false} />
                     <YAxis fontSize={12} stroke="var(--color-muted-foreground)" domain={[0, 100]} axisLine={false} tickLine={false} />
-                    <RechartsTooltip cursor={{fill: 'var(--color-muted)', opacity: 0.2}} />
+                    <RechartsTooltip cursor={{ fill: 'var(--color-muted)', opacity: 0.2 }} />
                     <Bar dataKey="confidence" name="Confidence %" fill="#2563eb" radius={[4, 4, 0, 0]} maxBarSize={60} />
                   </BarChart>
                 </ResponsiveContainer>
@@ -227,7 +227,7 @@ function AIMaintenanceDashboard() {
                     <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" vertical={false} />
                     <XAxis dataKey="month" fontSize={12} stroke="var(--color-muted-foreground)" axisLine={false} tickLine={false} />
                     <YAxis fontSize={12} stroke="var(--color-muted-foreground)" axisLine={false} tickLine={false} />
-                    <RechartsTooltip cursor={{fill: 'var(--color-muted)', opacity: 0.2}} />
+                    <RechartsTooltip cursor={{ fill: 'var(--color-muted)', opacity: 0.2 }} />
                     <Legend />
                     <Bar dataKey="actual" name="Actual WOs" fill="var(--color-chart-1)" radius={[4, 4, 0, 0]} maxBarSize={60} />
                     <Bar dataKey="predicted" name="Predicted WOs" fill="var(--color-chart-2)" opacity={0.6} radius={[4, 4, 0, 0]} maxBarSize={60} />
