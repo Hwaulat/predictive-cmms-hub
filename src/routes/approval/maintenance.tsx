@@ -1,8 +1,17 @@
 import { useState } from "react";
 import { Link, createFileRoute } from "@tanstack/react-router";
-import { Check, Eye } from "lucide-react";
-import { DataTable, PageHeader, Panel, SearchBar } from "@/components/ui-kit/page";
+import { Check, Eye, Search } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Button } from "@/components/ui/button";
 import { approvalMaintenanceList2 } from "@/lib/mock-data";
+import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/approval/maintenance")({
   head: () => ({
@@ -12,11 +21,6 @@ export const Route = createFileRoute("/approval/maintenance")({
         name: "description",
         content: "Work order cost approval list requiring management sign-off.",
       },
-      { property: "og:title", content: "Maintenance Approval — CMMS" },
-      {
-        property: "og:description",
-        content: "Work order cost approval process before repair execution.",
-      },
     ],
   }),
   component: ApprovalMaintenancePage,
@@ -24,14 +28,16 @@ export const Route = createFileRoute("/approval/maintenance")({
 
 function ApprovalMaintenancePage() {
   const [tab, setTab] = useState<"Pending" | "Confirmed">("Pending");
-  
-  const filteredData = approvalMaintenanceList2.filter((a) => a.status === tab);
-  
+  const [searchQuery, setSearchQuery] = useState("");
+  const [deptFilter, setDeptFilter] = useState("all");
+  const [catFilter, setCatFilter] = useState("all");
+
   const categoryTone = (c: string) =>
-    c === "Checklist" ? "text-blue-600 border-blue-600" :
-    c === "Preventive" ? "text-orange-500 border-orange-500" :
-    c === "Work Order" ? "text-red-500 border-red-500" :
-    "text-red-500 border-red-500";
+    c === "Checklist"
+      ? "text-blue-600 border-blue-600 bg-blue-50/50"
+      : c === "Preventive"
+      ? "text-orange-500 border-orange-500 bg-orange-50/50"
+      : "text-red-500 border-red-500 bg-red-50/50";
 
   const summaryRender = (summary: string) => {
     if (summary === "No Data") return <span className="text-muted-foreground">{summary}</span>;
@@ -50,85 +56,160 @@ function ApprovalMaintenancePage() {
     );
   };
 
+  const filteredData = approvalMaintenanceList2.filter((a) => {
+    const matchesTab = a.status === tab;
+    const matchesSearch =
+      a.id.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      a.doc.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      a.machine.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      a.exec.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesDept = deptFilter === "all" || a.dept === deptFilter;
+    const matchesCat = catFilter === "all" || a.category === catFilter;
+    return matchesTab && matchesSearch && matchesDept && matchesCat;
+  });
+
   return (
-    <div className="space-y-4">
-      <div className="flex items-center gap-2">
-        <button
-          onClick={() => setTab("Pending")}
-          className={`rounded-t-lg px-6 py-2.5 text-sm font-semibold transition-colors ${
-            tab === "Pending" ? "bg-surface text-foreground shadow-sm" : "bg-muted/50 text-muted-foreground hover:bg-muted"
-          }`}
-        >
-          Pending (10)
-        </button>
-        <button
-          onClick={() => setTab("Confirmed")}
-          className={`rounded-t-lg px-6 py-2.5 text-sm font-semibold transition-colors ${
-            tab === "Confirmed" ? "bg-surface text-foreground shadow-sm" : "bg-muted/50 text-muted-foreground hover:bg-muted"
-          }`}
-        >
-          Confirmed
-        </button>
+    <div className="space-y-6 pb-20 animate-in fade-in-50 duration-500">
+      {/* Top Tablist Header (Matched with Capsule Tablist style) */}
+      <div className="flex items-center justify-between">
+        <div className="bg-slate-100 p-1 rounded-xl border inline-flex items-center gap-1 shadow-inner">
+          <button
+            type="button"
+            onClick={() => setTab("Pending")}
+            className={cn(
+              "px-5 py-2 text-xs font-bold rounded-lg transition-all",
+              tab === "Pending"
+                ? "bg-white text-blue-600 shadow-sm"
+                : "text-slate-500 hover:text-slate-800"
+            )}
+          >
+            Pending (10)
+          </button>
+          <button
+            type="button"
+            onClick={() => setTab("Confirmed")}
+            className={cn(
+              "px-5 py-2 text-xs font-bold rounded-lg transition-all",
+              tab === "Confirmed"
+                ? "bg-white text-blue-600 shadow-sm"
+                : "text-slate-500 hover:text-slate-800"
+            )}
+          >
+            Confirmed
+          </button>
+        </div>
       </div>
 
-      <Panel
-        actions={
-          <div className="flex flex-wrap items-center gap-4 w-full">
-            <SearchBar placeholder="Search" />
-            <select className="h-10 rounded-lg border border-input bg-surface px-3 text-sm outline-none focus:border-ring focus:ring-2 focus:ring-ring/20">
-              <option>Filter by department</option>
-            </select>
-            <select className="h-10 rounded-lg border border-input bg-surface px-3 text-sm outline-none focus:border-ring focus:ring-2 focus:ring-ring/20">
-              <option>Filter by category</option>
-            </select>
+      {/* Main Container Card */}
+      <div className="bg-white rounded-xl border shadow-sm flex flex-col">
+        {/* Filters Bar - Positioned matching request-order-list */}
+        <div className="p-4 border-b flex flex-wrap items-center gap-4">
+          <div className="relative flex-1 min-w-[240px]">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
+            <Input
+              placeholder="Search by ID, Document, Machine..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="pl-9 bg-slate-50/50 w-full text-xs"
+            />
           </div>
-        }
-        className="rounded-tl-none border-0 p-0 card-surface-none"
-      >
-        <div className="mt-4">
-          <DataTable
-            columns={["Action", "ID", "Document Number", "Submit Form", "Machine/Item", "Department", "Area", "Line", "Executor", "Summary", "Category"]}
-            rows={filteredData.map((a) => [
-              <div className="flex items-center gap-1">
-                <button className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 border border-input bg-background shadow-sm hover:bg-accent hover:text-green-500 h-8 w-8 text-slate-400">
-                  <Check className="size-4" />
-                </button>
-                <Link to={`/approval/maintenance/${a.id}` as any} className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 border border-input bg-background shadow-sm hover:bg-accent hover:text-primary h-8 w-8 text-slate-400">
-                  <Eye className="size-4" />
-                </Link>
-              </div>,
-              <span className="font-medium">{a.id}</span>,
-              a.doc,
-              <span className="text-muted-foreground">{a.submit}</span>,
-              a.machine,
-              a.dept,
-              a.area,
-              a.line,
-              a.exec,
-              summaryRender(a.summary),
-              <span className={`inline-flex items-center rounded-full border px-3 py-1 text-[11px] font-semibold bg-surface ${categoryTone(a.category)}`}>
-                {a.category}
-              </span>,
-            ])}
-          />
+
+          <Select value={deptFilter} onValueChange={setDeptFilter}>
+            <SelectTrigger className="w-[190px] bg-white text-xs text-slate-700">
+              <SelectValue placeholder="Filter by department" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">Filter by department</SelectItem>
+              <SelectItem value="Department A">Department A</SelectItem>
+              <SelectItem value="Department B">Department B</SelectItem>
+              <SelectItem value="Department C">Department C</SelectItem>
+              <SelectItem value="Department D">Department D</SelectItem>
+            </SelectContent>
+          </Select>
+
+          <Select value={catFilter} onValueChange={setCatFilter}>
+            <SelectTrigger className="w-[180px] bg-white text-xs text-slate-700">
+              <SelectValue placeholder="Filter by category" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">Filter by category</SelectItem>
+              <SelectItem value="Checklist">Checklist</SelectItem>
+              <SelectItem value="Preventive">Preventive</SelectItem>
+              <SelectItem value="Work Order">Work Order</SelectItem>
+            </SelectContent>
+          </Select>
         </div>
-        
-        <div className="flex items-center justify-end gap-4 p-4 text-sm text-muted-foreground border-t border-border mt-4">
-          <div className="flex items-center gap-2">
-            <span>Rows per page</span>
-            <select className="rounded border border-input px-2 py-1 bg-surface">
-              <option>10</option>
-            </select>
-          </div>
-          <div>Page 1 of 10</div>
-          <div className="flex items-center gap-1">
-            <button className="px-2 py-1 rounded border border-border disabled:opacity-50" disabled>&laquo;</button>
-            <button className="px-2 py-1 rounded border border-border disabled:opacity-50" disabled>&lsaquo;</button>
-            <button className="px-2 py-1 rounded border border-border">&rsaquo;</button>
-            <button className="px-2 py-1 rounded border border-border">&raquo;</button>
-          </div>
+
+        {/* Table: Category column moved to the right of Action column */}
+        <div className="overflow-x-auto w-full">
+          <table className="w-full text-sm border-collapse">
+            <thead>
+              <tr className="bg-slate-100/50 border-b text-slate-500 uppercase text-xs font-bold tracking-wider whitespace-nowrap text-left">
+                <th className="py-4 px-4 text-center w-24">Action</th>
+                <th className="py-4 px-4 min-w-[130px]">Category</th>
+                <th className="py-4 px-4 min-w-[110px]">ID</th>
+                <th className="py-4 px-4 min-w-[180px]">Document Number</th>
+                <th className="py-4 px-4 min-w-[150px]">Submit Form</th>
+                <th className="py-4 px-4 min-w-[170px]">Machine/Item</th>
+                <th className="py-4 px-4 min-w-[140px]">Department</th>
+                <th className="py-4 px-4 min-w-[120px]">Area</th>
+                <th className="py-4 px-4 min-w-[160px]">Line</th>
+                <th className="py-4 px-4 min-w-[130px]">Executor</th>
+                <th className="py-4 px-4 min-w-[200px]">Summary</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-border/60">
+              {filteredData.map((a) => (
+                <tr key={a.id} className="hover:bg-slate-50/70 transition-colors whitespace-nowrap">
+                  {/* Action Column */}
+                  <td className="py-3 px-4 text-center">
+                    <div className="flex items-center justify-center gap-1">
+                      <Button
+                        variant="outline"
+                        size="icon"
+                        className="h-8 w-8 text-slate-400 hover:text-green-600 bg-white shadow-xs"
+                        title="Approve"
+                      >
+                        <Check className="size-4" />
+                      </Button>
+                      <Link
+                        to={`/approval/maintenance/${a.id}` as any}
+                        className="inline-flex items-center justify-center rounded-md border bg-white shadow-xs hover:bg-accent hover:text-primary h-8 w-8 text-slate-400 transition-colors"
+                        title="View Details"
+                      >
+                        <Eye className="size-4" />
+                      </Link>
+                    </div>
+                  </td>
+
+                  {/* Category Column (Right next to Action) */}
+                  <td className="py-3 px-4">
+                    <span
+                      className={`inline-flex items-center rounded-full border px-3 py-0.5 text-xs font-semibold ${categoryTone(
+                        a.category
+                      )}`}
+                    >
+                      {a.category}
+                    </span>
+                  </td>
+
+                  <td className="py-3 px-4 font-medium text-slate-800">{a.id}</td>
+                  <td className="py-3 px-4 font-mono text-slate-700">{a.doc}</td>
+                  <td className="py-3 px-4 text-slate-500">{a.submit}</td>
+                  <td className="py-3 px-4 font-medium text-slate-800">{a.machine}</td>
+                  <td className="py-3 px-4 text-slate-700">{a.dept}</td>
+                  <td className="py-3 px-4 text-slate-700">{a.area}</td>
+                  <td className="py-3 px-4 text-slate-700">{a.line}</td>
+                  <td className="py-3 px-4 text-slate-800 font-medium">{a.exec}</td>
+                  <td className="py-3 px-4">{summaryRender(a.summary)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
-      </Panel>
+
+        {/* Note: Bottom pagination removed as requested */}
+      </div>
     </div>
   );
 }
