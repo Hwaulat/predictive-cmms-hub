@@ -52,6 +52,12 @@ import { Route as MasterDataMachineNewRouteImport } from './routes/master-data/m
 import { Route as MasterDataSparepartIndexRouteImport } from './routes/master-data/sparepart/index'
 import { Route as MasterDataSparepartIdRouteImport } from './routes/master-data/sparepart/$id'
 import { Route as MasterDataSparepartNewRouteImport } from './routes/master-data/sparepart/new'
+import { Route as ReportChecklistIndexRouteImport } from './routes/report/checklist/index'
+import { Route as ReportChecklistIdRouteImport } from './routes/report/checklist/$id'
+import { Route as ReportCorrectiveIndexRouteImport } from './routes/report/corrective/index'
+import { Route as ReportCorrectiveIdRouteImport } from './routes/report/corrective/$id'
+import { Route as ReportPreventiveIndexRouteImport } from './routes/report/preventive/index'
+import { Route as ReportPreventiveIdRouteImport } from './routes/report/preventive/$id'
 import { Route as SparePartOrderRequestIndexRouteImport } from './routes/spare-part/order-request/index'
 import { Route as SparePartOrderRequestIdRouteImport } from './routes/spare-part/order-request/$id'
 import { Route as SparePartOrderRequestCreateSorRouteImport } from './routes/spare-part/order-request/create-sor'
@@ -65,6 +71,9 @@ import { Route as SparePartStockTransactionCreateRouteImport } from './routes/sp
 import { Route as DocumentationMachineIdHistoryIndexRouteImport } from './routes/documentation/$machineId/history/index'
 import { Route as DocumentationMachineIdHistoryHistoryIdRouteImport } from './routes/documentation/$machineId/history/$historyId'
 import { Route as MasterDataSparepartWarehouseNewRouteImport } from './routes/master-data/sparepart/warehouse/new'
+import { Route as ReportChecklistMachineNgIndexRouteImport } from './routes/report/checklist/machine-ng/index'
+import { Route as ReportChecklistMachineNgIdRouteImport } from './routes/report/checklist/machine-ng/$id'
+import { Route as ReportPreventivePreviewItemIdRouteImport } from './routes/report/preventive/preview/$itemId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -287,6 +296,36 @@ const MasterDataSparepartNewRoute = MasterDataSparepartNewRouteImport.update({
   path: '/master-data/sparepart/new',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ReportChecklistIndexRoute = ReportChecklistIndexRouteImport.update({
+  id: '/report/checklist/',
+  path: '/report/checklist/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReportChecklistIdRoute = ReportChecklistIdRouteImport.update({
+  id: '/report/checklist/$id',
+  path: '/report/checklist/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReportCorrectiveIndexRoute = ReportCorrectiveIndexRouteImport.update({
+  id: '/report/corrective/',
+  path: '/report/corrective/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReportCorrectiveIdRoute = ReportCorrectiveIdRouteImport.update({
+  id: '/report/corrective/$id',
+  path: '/report/corrective/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReportPreventiveIndexRoute = ReportPreventiveIndexRouteImport.update({
+  id: '/report/preventive/',
+  path: '/report/preventive/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReportPreventiveIdRoute = ReportPreventiveIdRouteImport.update({
+  id: '/report/preventive/$id',
+  path: '/report/preventive/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SparePartOrderRequestIndexRoute =
   SparePartOrderRequestIndexRouteImport.update({
     id: '/spare-part/order-request/',
@@ -364,6 +403,24 @@ const MasterDataSparepartWarehouseNewRoute =
     path: '/master-data/sparepart/warehouse/new',
     getParentRoute: () => rootRouteImport,
   } as any)
+const ReportChecklistMachineNgIndexRoute =
+  ReportChecklistMachineNgIndexRouteImport.update({
+    id: '/report/checklist/machine-ng/',
+    path: '/report/checklist/machine-ng/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ReportChecklistMachineNgIdRoute =
+  ReportChecklistMachineNgIdRouteImport.update({
+    id: '/report/checklist/machine-ng/$id',
+    path: '/report/checklist/machine-ng/$id',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ReportPreventivePreviewItemIdRoute =
+  ReportPreventivePreviewItemIdRouteImport.update({
+    id: '/report/preventive/preview/$itemId',
+    path: '/report/preventive/preview/$itemId',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -405,6 +462,9 @@ export interface FileRoutesByFullPath {
   '/master-data/machine/new': typeof MasterDataMachineNewRoute
   '/master-data/sparepart/$id': typeof MasterDataSparepartIdRoute
   '/master-data/sparepart/new': typeof MasterDataSparepartNewRoute
+  '/report/checklist/$id': typeof ReportChecklistIdRoute
+  '/report/corrective/$id': typeof ReportCorrectiveIdRoute
+  '/report/preventive/$id': typeof ReportPreventiveIdRoute
   '/spare-part/order-request/$id': typeof SparePartOrderRequestIdRoute
   '/spare-part/order-request/create-sor': typeof SparePartOrderRequestCreateSorRoute
   '/spare-part/order-request/edit': typeof SparePartOrderRequestEditRoute
@@ -416,12 +476,18 @@ export interface FileRoutesByFullPath {
   '/master-data/department/': typeof MasterDataDepartmentIndexRoute
   '/master-data/machine/': typeof MasterDataMachineIndexRoute
   '/master-data/sparepart/': typeof MasterDataSparepartIndexRoute
+  '/report/checklist/': typeof ReportChecklistIndexRoute
+  '/report/corrective/': typeof ReportCorrectiveIndexRoute
+  '/report/preventive/': typeof ReportPreventiveIndexRoute
   '/spare-part/order-request/': typeof SparePartOrderRequestIndexRoute
   '/spare-part/request-order-list/': typeof SparePartRequestOrderListIndexRoute
   '/spare-part/stock-transaction/': typeof SparePartStockTransactionIndexRoute
   '/documentation/$machineId/history/$historyId': typeof DocumentationMachineIdHistoryHistoryIdRoute
   '/master-data/sparepart/warehouse/new': typeof MasterDataSparepartWarehouseNewRoute
+  '/report/checklist/machine-ng/$id': typeof ReportChecklistMachineNgIdRoute
+  '/report/preventive/preview/$itemId': typeof ReportPreventivePreviewItemIdRoute
   '/documentation/$machineId/history/': typeof DocumentationMachineIdHistoryIndexRoute
+  '/report/checklist/machine-ng/': typeof ReportChecklistMachineNgIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -463,6 +529,9 @@ export interface FileRoutesByTo {
   '/master-data/machine/new': typeof MasterDataMachineNewRoute
   '/master-data/sparepart/$id': typeof MasterDataSparepartIdRoute
   '/master-data/sparepart/new': typeof MasterDataSparepartNewRoute
+  '/report/checklist/$id': typeof ReportChecklistIdRoute
+  '/report/corrective/$id': typeof ReportCorrectiveIdRoute
+  '/report/preventive/$id': typeof ReportPreventiveIdRoute
   '/spare-part/order-request/$id': typeof SparePartOrderRequestIdRoute
   '/spare-part/order-request/create-sor': typeof SparePartOrderRequestCreateSorRoute
   '/spare-part/order-request/edit': typeof SparePartOrderRequestEditRoute
@@ -474,12 +543,18 @@ export interface FileRoutesByTo {
   '/master-data/department': typeof MasterDataDepartmentIndexRoute
   '/master-data/machine': typeof MasterDataMachineIndexRoute
   '/master-data/sparepart': typeof MasterDataSparepartIndexRoute
+  '/report/checklist': typeof ReportChecklistIndexRoute
+  '/report/corrective': typeof ReportCorrectiveIndexRoute
+  '/report/preventive': typeof ReportPreventiveIndexRoute
   '/spare-part/order-request': typeof SparePartOrderRequestIndexRoute
   '/spare-part/request-order-list': typeof SparePartRequestOrderListIndexRoute
   '/spare-part/stock-transaction': typeof SparePartStockTransactionIndexRoute
   '/documentation/$machineId/history/$historyId': typeof DocumentationMachineIdHistoryHistoryIdRoute
   '/master-data/sparepart/warehouse/new': typeof MasterDataSparepartWarehouseNewRoute
+  '/report/checklist/machine-ng/$id': typeof ReportChecklistMachineNgIdRoute
+  '/report/preventive/preview/$itemId': typeof ReportPreventivePreviewItemIdRoute
   '/documentation/$machineId/history': typeof DocumentationMachineIdHistoryIndexRoute
+  '/report/checklist/machine-ng': typeof ReportChecklistMachineNgIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -522,6 +597,9 @@ export interface FileRoutesById {
   '/master-data/machine/new': typeof MasterDataMachineNewRoute
   '/master-data/sparepart/$id': typeof MasterDataSparepartIdRoute
   '/master-data/sparepart/new': typeof MasterDataSparepartNewRoute
+  '/report/checklist/$id': typeof ReportChecklistIdRoute
+  '/report/corrective/$id': typeof ReportCorrectiveIdRoute
+  '/report/preventive/$id': typeof ReportPreventiveIdRoute
   '/spare-part/order-request/$id': typeof SparePartOrderRequestIdRoute
   '/spare-part/order-request/create-sor': typeof SparePartOrderRequestCreateSorRoute
   '/spare-part/order-request/edit': typeof SparePartOrderRequestEditRoute
@@ -533,12 +611,18 @@ export interface FileRoutesById {
   '/master-data/department/': typeof MasterDataDepartmentIndexRoute
   '/master-data/machine/': typeof MasterDataMachineIndexRoute
   '/master-data/sparepart/': typeof MasterDataSparepartIndexRoute
+  '/report/checklist/': typeof ReportChecklistIndexRoute
+  '/report/corrective/': typeof ReportCorrectiveIndexRoute
+  '/report/preventive/': typeof ReportPreventiveIndexRoute
   '/spare-part/order-request/': typeof SparePartOrderRequestIndexRoute
   '/spare-part/request-order-list/': typeof SparePartRequestOrderListIndexRoute
   '/spare-part/stock-transaction/': typeof SparePartStockTransactionIndexRoute
   '/documentation/$machineId/history/$historyId': typeof DocumentationMachineIdHistoryHistoryIdRoute
   '/master-data/sparepart/warehouse/new': typeof MasterDataSparepartWarehouseNewRoute
+  '/report/checklist/machine-ng/$id': typeof ReportChecklistMachineNgIdRoute
+  '/report/preventive/preview/$itemId': typeof ReportPreventivePreviewItemIdRoute
   '/documentation/$machineId/history/': typeof DocumentationMachineIdHistoryIndexRoute
+  '/report/checklist/machine-ng/': typeof ReportChecklistMachineNgIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -582,6 +666,9 @@ export interface FileRouteTypes {
     | '/master-data/machine/new'
     | '/master-data/sparepart/$id'
     | '/master-data/sparepart/new'
+    | '/report/checklist/$id'
+    | '/report/corrective/$id'
+    | '/report/preventive/$id'
     | '/spare-part/order-request/$id'
     | '/spare-part/order-request/create-sor'
     | '/spare-part/order-request/edit'
@@ -593,12 +680,18 @@ export interface FileRouteTypes {
     | '/master-data/department/'
     | '/master-data/machine/'
     | '/master-data/sparepart/'
+    | '/report/checklist/'
+    | '/report/corrective/'
+    | '/report/preventive/'
     | '/spare-part/order-request/'
     | '/spare-part/request-order-list/'
     | '/spare-part/stock-transaction/'
     | '/documentation/$machineId/history/$historyId'
     | '/master-data/sparepart/warehouse/new'
+    | '/report/checklist/machine-ng/$id'
+    | '/report/preventive/preview/$itemId'
     | '/documentation/$machineId/history/'
+    | '/report/checklist/machine-ng/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -640,6 +733,9 @@ export interface FileRouteTypes {
     | '/master-data/machine/new'
     | '/master-data/sparepart/$id'
     | '/master-data/sparepart/new'
+    | '/report/checklist/$id'
+    | '/report/corrective/$id'
+    | '/report/preventive/$id'
     | '/spare-part/order-request/$id'
     | '/spare-part/order-request/create-sor'
     | '/spare-part/order-request/edit'
@@ -651,12 +747,18 @@ export interface FileRouteTypes {
     | '/master-data/department'
     | '/master-data/machine'
     | '/master-data/sparepart'
+    | '/report/checklist'
+    | '/report/corrective'
+    | '/report/preventive'
     | '/spare-part/order-request'
     | '/spare-part/request-order-list'
     | '/spare-part/stock-transaction'
     | '/documentation/$machineId/history/$historyId'
     | '/master-data/sparepart/warehouse/new'
+    | '/report/checklist/machine-ng/$id'
+    | '/report/preventive/preview/$itemId'
     | '/documentation/$machineId/history'
+    | '/report/checklist/machine-ng'
   id:
     | '__root__'
     | '/'
@@ -698,6 +800,9 @@ export interface FileRouteTypes {
     | '/master-data/machine/new'
     | '/master-data/sparepart/$id'
     | '/master-data/sparepart/new'
+    | '/report/checklist/$id'
+    | '/report/corrective/$id'
+    | '/report/preventive/$id'
     | '/spare-part/order-request/$id'
     | '/spare-part/order-request/create-sor'
     | '/spare-part/order-request/edit'
@@ -709,12 +814,18 @@ export interface FileRouteTypes {
     | '/master-data/department/'
     | '/master-data/machine/'
     | '/master-data/sparepart/'
+    | '/report/checklist/'
+    | '/report/corrective/'
+    | '/report/preventive/'
     | '/spare-part/order-request/'
     | '/spare-part/request-order-list/'
     | '/spare-part/stock-transaction/'
     | '/documentation/$machineId/history/$historyId'
     | '/master-data/sparepart/warehouse/new'
+    | '/report/checklist/machine-ng/$id'
+    | '/report/preventive/preview/$itemId'
     | '/documentation/$machineId/history/'
+    | '/report/checklist/machine-ng/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -756,6 +867,9 @@ export interface RootRouteChildren {
   MasterDataMachineNewRoute: typeof MasterDataMachineNewRoute
   MasterDataSparepartIdRoute: typeof MasterDataSparepartIdRoute
   MasterDataSparepartNewRoute: typeof MasterDataSparepartNewRoute
+  ReportChecklistIdRoute: typeof ReportChecklistIdRoute
+  ReportCorrectiveIdRoute: typeof ReportCorrectiveIdRoute
+  ReportPreventiveIdRoute: typeof ReportPreventiveIdRoute
   SparePartOrderRequestIdRoute: typeof SparePartOrderRequestIdRoute
   SparePartOrderRequestCreateSorRoute: typeof SparePartOrderRequestCreateSorRoute
   SparePartOrderRequestEditRoute: typeof SparePartOrderRequestEditRoute
@@ -767,12 +881,18 @@ export interface RootRouteChildren {
   MasterDataDepartmentIndexRoute: typeof MasterDataDepartmentIndexRoute
   MasterDataMachineIndexRoute: typeof MasterDataMachineIndexRoute
   MasterDataSparepartIndexRoute: typeof MasterDataSparepartIndexRoute
+  ReportChecklistIndexRoute: typeof ReportChecklistIndexRoute
+  ReportCorrectiveIndexRoute: typeof ReportCorrectiveIndexRoute
+  ReportPreventiveIndexRoute: typeof ReportPreventiveIndexRoute
   SparePartOrderRequestIndexRoute: typeof SparePartOrderRequestIndexRoute
   SparePartRequestOrderListIndexRoute: typeof SparePartRequestOrderListIndexRoute
   SparePartStockTransactionIndexRoute: typeof SparePartStockTransactionIndexRoute
   DocumentationMachineIdHistoryHistoryIdRoute: typeof DocumentationMachineIdHistoryHistoryIdRoute
   MasterDataSparepartWarehouseNewRoute: typeof MasterDataSparepartWarehouseNewRoute
+  ReportChecklistMachineNgIdRoute: typeof ReportChecklistMachineNgIdRoute
+  ReportPreventivePreviewItemIdRoute: typeof ReportPreventivePreviewItemIdRoute
   DocumentationMachineIdHistoryIndexRoute: typeof DocumentationMachineIdHistoryIndexRoute
+  ReportChecklistMachineNgIndexRoute: typeof ReportChecklistMachineNgIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -1078,6 +1198,48 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MasterDataSparepartNewRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/report/checklist/': {
+      id: '/report/checklist/'
+      path: '/report/checklist'
+      fullPath: '/report/checklist/'
+      preLoaderRoute: typeof ReportChecklistIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/report/checklist/$id': {
+      id: '/report/checklist/$id'
+      path: '/report/checklist/$id'
+      fullPath: '/report/checklist/$id'
+      preLoaderRoute: typeof ReportChecklistIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/report/corrective/': {
+      id: '/report/corrective/'
+      path: '/report/corrective'
+      fullPath: '/report/corrective/'
+      preLoaderRoute: typeof ReportCorrectiveIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/report/corrective/$id': {
+      id: '/report/corrective/$id'
+      path: '/report/corrective/$id'
+      fullPath: '/report/corrective/$id'
+      preLoaderRoute: typeof ReportCorrectiveIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/report/preventive/': {
+      id: '/report/preventive/'
+      path: '/report/preventive'
+      fullPath: '/report/preventive/'
+      preLoaderRoute: typeof ReportPreventiveIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/report/preventive/$id': {
+      id: '/report/preventive/$id'
+      path: '/report/preventive/$id'
+      fullPath: '/report/preventive/$id'
+      preLoaderRoute: typeof ReportPreventiveIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/spare-part/order-request/': {
       id: '/spare-part/order-request/'
       path: '/spare-part/order-request'
@@ -1169,6 +1331,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MasterDataSparepartWarehouseNewRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/report/checklist/machine-ng/': {
+      id: '/report/checklist/machine-ng/'
+      path: '/report/checklist/machine-ng'
+      fullPath: '/report/checklist/machine-ng/'
+      preLoaderRoute: typeof ReportChecklistMachineNgIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/report/checklist/machine-ng/$id': {
+      id: '/report/checklist/machine-ng/$id'
+      path: '/report/checklist/machine-ng/$id'
+      fullPath: '/report/checklist/machine-ng/$id'
+      preLoaderRoute: typeof ReportChecklistMachineNgIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/report/preventive/preview/$itemId': {
+      id: '/report/preventive/preview/$itemId'
+      path: '/report/preventive/preview/$itemId'
+      fullPath: '/report/preventive/preview/$itemId'
+      preLoaderRoute: typeof ReportPreventivePreviewItemIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -1222,6 +1405,9 @@ const rootRouteChildren: RootRouteChildren = {
   MasterDataMachineNewRoute: MasterDataMachineNewRoute,
   MasterDataSparepartIdRoute: MasterDataSparepartIdRoute,
   MasterDataSparepartNewRoute: MasterDataSparepartNewRoute,
+  ReportChecklistIdRoute: ReportChecklistIdRoute,
+  ReportCorrectiveIdRoute: ReportCorrectiveIdRoute,
+  ReportPreventiveIdRoute: ReportPreventiveIdRoute,
   SparePartOrderRequestIdRoute: SparePartOrderRequestIdRoute,
   SparePartOrderRequestCreateSorRoute: SparePartOrderRequestCreateSorRoute,
   SparePartOrderRequestEditRoute: SparePartOrderRequestEditRoute,
@@ -1233,14 +1419,20 @@ const rootRouteChildren: RootRouteChildren = {
   MasterDataDepartmentIndexRoute: MasterDataDepartmentIndexRoute,
   MasterDataMachineIndexRoute: MasterDataMachineIndexRoute,
   MasterDataSparepartIndexRoute: MasterDataSparepartIndexRoute,
+  ReportChecklistIndexRoute: ReportChecklistIndexRoute,
+  ReportCorrectiveIndexRoute: ReportCorrectiveIndexRoute,
+  ReportPreventiveIndexRoute: ReportPreventiveIndexRoute,
   SparePartOrderRequestIndexRoute: SparePartOrderRequestIndexRoute,
   SparePartRequestOrderListIndexRoute: SparePartRequestOrderListIndexRoute,
   SparePartStockTransactionIndexRoute: SparePartStockTransactionIndexRoute,
   DocumentationMachineIdHistoryHistoryIdRoute:
     DocumentationMachineIdHistoryHistoryIdRoute,
   MasterDataSparepartWarehouseNewRoute: MasterDataSparepartWarehouseNewRoute,
+  ReportChecklistMachineNgIdRoute: ReportChecklistMachineNgIdRoute,
+  ReportPreventivePreviewItemIdRoute: ReportPreventivePreviewItemIdRoute,
   DocumentationMachineIdHistoryIndexRoute:
     DocumentationMachineIdHistoryIndexRoute,
+  ReportChecklistMachineNgIndexRoute: ReportChecklistMachineNgIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

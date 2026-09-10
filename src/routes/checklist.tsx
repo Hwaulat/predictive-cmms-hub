@@ -22,7 +22,7 @@ export const Route = createFileRoute("/checklist")({
   component: ChecklistPage,
 });
 
-function ChecklistPage() {
+export function ChecklistPage() {
   return (
     <div className="space-y-6">
       <PageHeader
