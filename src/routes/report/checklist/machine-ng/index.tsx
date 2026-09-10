@@ -24,13 +24,13 @@ const machineNgRows = [
 function ListMachineNgPage() {
   return (
     <div className="space-y-6 pb-20 w-full animate-in fade-in-50 duration-500">
-      <div className="flex items-center justify-between border-b pb-4">
-        <h1 className="text-2xl font-bold text-slate-800">List Machine NG</h1>
+      <div className="flex items-center gap-4 border-b pb-4">
         <Button variant="outline" asChild>
           <Link to="/report/checklist">
             <ArrowLeft className="size-4 mr-2" /> Back
           </Link>
         </Button>
+        <h1 className="text-2xl font-bold text-slate-800">List Machine NG</h1>
       </div>
 
       <div className="mb-4">
@@ -51,7 +51,8 @@ function ListMachineNgPage() {
           <table className="w-full text-sm">
             <thead>
               <tr className="bg-slate-50 text-slate-500 text-xs font-semibold border-b text-left whitespace-nowrap">
-                {["Checklist ID", "Machine Code", "Machine Name", "Department", "Area", "Line", "Total NG", "Preview"].map((header) => (
+                <th className="py-4 px-4 font-semibold">Action</th>
+                {["Checklist ID", "Machine Code", "Machine Name", "Department", "Area", "Line", "Total NG"].map((header) => (
                   <th key={header} className="py-4 px-4 font-semibold">{header}</th>
                 ))}
               </tr>
@@ -59,16 +60,18 @@ function ListMachineNgPage() {
             <tbody className="divide-y">
               {machineNgRows.map((row, rowIndex) => (
                 <tr key={rowIndex} className="hover:bg-slate-50/50 whitespace-nowrap">
+                  <td className="py-3 px-4">
+                    <div className="flex items-center gap-1">
+                      <Button variant="outline" size="icon" className="h-8 w-8 text-slate-400 hover:text-primary" asChild>
+                        <Link to={`/report/checklist/machine-ng/${row[1]}`}>
+                          <Eye className="size-4" />
+                        </Link>
+                      </Button>
+                    </div>
+                  </td>
                   {row.map((cell, cellIndex) => (
                     <td key={cellIndex} className="py-3 px-4 text-slate-600">{cell}</td>
                   ))}
-                  <td className="py-3 px-4">
-                    <Button variant="outline" size="icon" className="h-8 w-8 text-slate-400 hover:text-primary" asChild>
-                      <Link to={`/report/checklist/machine-ng/${row[1]}`}>
-                        <Eye className="size-4" />
-                      </Link>
-                    </Button>
-                  </td>
                 </tr>
               ))}
             </tbody>

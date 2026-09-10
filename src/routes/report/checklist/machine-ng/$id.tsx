@@ -41,14 +41,14 @@ function DetailMachineNgPage() {
   const { id } = Route.useParams();
 
   return (
-    <div className="space-y-6 pb-20 max-w-[1200px] mx-auto">
-      <div className="flex items-center justify-between border-b pb-4">
-        <h1 className="text-2xl font-bold text-slate-800">Detail Machine ({id} - Crane)</h1>
+    <div className="space-y-6 pb-20 w-full animate-in fade-in-50 duration-500">
+      <div className="flex items-center gap-4 border-b pb-4">
         <Button variant="outline" className="border-slate-300" asChild>
           <Link to="/report/checklist/machine-ng">
             <ArrowLeft className="size-4 mr-2" /> Back
           </Link>
         </Button>
+        <h1 className="text-2xl font-bold text-slate-800">Detail Machine ({id} - Crane)</h1>
       </div>
 
       <div className="flex justify-between items-center mb-4">

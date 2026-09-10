@@ -105,91 +105,93 @@ function DetailChecklistReportPage() {
         </div>
       </div>
 
-      <div className="flex gap-16 pt-4">
-        <div>
-          <p className="text-sm font-semibold mb-3">Checked by:</p>
-          <div className="flex items-center gap-2 mb-4">
-            <CheckCircle2 className="size-5 text-[#10b981]" />
-            <span className="text-sm font-medium">Suprayitno</span>
+      <div className="bg-white rounded-xl border shadow-sm p-6 mt-6 space-y-8">
+        <div className="flex gap-16">
+          <div>
+            <p className="text-sm font-semibold mb-3">Checked by:</p>
+            <div className="flex items-center gap-2 mb-4">
+              <CheckCircle2 className="size-5 text-[#10b981]" />
+              <span className="text-sm font-medium">Suprayitno</span>
+            </div>
+            <div className="flex items-center gap-3 text-sm">
+              <span className="text-slate-500">Status:</span>
+              <span className="bg-[#10b981] text-white px-3 py-1 rounded-md text-xs font-semibold">Approved</span>
+            </div>
+            <p className="text-xs text-slate-500 mt-2">Approved Date : 09/08/2024 10:00</p>
           </div>
-          <div className="flex items-center gap-3 text-sm">
-            <span className="text-slate-500">Status:</span>
-            <span className="bg-[#10b981] text-white px-3 py-1 rounded-md text-xs font-semibold">Approved</span>
+          <div>
+            <p className="text-sm font-semibold mb-3">Approved by:</p>
+            <div className="flex items-center gap-2 mb-4">
+              <CheckCircle2 className="size-5 text-[#10b981]" />
+              <span className="text-sm font-medium">Purnomo</span>
+            </div>
+            <div className="flex items-center gap-3 text-sm">
+              <span className="text-slate-500">Status:</span>
+              <span className="bg-[#10b981] text-white px-3 py-1 rounded-md text-xs font-semibold">Approved</span>
+            </div>
+            <p className="text-xs text-slate-500 mt-2">Approved Date : 09/08/2024 10:00</p>
           </div>
-          <p className="text-xs text-slate-500 mt-2">Approved Date : 09/08/2024 10:00</p>
-        </div>
-        <div>
-          <p className="text-sm font-semibold mb-3">Approved by:</p>
-          <div className="flex items-center gap-2 mb-4">
-            <CheckCircle2 className="size-5 text-[#10b981]" />
-            <span className="text-sm font-medium">Purnomo</span>
-          </div>
-          <div className="flex items-center gap-3 text-sm">
-            <span className="text-slate-500">Status:</span>
-            <span className="bg-[#10b981] text-white px-3 py-1 rounded-md text-xs font-semibold">Approved</span>
-          </div>
-          <p className="text-xs text-slate-500 mt-2">Approved Date : 09/08/2024 10:00</p>
-        </div>
-      </div>
-
-      <div className="pt-6">
-        <div className="flex justify-between items-end mb-4">
-          <h2 className="text-xl font-bold text-slate-800">Checklist Report</h2>
-          <p className="text-sm font-semibold text-slate-700">
-            Summary : <span className="text-red-500 ml-1">NG 5</span> <span className="text-[#10b981] ml-2">OK 4</span>
-          </p>
         </div>
 
-        <div className="bg-white rounded-xl border shadow-sm overflow-hidden">
-          <div className="overflow-x-auto">
-            <table className="w-full text-sm">
-              <thead>
-                <tr className="bg-slate-50 text-slate-500 text-xs font-semibold border-b text-left">
-                  <th className="py-3 px-4 w-40">Item Check</th>
-                  <th className="py-3 px-4 min-w-[200px]">Inspection Items</th>
-                  <th className="py-3 px-4 w-40">Inspection Method</th>
-                  <th className="py-3 px-4 w-32">Standard</th>
-                  <th className="py-3 px-4 w-20">Status</th>
-                  <th className="py-3 px-4 w-24">Variable</th>
-                  <th className="py-3 px-4 min-w-[150px]">Description of Damage</th>
-                  <th className="py-3 px-4 w-24 text-center">Doc. SOP</th>
-                  <th className="py-3 px-4 w-24 text-center">Preview</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y">
-                {reportItems.map((group, groupIndex) => (
-                  group.items.map((item, itemIndex) => (
-                    <tr key={`${groupIndex}-${itemIndex}`} className="hover:bg-slate-50/50">
-                      {itemIndex === 0 && (
-                        <td className="py-3 px-4 border-r align-top bg-white" rowSpan={group.items.length}>
-                          <span className="font-medium text-slate-700">{group.group}</span>
+        <div>
+          <div className="flex justify-between items-end mb-4">
+            <h2 className="text-xl font-bold text-slate-800">Checklist Report</h2>
+            <p className="text-sm font-semibold text-slate-700">
+              Summary : <span className="text-red-500 ml-1">NG 5</span> <span className="text-[#10b981] ml-2">OK 4</span>
+            </p>
+          </div>
+
+          <div className="rounded-xl border overflow-hidden">
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="bg-slate-50 text-slate-500 text-xs font-semibold border-b text-left">
+                    <th className="py-3 px-4 w-40">Item Check</th>
+                    <th className="py-3 px-4 min-w-[200px]">Inspection Items</th>
+                    <th className="py-3 px-4 w-40">Inspection Method</th>
+                    <th className="py-3 px-4 w-32">Standard</th>
+                    <th className="py-3 px-4 w-20">Status</th>
+                    <th className="py-3 px-4 w-24">Variable</th>
+                    <th className="py-3 px-4 min-w-[150px]">Description of Damage</th>
+                    <th className="py-3 px-4 w-24 text-center">Doc. SOP</th>
+                    <th className="py-3 px-4 w-24 text-center">Preview</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y">
+                  {reportItems.map((group, groupIndex) => (
+                    group.items.map((item, itemIndex) => (
+                      <tr key={`${groupIndex}-${itemIndex}`} className="hover:bg-slate-50/50">
+                        {itemIndex === 0 && (
+                          <td className="py-3 px-4 border-r align-top bg-white" rowSpan={group.items.length}>
+                            <span className="font-medium text-slate-700">{group.group}</span>
+                          </td>
+                        )}
+                        <td className="py-3 px-4 border-r text-slate-600">{item.no}</td>
+                        <td className="py-3 px-4 border-r text-slate-600">{item.method}</td>
+                        <td className="py-3 px-4 border-r text-slate-600">{item.standard}</td>
+                        <td className="py-3 px-4 border-r text-center">
+                          <span className={`inline-block px-2 py-1 rounded text-xs font-bold text-white w-10 text-center ${item.status === 'OK' ? 'bg-[#10b981]' : 'bg-[#ef4444]'}`}>
+                            {item.status}
+                          </span>
                         </td>
-                      )}
-                      <td className="py-3 px-4 border-r text-slate-600">{item.no}</td>
-                      <td className="py-3 px-4 border-r text-slate-600">{item.method}</td>
-                      <td className="py-3 px-4 border-r text-slate-600">{item.standard}</td>
-                      <td className="py-3 px-4 border-r text-center">
-                        <span className={`inline-block px-2 py-1 rounded text-xs font-bold text-white w-10 text-center ${item.status === 'OK' ? 'bg-[#10b981]' : 'bg-[#ef4444]'}`}>
-                          {item.status}
-                        </span>
-                      </td>
-                      <td className="py-3 px-4 border-r text-slate-600 text-center">{item.variable}</td>
-                      <td className="py-3 px-4 border-r text-slate-600">{item.description}</td>
-                      <td className="py-3 px-4 border-r text-center">
-                        <Button size="icon" className="h-8 w-8 bg-[#10b981] hover:bg-[#059669]">
-                          <Download className="size-4 text-white" />
-                        </Button>
-                      </td>
-                      <td className="py-3 px-4 text-center">
-                        <Button size="icon" className="h-8 w-8 bg-[#2563eb] hover:bg-[#1d4ed8]">
-                          <ImageIcon className="size-4 text-white" />
-                        </Button>
-                      </td>
-                    </tr>
-                  ))
-                ))}
-              </tbody>
-            </table>
+                        <td className="py-3 px-4 border-r text-slate-600 text-center">{item.variable}</td>
+                        <td className="py-3 px-4 border-r text-slate-600">{item.description}</td>
+                        <td className="py-3 px-4 border-r text-center">
+                          <Button size="icon" className="h-8 w-8 bg-[#10b981] hover:bg-[#059669]">
+                            <Download className="size-4 text-white" />
+                          </Button>
+                        </td>
+                        <td className="py-3 px-4 text-center">
+                          <Button size="icon" className="h-8 w-8 bg-[#2563eb] hover:bg-[#1d4ed8]">
+                            <ImageIcon className="size-4 text-white" />
+                          </Button>
+                        </td>
+                      </tr>
+                    ))
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>

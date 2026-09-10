@@ -84,6 +84,7 @@ import { Route as MasterDataSparepartWarehouseEditRouteImport } from './routes/m
 import { Route as MasterDataSparepartWarehouseNewRouteImport } from './routes/master-data/sparepart/warehouse/new'
 import { Route as ReportChecklistMachineNgIndexRouteImport } from './routes/report/checklist/machine-ng/index'
 import { Route as ReportChecklistMachineNgIdRouteImport } from './routes/report/checklist/machine-ng/$id'
+import { Route as ReportChecklistMachineNgMachineIdRouteImport } from './routes/report/checklist/machine-ng/$machineId'
 import { Route as ReportPreventivePreviewItemIdRouteImport } from './routes/report/preventive/preview/$itemId'
 
 const IndexRoute = IndexRouteImport.update({
@@ -349,34 +350,34 @@ const MasterDataSparepartNewRoute = MasterDataSparepartNewRouteImport.update({
   getParentRoute: () => rootRouteImport,
 } as any)
 const ReportChecklistIndexRoute = ReportChecklistIndexRouteImport.update({
-  id: '/report/checklist/',
-  path: '/report/checklist/',
-  getParentRoute: () => rootRouteImport,
+  id: '/',
+  path: '/',
+  getParentRoute: () => ReportChecklistRoute,
 } as any)
 const ReportChecklistIdRoute = ReportChecklistIdRouteImport.update({
-  id: '/report/checklist/$id',
-  path: '/report/checklist/$id',
-  getParentRoute: () => rootRouteImport,
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => ReportChecklistRoute,
 } as any)
 const ReportCorrectiveIndexRoute = ReportCorrectiveIndexRouteImport.update({
-  id: '/report/corrective/',
-  path: '/report/corrective/',
-  getParentRoute: () => rootRouteImport,
+  id: '/',
+  path: '/',
+  getParentRoute: () => ReportCorrectiveRoute,
 } as any)
 const ReportCorrectiveIdRoute = ReportCorrectiveIdRouteImport.update({
-  id: '/report/corrective/$id',
-  path: '/report/corrective/$id',
-  getParentRoute: () => rootRouteImport,
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => ReportCorrectiveRoute,
 } as any)
 const ReportPreventiveIndexRoute = ReportPreventiveIndexRouteImport.update({
-  id: '/report/preventive/',
-  path: '/report/preventive/',
-  getParentRoute: () => rootRouteImport,
+  id: '/',
+  path: '/',
+  getParentRoute: () => ReportPreventiveRoute,
 } as any)
 const ReportPreventiveIdRoute = ReportPreventiveIdRouteImport.update({
-  id: '/report/preventive/$id',
-  path: '/report/preventive/$id',
-  getParentRoute: () => rootRouteImport,
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => ReportPreventiveRoute,
 } as any)
 const SparePartOrderRequestIndexRoute =
   SparePartOrderRequestIndexRouteImport.update({
@@ -475,21 +476,27 @@ const MasterDataSparepartWarehouseNewRoute =
   } as any)
 const ReportChecklistMachineNgIndexRoute =
   ReportChecklistMachineNgIndexRouteImport.update({
-    id: '/report/checklist/machine-ng/',
-    path: '/report/checklist/machine-ng/',
-    getParentRoute: () => rootRouteImport,
+    id: '/machine-ng/',
+    path: '/machine-ng/',
+    getParentRoute: () => ReportChecklistRoute,
   } as any)
 const ReportChecklistMachineNgIdRoute =
   ReportChecklistMachineNgIdRouteImport.update({
-    id: '/report/checklist/machine-ng/$id',
-    path: '/report/checklist/machine-ng/$id',
-    getParentRoute: () => rootRouteImport,
+    id: '/machine-ng/$id',
+    path: '/machine-ng/$id',
+    getParentRoute: () => ReportChecklistRoute,
+  } as any)
+const ReportChecklistMachineNgMachineIdRoute =
+  ReportChecklistMachineNgMachineIdRouteImport.update({
+    id: '/machine-ng/$machineId',
+    path: '/machine-ng/$machineId',
+    getParentRoute: () => ReportChecklistRoute,
   } as any)
 const ReportPreventivePreviewItemIdRoute =
   ReportPreventivePreviewItemIdRouteImport.update({
-    id: '/report/preventive/preview/$itemId',
-    path: '/report/preventive/preview/$itemId',
-    getParentRoute: () => rootRouteImport,
+    id: '/preview/$itemId',
+    path: '/preview/$itemId',
+    getParentRoute: () => ReportPreventiveRoute,
   } as any)
 
 export interface FileRoutesByFullPath {
@@ -516,9 +523,9 @@ export interface FileRoutesByFullPath {
   '/master-data/document-number': typeof MasterDataDocumentNumberRoute
   '/master-data/parameter': typeof MasterDataParameterRoute
   '/report/checklist': typeof ReportChecklistRouteWithChildren
-  '/report/corrective': typeof ReportCorrectiveRoute
+  '/report/corrective': typeof ReportCorrectiveRouteWithChildren
   '/report/maintenance': typeof ReportMaintenanceRoute
-  '/report/preventive': typeof ReportPreventiveRoute
+  '/report/preventive': typeof ReportPreventiveRouteWithChildren
   '/report/sparepart': typeof ReportSparepartRoute
   '/setup/workflow-approval': typeof SetupWorkflowApprovalRoute
   '/spare-part/inventory': typeof SparePartInventoryRoute
@@ -566,9 +573,9 @@ export interface FileRoutesByFullPath {
   '/master-data/sparepart/warehouse/edit': typeof MasterDataSparepartWarehouseEditRoute
   '/master-data/sparepart/warehouse/new': typeof MasterDataSparepartWarehouseNewRoute
   '/report/checklist/machine-ng/$id': typeof ReportChecklistMachineNgIdRoute
+  '/report/checklist/machine-ng/$machineId': typeof ReportChecklistMachineNgMachineIdRoute
   '/report/preventive/preview/$itemId': typeof ReportPreventivePreviewItemIdRoute
   '/documentation/$machineId/history/': typeof DocumentationMachineIdHistoryIndexRoute
-  '/report/checklist/machine-ng/': typeof ReportChecklistMachineNgIndexRoute
   '/report/checklist/machine-ng/': typeof ReportChecklistMachineNgIndexRoute
 }
 export interface FileRoutesByTo {
@@ -594,10 +601,7 @@ export interface FileRoutesByTo {
   '/dashboard/sparepart': typeof DashboardSparepartRoute
   '/master-data/document-number': typeof MasterDataDocumentNumberRoute
   '/master-data/parameter': typeof MasterDataParameterRoute
-  '/report/checklist': typeof ReportChecklistRouteWithChildren
-  '/report/corrective': typeof ReportCorrectiveRoute
   '/report/maintenance': typeof ReportMaintenanceRoute
-  '/report/preventive': typeof ReportPreventiveRoute
   '/report/sparepart': typeof ReportSparepartRoute
   '/setup/workflow-approval': typeof SetupWorkflowApprovalRoute
   '/spare-part/inventory': typeof SparePartInventoryRoute
@@ -645,9 +649,9 @@ export interface FileRoutesByTo {
   '/master-data/sparepart/warehouse/edit': typeof MasterDataSparepartWarehouseEditRoute
   '/master-data/sparepart/warehouse/new': typeof MasterDataSparepartWarehouseNewRoute
   '/report/checklist/machine-ng/$id': typeof ReportChecklistMachineNgIdRoute
+  '/report/checklist/machine-ng/$machineId': typeof ReportChecklistMachineNgMachineIdRoute
   '/report/preventive/preview/$itemId': typeof ReportPreventivePreviewItemIdRoute
   '/documentation/$machineId/history': typeof DocumentationMachineIdHistoryIndexRoute
-  '/report/checklist/machine-ng': typeof ReportChecklistMachineNgIndexRoute
   '/report/checklist/machine-ng': typeof ReportChecklistMachineNgIndexRoute
 }
 export interface FileRoutesById {
@@ -675,9 +679,9 @@ export interface FileRoutesById {
   '/master-data/document-number': typeof MasterDataDocumentNumberRoute
   '/master-data/parameter': typeof MasterDataParameterRoute
   '/report/checklist': typeof ReportChecklistRouteWithChildren
-  '/report/corrective': typeof ReportCorrectiveRoute
+  '/report/corrective': typeof ReportCorrectiveRouteWithChildren
   '/report/maintenance': typeof ReportMaintenanceRoute
-  '/report/preventive': typeof ReportPreventiveRoute
+  '/report/preventive': typeof ReportPreventiveRouteWithChildren
   '/report/sparepart': typeof ReportSparepartRoute
   '/setup/workflow-approval': typeof SetupWorkflowApprovalRoute
   '/spare-part/inventory': typeof SparePartInventoryRoute
@@ -725,249 +729,246 @@ export interface FileRoutesById {
   '/master-data/sparepart/warehouse/edit': typeof MasterDataSparepartWarehouseEditRoute
   '/master-data/sparepart/warehouse/new': typeof MasterDataSparepartWarehouseNewRoute
   '/report/checklist/machine-ng/$id': typeof ReportChecklistMachineNgIdRoute
+  '/report/checklist/machine-ng/$machineId': typeof ReportChecklistMachineNgMachineIdRoute
   '/report/preventive/preview/$itemId': typeof ReportPreventivePreviewItemIdRoute
   '/documentation/$machineId/history/': typeof DocumentationMachineIdHistoryIndexRoute
-  '/report/checklist/machine-ng/': typeof ReportChecklistMachineNgIndexRoute
   '/report/checklist/machine-ng/': typeof ReportChecklistMachineNgIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-  | '/'
-  | '/ai-analytics'
-  | '/checklist'
-  | '/schedule'
-  | '/users-management'
-  | '/ai/breakdown-sparepart'
-  | '/ai/forecast-part'
-  | '/ai/kpi'
-  | '/ai/maintenance'
-  | '/ai/sparepart'
-  | '/approval/maintenance'
-  | '/approval/spare-part'
-  | '/checklist/$id'
-  | '/dashboard/breakdown'
-  | '/dashboard/corrective'
-  | '/dashboard/kpi-report'
-  | '/dashboard/machine'
-  | '/dashboard/machine-problem-trend'
-  | '/dashboard/manpower'
-  | '/dashboard/sparepart'
-  | '/master-data/document-number'
-  | '/master-data/parameter'
-  | '/report/checklist'
-  | '/report/corrective'
-  | '/report/maintenance'
-  | '/report/preventive'
-  | '/report/sparepart'
-  | '/setup/workflow-approval'
-  | '/spare-part/inventory'
-  | '/spare-part/log-part'
-  | '/spare-part/purchase-reminder'
-  | '/spare-part/request-part'
-  | '/work-order/$id'
-  | '/work-order/add'
-  | '/documentation/'
-  | '/work-order/'
-  | '/approval/maintenance/$id'
-  | '/checklist/machine-ng/$machineId'
-  | '/master-data/department/$id'
-  | '/master-data/department/new'
-  | '/master-data/machine/$id'
-  | '/master-data/machine/edit'
-  | '/master-data/machine/new'
-  | '/master-data/sparepart/$id'
-  | '/master-data/sparepart/edit'
-  | '/master-data/sparepart/new'
-  | '/report/checklist/$id'
-  | '/report/corrective/$id'
-  | '/report/preventive/$id'
-  | '/spare-part/order-request/$id'
-  | '/spare-part/order-request/create-sor'
-  | '/spare-part/order-request/edit'
-  | '/spare-part/request-order-list/$id'
-  | '/spare-part/request-order-list/new'
-  | '/spare-part/stock-transaction/$id'
-  | '/spare-part/stock-transaction/create'
-  | '/checklist/machine-ng/'
-  | '/documentation/$machineId/'
-  | '/master-data/department/'
-  | '/master-data/machine/'
-  | '/master-data/sparepart/'
-  | '/report/checklist/'
-  | '/report/corrective/'
-  | '/report/preventive/'
-  | '/spare-part/order-request/'
-  | '/spare-part/request-order-list/'
-  | '/spare-part/stock-transaction/'
-  | '/documentation/$machineId/history/$historyId'
-  | '/master-data/department/detail/$id'
-  | '/master-data/sparepart/category/edit'
-  | '/master-data/sparepart/warehouse/edit'
-  | '/master-data/sparepart/warehouse/new'
-  | '/report/checklist/machine-ng/$id'
-  | '/report/preventive/preview/$itemId'
-  | '/documentation/$machineId/history/'
-  | '/report/checklist/machine-ng/'
-  | '/report/checklist/machine-ng/'
+    | '/'
+    | '/ai-analytics'
+    | '/checklist'
+    | '/schedule'
+    | '/users-management'
+    | '/ai/breakdown-sparepart'
+    | '/ai/forecast-part'
+    | '/ai/kpi'
+    | '/ai/maintenance'
+    | '/ai/sparepart'
+    | '/approval/maintenance'
+    | '/approval/spare-part'
+    | '/checklist/$id'
+    | '/dashboard/breakdown'
+    | '/dashboard/corrective'
+    | '/dashboard/kpi-report'
+    | '/dashboard/machine'
+    | '/dashboard/machine-problem-trend'
+    | '/dashboard/manpower'
+    | '/dashboard/sparepart'
+    | '/master-data/document-number'
+    | '/master-data/parameter'
+    | '/report/checklist'
+    | '/report/corrective'
+    | '/report/maintenance'
+    | '/report/preventive'
+    | '/report/sparepart'
+    | '/setup/workflow-approval'
+    | '/spare-part/inventory'
+    | '/spare-part/log-part'
+    | '/spare-part/purchase-reminder'
+    | '/spare-part/request-part'
+    | '/work-order/$id'
+    | '/work-order/add'
+    | '/documentation/'
+    | '/work-order/'
+    | '/approval/maintenance/$id'
+    | '/checklist/machine-ng/$machineId'
+    | '/master-data/department/$id'
+    | '/master-data/department/new'
+    | '/master-data/machine/$id'
+    | '/master-data/machine/edit'
+    | '/master-data/machine/new'
+    | '/master-data/sparepart/$id'
+    | '/master-data/sparepart/edit'
+    | '/master-data/sparepart/new'
+    | '/report/checklist/$id'
+    | '/report/corrective/$id'
+    | '/report/preventive/$id'
+    | '/spare-part/order-request/$id'
+    | '/spare-part/order-request/create-sor'
+    | '/spare-part/order-request/edit'
+    | '/spare-part/request-order-list/$id'
+    | '/spare-part/request-order-list/new'
+    | '/spare-part/stock-transaction/$id'
+    | '/spare-part/stock-transaction/create'
+    | '/checklist/machine-ng/'
+    | '/documentation/$machineId/'
+    | '/master-data/department/'
+    | '/master-data/machine/'
+    | '/master-data/sparepart/'
+    | '/report/checklist/'
+    | '/report/corrective/'
+    | '/report/preventive/'
+    | '/spare-part/order-request/'
+    | '/spare-part/request-order-list/'
+    | '/spare-part/stock-transaction/'
+    | '/documentation/$machineId/history/$historyId'
+    | '/master-data/department/detail/$id'
+    | '/master-data/sparepart/category/edit'
+    | '/master-data/sparepart/warehouse/edit'
+    | '/master-data/sparepart/warehouse/new'
+    | '/report/checklist/machine-ng/$id'
+    | '/report/checklist/machine-ng/$machineId'
+    | '/report/preventive/preview/$itemId'
+    | '/documentation/$machineId/history/'
+    | '/report/checklist/machine-ng/'
   fileRoutesByTo: FileRoutesByTo
   to:
-  | '/'
-  | '/ai-analytics'
-  | '/checklist'
-  | '/schedule'
-  | '/users-management'
-  | '/ai/breakdown-sparepart'
-  | '/ai/forecast-part'
-  | '/ai/kpi'
-  | '/ai/maintenance'
-  | '/ai/sparepart'
-  | '/approval/maintenance'
-  | '/approval/spare-part'
-  | '/checklist/$id'
-  | '/dashboard/breakdown'
-  | '/dashboard/corrective'
-  | '/dashboard/kpi-report'
-  | '/dashboard/machine'
-  | '/dashboard/machine-problem-trend'
-  | '/dashboard/manpower'
-  | '/dashboard/sparepart'
-  | '/master-data/document-number'
-  | '/master-data/parameter'
-  | '/report/checklist'
-  | '/report/corrective'
-  | '/report/maintenance'
-  | '/report/preventive'
-  | '/report/sparepart'
-  | '/setup/workflow-approval'
-  | '/spare-part/inventory'
-  | '/spare-part/log-part'
-  | '/spare-part/purchase-reminder'
-  | '/spare-part/request-part'
-  | '/work-order/$id'
-  | '/work-order/add'
-  | '/documentation'
-  | '/work-order'
-  | '/approval/maintenance/$id'
-  | '/checklist/machine-ng/$machineId'
-  | '/master-data/department/$id'
-  | '/master-data/department/new'
-  | '/master-data/machine/$id'
-  | '/master-data/machine/edit'
-  | '/master-data/machine/new'
-  | '/master-data/sparepart/$id'
-  | '/master-data/sparepart/edit'
-  | '/master-data/sparepart/new'
-  | '/report/checklist/$id'
-  | '/report/corrective/$id'
-  | '/report/preventive/$id'
-  | '/spare-part/order-request/$id'
-  | '/spare-part/order-request/create-sor'
-  | '/spare-part/order-request/edit'
-  | '/spare-part/request-order-list/$id'
-  | '/spare-part/request-order-list/new'
-  | '/spare-part/stock-transaction/$id'
-  | '/spare-part/stock-transaction/create'
-  | '/checklist/machine-ng'
-  | '/documentation/$machineId'
-  | '/master-data/department'
-  | '/master-data/machine'
-  | '/master-data/sparepart'
-  | '/report/checklist'
-  | '/report/corrective'
-  | '/report/preventive'
-  | '/spare-part/order-request'
-  | '/spare-part/request-order-list'
-  | '/spare-part/stock-transaction'
-  | '/documentation/$machineId/history/$historyId'
-  | '/master-data/department/detail/$id'
-  | '/master-data/sparepart/category/edit'
-  | '/master-data/sparepart/warehouse/edit'
-  | '/master-data/sparepart/warehouse/new'
-  | '/report/checklist/machine-ng/$id'
-  | '/report/preventive/preview/$itemId'
-  | '/documentation/$machineId/history'
-  | '/report/checklist/machine-ng'
-  | '/report/checklist/machine-ng'
+    | '/'
+    | '/ai-analytics'
+    | '/checklist'
+    | '/schedule'
+    | '/users-management'
+    | '/ai/breakdown-sparepart'
+    | '/ai/forecast-part'
+    | '/ai/kpi'
+    | '/ai/maintenance'
+    | '/ai/sparepart'
+    | '/approval/maintenance'
+    | '/approval/spare-part'
+    | '/checklist/$id'
+    | '/dashboard/breakdown'
+    | '/dashboard/corrective'
+    | '/dashboard/kpi-report'
+    | '/dashboard/machine'
+    | '/dashboard/machine-problem-trend'
+    | '/dashboard/manpower'
+    | '/dashboard/sparepart'
+    | '/master-data/document-number'
+    | '/master-data/parameter'
+    | '/report/maintenance'
+    | '/report/sparepart'
+    | '/setup/workflow-approval'
+    | '/spare-part/inventory'
+    | '/spare-part/log-part'
+    | '/spare-part/purchase-reminder'
+    | '/spare-part/request-part'
+    | '/work-order/$id'
+    | '/work-order/add'
+    | '/documentation'
+    | '/work-order'
+    | '/approval/maintenance/$id'
+    | '/checklist/machine-ng/$machineId'
+    | '/master-data/department/$id'
+    | '/master-data/department/new'
+    | '/master-data/machine/$id'
+    | '/master-data/machine/edit'
+    | '/master-data/machine/new'
+    | '/master-data/sparepart/$id'
+    | '/master-data/sparepart/edit'
+    | '/master-data/sparepart/new'
+    | '/report/checklist/$id'
+    | '/report/corrective/$id'
+    | '/report/preventive/$id'
+    | '/spare-part/order-request/$id'
+    | '/spare-part/order-request/create-sor'
+    | '/spare-part/order-request/edit'
+    | '/spare-part/request-order-list/$id'
+    | '/spare-part/request-order-list/new'
+    | '/spare-part/stock-transaction/$id'
+    | '/spare-part/stock-transaction/create'
+    | '/checklist/machine-ng'
+    | '/documentation/$machineId'
+    | '/master-data/department'
+    | '/master-data/machine'
+    | '/master-data/sparepart'
+    | '/report/checklist'
+    | '/report/corrective'
+    | '/report/preventive'
+    | '/spare-part/order-request'
+    | '/spare-part/request-order-list'
+    | '/spare-part/stock-transaction'
+    | '/documentation/$machineId/history/$historyId'
+    | '/master-data/department/detail/$id'
+    | '/master-data/sparepart/category/edit'
+    | '/master-data/sparepart/warehouse/edit'
+    | '/master-data/sparepart/warehouse/new'
+    | '/report/checklist/machine-ng/$id'
+    | '/report/checklist/machine-ng/$machineId'
+    | '/report/preventive/preview/$itemId'
+    | '/documentation/$machineId/history'
+    | '/report/checklist/machine-ng'
   id:
-  | '__root__'
-  | '/'
-  | '/ai-analytics'
-  | '/checklist'
-  | '/schedule'
-  | '/users-management'
-  | '/ai/breakdown-sparepart'
-  | '/ai/forecast-part'
-  | '/ai/kpi'
-  | '/ai/maintenance'
-  | '/ai/sparepart'
-  | '/approval/maintenance'
-  | '/approval/spare-part'
-  | '/checklist/$id'
-  | '/dashboard/breakdown'
-  | '/dashboard/corrective'
-  | '/dashboard/kpi-report'
-  | '/dashboard/machine'
-  | '/dashboard/machine-problem-trend'
-  | '/dashboard/manpower'
-  | '/dashboard/sparepart'
-  | '/master-data/document-number'
-  | '/master-data/parameter'
-  | '/report/checklist'
-  | '/report/corrective'
-  | '/report/maintenance'
-  | '/report/preventive'
-  | '/report/sparepart'
-  | '/setup/workflow-approval'
-  | '/spare-part/inventory'
-  | '/spare-part/log-part'
-  | '/spare-part/purchase-reminder'
-  | '/spare-part/request-part'
-  | '/work-order/$id'
-  | '/work-order/add'
-  | '/documentation/'
-  | '/work-order/'
-  | '/approval/maintenance/$id'
-  | '/checklist/machine-ng/$machineId'
-  | '/master-data/department/$id'
-  | '/master-data/department/new'
-  | '/master-data/machine/$id'
-  | '/master-data/machine/edit'
-  | '/master-data/machine/new'
-  | '/master-data/sparepart/$id'
-  | '/master-data/sparepart/edit'
-  | '/master-data/sparepart/new'
-  | '/report/checklist/$id'
-  | '/report/corrective/$id'
-  | '/report/preventive/$id'
-  | '/spare-part/order-request/$id'
-  | '/spare-part/order-request/create-sor'
-  | '/spare-part/order-request/edit'
-  | '/spare-part/request-order-list/$id'
-  | '/spare-part/request-order-list/new'
-  | '/spare-part/stock-transaction/$id'
-  | '/spare-part/stock-transaction/create'
-  | '/checklist/machine-ng/'
-  | '/documentation/$machineId/'
-  | '/master-data/department/'
-  | '/master-data/machine/'
-  | '/master-data/sparepart/'
-  | '/report/checklist/'
-  | '/report/corrective/'
-  | '/report/preventive/'
-  | '/spare-part/order-request/'
-  | '/spare-part/request-order-list/'
-  | '/spare-part/stock-transaction/'
-  | '/documentation/$machineId/history/$historyId'
-  | '/master-data/department/detail/$id'
-  | '/master-data/sparepart/category/edit'
-  | '/master-data/sparepart/warehouse/edit'
-  | '/master-data/sparepart/warehouse/new'
-  | '/report/checklist/machine-ng/$id'
-  | '/report/preventive/preview/$itemId'
-  | '/documentation/$machineId/history/'
-  | '/report/checklist/machine-ng/'
-  | '/report/checklist/machine-ng/'
+    | '__root__'
+    | '/'
+    | '/ai-analytics'
+    | '/checklist'
+    | '/schedule'
+    | '/users-management'
+    | '/ai/breakdown-sparepart'
+    | '/ai/forecast-part'
+    | '/ai/kpi'
+    | '/ai/maintenance'
+    | '/ai/sparepart'
+    | '/approval/maintenance'
+    | '/approval/spare-part'
+    | '/checklist/$id'
+    | '/dashboard/breakdown'
+    | '/dashboard/corrective'
+    | '/dashboard/kpi-report'
+    | '/dashboard/machine'
+    | '/dashboard/machine-problem-trend'
+    | '/dashboard/manpower'
+    | '/dashboard/sparepart'
+    | '/master-data/document-number'
+    | '/master-data/parameter'
+    | '/report/checklist'
+    | '/report/corrective'
+    | '/report/maintenance'
+    | '/report/preventive'
+    | '/report/sparepart'
+    | '/setup/workflow-approval'
+    | '/spare-part/inventory'
+    | '/spare-part/log-part'
+    | '/spare-part/purchase-reminder'
+    | '/spare-part/request-part'
+    | '/work-order/$id'
+    | '/work-order/add'
+    | '/documentation/'
+    | '/work-order/'
+    | '/approval/maintenance/$id'
+    | '/checklist/machine-ng/$machineId'
+    | '/master-data/department/$id'
+    | '/master-data/department/new'
+    | '/master-data/machine/$id'
+    | '/master-data/machine/edit'
+    | '/master-data/machine/new'
+    | '/master-data/sparepart/$id'
+    | '/master-data/sparepart/edit'
+    | '/master-data/sparepart/new'
+    | '/report/checklist/$id'
+    | '/report/corrective/$id'
+    | '/report/preventive/$id'
+    | '/spare-part/order-request/$id'
+    | '/spare-part/order-request/create-sor'
+    | '/spare-part/order-request/edit'
+    | '/spare-part/request-order-list/$id'
+    | '/spare-part/request-order-list/new'
+    | '/spare-part/stock-transaction/$id'
+    | '/spare-part/stock-transaction/create'
+    | '/checklist/machine-ng/'
+    | '/documentation/$machineId/'
+    | '/master-data/department/'
+    | '/master-data/machine/'
+    | '/master-data/sparepart/'
+    | '/report/checklist/'
+    | '/report/corrective/'
+    | '/report/preventive/'
+    | '/spare-part/order-request/'
+    | '/spare-part/request-order-list/'
+    | '/spare-part/stock-transaction/'
+    | '/documentation/$machineId/history/$historyId'
+    | '/master-data/department/detail/$id'
+    | '/master-data/sparepart/category/edit'
+    | '/master-data/sparepart/warehouse/edit'
+    | '/master-data/sparepart/warehouse/new'
+    | '/report/checklist/machine-ng/$id'
+    | '/report/checklist/machine-ng/$machineId'
+    | '/report/preventive/preview/$itemId'
+    | '/documentation/$machineId/history/'
+    | '/report/checklist/machine-ng/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -993,9 +994,9 @@ export interface RootRouteChildren {
   MasterDataDocumentNumberRoute: typeof MasterDataDocumentNumberRoute
   MasterDataParameterRoute: typeof MasterDataParameterRoute
   ReportChecklistRoute: typeof ReportChecklistRouteWithChildren
-  ReportCorrectiveRoute: typeof ReportCorrectiveRoute
+  ReportCorrectiveRoute: typeof ReportCorrectiveRouteWithChildren
   ReportMaintenanceRoute: typeof ReportMaintenanceRoute
-  ReportPreventiveRoute: typeof ReportPreventiveRoute
+  ReportPreventiveRoute: typeof ReportPreventiveRouteWithChildren
   ReportSparepartRoute: typeof ReportSparepartRoute
   SetupWorkflowApprovalRoute: typeof SetupWorkflowApprovalRoute
   SparePartInventoryRoute: typeof SparePartInventoryRoute
@@ -1014,9 +1015,6 @@ export interface RootRouteChildren {
   MasterDataSparepartIdRoute: typeof MasterDataSparepartIdRoute
   MasterDataSparepartEditRoute: typeof MasterDataSparepartEditRoute
   MasterDataSparepartNewRoute: typeof MasterDataSparepartNewRoute
-  ReportChecklistIdRoute: typeof ReportChecklistIdRoute
-  ReportCorrectiveIdRoute: typeof ReportCorrectiveIdRoute
-  ReportPreventiveIdRoute: typeof ReportPreventiveIdRoute
   SparePartOrderRequestIdRoute: typeof SparePartOrderRequestIdRoute
   SparePartOrderRequestCreateSorRoute: typeof SparePartOrderRequestCreateSorRoute
   SparePartOrderRequestEditRoute: typeof SparePartOrderRequestEditRoute
@@ -1028,9 +1026,6 @@ export interface RootRouteChildren {
   MasterDataDepartmentIndexRoute: typeof MasterDataDepartmentIndexRoute
   MasterDataMachineIndexRoute: typeof MasterDataMachineIndexRoute
   MasterDataSparepartIndexRoute: typeof MasterDataSparepartIndexRoute
-  ReportChecklistIndexRoute: typeof ReportChecklistIndexRoute
-  ReportCorrectiveIndexRoute: typeof ReportCorrectiveIndexRoute
-  ReportPreventiveIndexRoute: typeof ReportPreventiveIndexRoute
   SparePartOrderRequestIndexRoute: typeof SparePartOrderRequestIndexRoute
   SparePartRequestOrderListIndexRoute: typeof SparePartRequestOrderListIndexRoute
   SparePartStockTransactionIndexRoute: typeof SparePartStockTransactionIndexRoute
@@ -1039,10 +1034,7 @@ export interface RootRouteChildren {
   MasterDataSparepartCategoryEditRoute: typeof MasterDataSparepartCategoryEditRoute
   MasterDataSparepartWarehouseEditRoute: typeof MasterDataSparepartWarehouseEditRoute
   MasterDataSparepartWarehouseNewRoute: typeof MasterDataSparepartWarehouseNewRoute
-  ReportChecklistMachineNgIdRoute: typeof ReportChecklistMachineNgIdRoute
-  ReportPreventivePreviewItemIdRoute: typeof ReportPreventivePreviewItemIdRoute
   DocumentationMachineIdHistoryIndexRoute: typeof DocumentationMachineIdHistoryIndexRoute
-  ReportChecklistMachineNgIndexRoute: typeof ReportChecklistMachineNgIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -1406,45 +1398,45 @@ declare module '@tanstack/react-router' {
     }
     '/report/checklist/': {
       id: '/report/checklist/'
-      path: '/report/checklist'
+      path: '/'
       fullPath: '/report/checklist/'
       preLoaderRoute: typeof ReportChecklistIndexRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof ReportChecklistRoute
     }
     '/report/checklist/$id': {
       id: '/report/checklist/$id'
-      path: '/report/checklist/$id'
+      path: '/$id'
       fullPath: '/report/checklist/$id'
       preLoaderRoute: typeof ReportChecklistIdRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof ReportChecklistRoute
     }
     '/report/corrective/': {
       id: '/report/corrective/'
-      path: '/report/corrective'
+      path: '/'
       fullPath: '/report/corrective/'
       preLoaderRoute: typeof ReportCorrectiveIndexRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof ReportCorrectiveRoute
     }
     '/report/corrective/$id': {
       id: '/report/corrective/$id'
-      path: '/report/corrective/$id'
+      path: '/$id'
       fullPath: '/report/corrective/$id'
       preLoaderRoute: typeof ReportCorrectiveIdRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof ReportCorrectiveRoute
     }
     '/report/preventive/': {
       id: '/report/preventive/'
-      path: '/report/preventive'
+      path: '/'
       fullPath: '/report/preventive/'
       preLoaderRoute: typeof ReportPreventiveIndexRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof ReportPreventiveRoute
     }
     '/report/preventive/$id': {
       id: '/report/preventive/$id'
-      path: '/report/preventive/$id'
+      path: '/$id'
       fullPath: '/report/preventive/$id'
       preLoaderRoute: typeof ReportPreventiveIdRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof ReportPreventiveRoute
     }
     '/spare-part/order-request/': {
       id: '/spare-part/order-request/'
@@ -1560,27 +1552,50 @@ declare module '@tanstack/react-router' {
     }
     '/report/checklist/machine-ng/': {
       id: '/report/checklist/machine-ng/'
-      path: '/report/checklist/machine-ng'
+      path: '/machine-ng'
       fullPath: '/report/checklist/machine-ng/'
       preLoaderRoute: typeof ReportChecklistMachineNgIndexRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof ReportChecklistRoute
     }
     '/report/checklist/machine-ng/$id': {
       id: '/report/checklist/machine-ng/$id'
-      path: '/report/checklist/machine-ng/$id'
+      path: '/machine-ng/$id'
       fullPath: '/report/checklist/machine-ng/$id'
       preLoaderRoute: typeof ReportChecklistMachineNgIdRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof ReportChecklistRoute
+    }
+    '/report/checklist/machine-ng/$machineId': {
+      id: '/report/checklist/machine-ng/$machineId'
+      path: '/machine-ng/$machineId'
+      fullPath: '/report/checklist/machine-ng/$machineId'
+      preLoaderRoute: typeof ReportChecklistMachineNgMachineIdRouteImport
+      parentRoute: typeof ReportChecklistRoute
     }
     '/report/preventive/preview/$itemId': {
       id: '/report/preventive/preview/$itemId'
-      path: '/report/preventive/preview/$itemId'
+      path: '/preview/$itemId'
       fullPath: '/report/preventive/preview/$itemId'
       preLoaderRoute: typeof ReportPreventivePreviewItemIdRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof ReportPreventiveRoute
     }
   }
 }
+
+interface ChecklistRouteChildren {
+  ChecklistIdRoute: typeof ChecklistIdRoute
+  ChecklistMachineNgMachineIdRoute: typeof ChecklistMachineNgMachineIdRoute
+  ChecklistMachineNgIndexRoute: typeof ChecklistMachineNgIndexRoute
+}
+
+const ChecklistRouteChildren: ChecklistRouteChildren = {
+  ChecklistIdRoute: ChecklistIdRoute,
+  ChecklistMachineNgMachineIdRoute: ChecklistMachineNgMachineIdRoute,
+  ChecklistMachineNgIndexRoute: ChecklistMachineNgIndexRoute,
+}
+
+const ChecklistRouteWithChildren = ChecklistRoute._addFileChildren(
+  ChecklistRouteChildren,
+)
 
 interface ApprovalMaintenanceRouteChildren {
   ApprovalMaintenanceIdRoute: typeof ApprovalMaintenanceIdRoute
@@ -1595,12 +1610,16 @@ const ApprovalMaintenanceRouteWithChildren =
 
 interface ReportChecklistRouteChildren {
   ReportChecklistIdRoute: typeof ReportChecklistIdRoute
+  ReportChecklistIndexRoute: typeof ReportChecklistIndexRoute
+  ReportChecklistMachineNgIdRoute: typeof ReportChecklistMachineNgIdRoute
   ReportChecklistMachineNgMachineIdRoute: typeof ReportChecklistMachineNgMachineIdRoute
   ReportChecklistMachineNgIndexRoute: typeof ReportChecklistMachineNgIndexRoute
 }
 
 const ReportChecklistRouteChildren: ReportChecklistRouteChildren = {
   ReportChecklistIdRoute: ReportChecklistIdRoute,
+  ReportChecklistIndexRoute: ReportChecklistIndexRoute,
+  ReportChecklistMachineNgIdRoute: ReportChecklistMachineNgIdRoute,
   ReportChecklistMachineNgMachineIdRoute:
     ReportChecklistMachineNgMachineIdRoute,
   ReportChecklistMachineNgIndexRoute: ReportChecklistMachineNgIndexRoute,
@@ -1609,6 +1628,34 @@ const ReportChecklistRouteChildren: ReportChecklistRouteChildren = {
 const ReportChecklistRouteWithChildren = ReportChecklistRoute._addFileChildren(
   ReportChecklistRouteChildren,
 )
+
+interface ReportCorrectiveRouteChildren {
+  ReportCorrectiveIdRoute: typeof ReportCorrectiveIdRoute
+  ReportCorrectiveIndexRoute: typeof ReportCorrectiveIndexRoute
+}
+
+const ReportCorrectiveRouteChildren: ReportCorrectiveRouteChildren = {
+  ReportCorrectiveIdRoute: ReportCorrectiveIdRoute,
+  ReportCorrectiveIndexRoute: ReportCorrectiveIndexRoute,
+}
+
+const ReportCorrectiveRouteWithChildren =
+  ReportCorrectiveRoute._addFileChildren(ReportCorrectiveRouteChildren)
+
+interface ReportPreventiveRouteChildren {
+  ReportPreventiveIdRoute: typeof ReportPreventiveIdRoute
+  ReportPreventiveIndexRoute: typeof ReportPreventiveIndexRoute
+  ReportPreventivePreviewItemIdRoute: typeof ReportPreventivePreviewItemIdRoute
+}
+
+const ReportPreventiveRouteChildren: ReportPreventiveRouteChildren = {
+  ReportPreventiveIdRoute: ReportPreventiveIdRoute,
+  ReportPreventiveIndexRoute: ReportPreventiveIndexRoute,
+  ReportPreventivePreviewItemIdRoute: ReportPreventivePreviewItemIdRoute,
+}
+
+const ReportPreventiveRouteWithChildren =
+  ReportPreventiveRoute._addFileChildren(ReportPreventiveRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
@@ -1633,9 +1680,9 @@ const rootRouteChildren: RootRouteChildren = {
   MasterDataDocumentNumberRoute: MasterDataDocumentNumberRoute,
   MasterDataParameterRoute: MasterDataParameterRoute,
   ReportChecklistRoute: ReportChecklistRouteWithChildren,
-  ReportCorrectiveRoute: ReportCorrectiveRoute,
+  ReportCorrectiveRoute: ReportCorrectiveRouteWithChildren,
   ReportMaintenanceRoute: ReportMaintenanceRoute,
-  ReportPreventiveRoute: ReportPreventiveRoute,
+  ReportPreventiveRoute: ReportPreventiveRouteWithChildren,
   ReportSparepartRoute: ReportSparepartRoute,
   SetupWorkflowApprovalRoute: SetupWorkflowApprovalRoute,
   SparePartInventoryRoute: SparePartInventoryRoute,
@@ -1654,9 +1701,6 @@ const rootRouteChildren: RootRouteChildren = {
   MasterDataSparepartIdRoute: MasterDataSparepartIdRoute,
   MasterDataSparepartEditRoute: MasterDataSparepartEditRoute,
   MasterDataSparepartNewRoute: MasterDataSparepartNewRoute,
-  ReportChecklistIdRoute: ReportChecklistIdRoute,
-  ReportCorrectiveIdRoute: ReportCorrectiveIdRoute,
-  ReportPreventiveIdRoute: ReportPreventiveIdRoute,
   SparePartOrderRequestIdRoute: SparePartOrderRequestIdRoute,
   SparePartOrderRequestCreateSorRoute: SparePartOrderRequestCreateSorRoute,
   SparePartOrderRequestEditRoute: SparePartOrderRequestEditRoute,
@@ -1668,9 +1712,6 @@ const rootRouteChildren: RootRouteChildren = {
   MasterDataDepartmentIndexRoute: MasterDataDepartmentIndexRoute,
   MasterDataMachineIndexRoute: MasterDataMachineIndexRoute,
   MasterDataSparepartIndexRoute: MasterDataSparepartIndexRoute,
-  ReportChecklistIndexRoute: ReportChecklistIndexRoute,
-  ReportCorrectiveIndexRoute: ReportCorrectiveIndexRoute,
-  ReportPreventiveIndexRoute: ReportPreventiveIndexRoute,
   SparePartOrderRequestIndexRoute: SparePartOrderRequestIndexRoute,
   SparePartRequestOrderListIndexRoute: SparePartRequestOrderListIndexRoute,
   SparePartStockTransactionIndexRoute: SparePartStockTransactionIndexRoute,
@@ -1680,11 +1721,8 @@ const rootRouteChildren: RootRouteChildren = {
   MasterDataSparepartCategoryEditRoute: MasterDataSparepartCategoryEditRoute,
   MasterDataSparepartWarehouseEditRoute: MasterDataSparepartWarehouseEditRoute,
   MasterDataSparepartWarehouseNewRoute: MasterDataSparepartWarehouseNewRoute,
-  ReportChecklistMachineNgIdRoute: ReportChecklistMachineNgIdRoute,
-  ReportPreventivePreviewItemIdRoute: ReportPreventivePreviewItemIdRoute,
   DocumentationMachineIdHistoryIndexRoute:
     DocumentationMachineIdHistoryIndexRoute,
-  ReportChecklistMachineNgIndexRoute: ReportChecklistMachineNgIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

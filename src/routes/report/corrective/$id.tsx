@@ -12,17 +12,17 @@ function DetailCorrectiveReportPage() {
   return (
     <div className="space-y-6 pb-20 w-full animate-in fade-in-50 duration-500">
       <div className="flex items-center justify-between border-b pb-4">
-        <h1 className="text-2xl font-bold text-slate-800">Detail Corrective Report</h1>
-        <div className="flex items-center gap-3">
-          <Button className="bg-[#2563eb] hover:bg-[#1d4ed8] text-white">
-            <Download className="size-4 mr-2" /> Download Report
-          </Button>
+        <div className="flex items-center gap-4">
           <Button variant="outline" asChild>
             <Link to="/report/corrective">
               <ArrowLeft className="size-4 mr-2" /> Back
             </Link>
           </Button>
+          <h1 className="text-2xl font-bold text-slate-800">Detail Corrective Report</h1>
         </div>
+        <Button className="bg-[#2563eb] hover:bg-[#1d4ed8] text-white">
+          <Download className="size-4 mr-2" /> Download Report
+        </Button>
       </div>
 
       <div className="mb-2 mt-6">
@@ -69,149 +69,151 @@ function DetailCorrectiveReportPage() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4">
-        {/* Corrective Column */}
-        <div className="space-y-6">
-          <h2 className="text-xl font-bold text-slate-800">Corrective</h2>
-          <div>
-            <p className="text-sm font-bold text-slate-800 mb-4">Approved by:</p>
-            <p className="text-sm font-medium flex items-center gap-2 mb-4">
-              <span className="flex items-center justify-center size-4 rounded-full bg-[#10b981] text-white text-[10px]">✓</span>
-              Nanang Karbu
-            </p>
-            <div className="flex items-center gap-4 text-sm font-medium mb-2">
-              Status: <span className="px-3 py-1 bg-[#10b981] text-white rounded-md text-xs font-semibold">Approved</span>
+      <div className="bg-white rounded-xl border shadow-sm p-6 mt-6 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {/* Corrective Column */}
+          <div className="space-y-6">
+            <h2 className="text-xl font-bold text-slate-800">Corrective</h2>
+            <div>
+              <p className="text-sm font-bold text-slate-800 mb-4">Approved by:</p>
+              <p className="text-sm font-medium flex items-center gap-2 mb-4">
+                <span className="flex items-center justify-center size-4 rounded-full bg-[#10b981] text-white text-[10px]">✓</span>
+                Nanang Karbu
+              </p>
+              <div className="flex items-center gap-4 text-sm font-medium mb-2">
+                Status: <span className="px-3 py-1 bg-[#10b981] text-white rounded-md text-xs font-semibold">Approved</span>
+              </div>
+              <p className="text-xs font-medium text-slate-600">Approved Date : 09/08/2024 10:00</p>
             </div>
-            <p className="text-xs font-medium text-slate-600">Approved Date : 09/08/2024 10:00</p>
-          </div>
-          
-          <div className="bg-white rounded-xl border shadow-sm">
-            <div className="p-4 border-b bg-slate-50/50 rounded-t-xl">
-              <h3 className="font-semibold text-slate-600 text-sm">Damage Report</h3>
-            </div>
-            <div className="flex flex-col">
-              <div className="grid grid-cols-12 border-b">
-                <div className="col-span-5 p-4 text-sm font-medium text-slate-600 border-r bg-white">Wo Created Date</div>
-                <div className="col-span-7 p-4 text-sm font-semibold text-slate-800">15/08/2024 02:06</div>
+            
+            <div className="bg-white rounded-xl border shadow-sm">
+              <div className="p-4 border-b bg-slate-50/50 rounded-t-xl">
+                <h3 className="font-semibold text-slate-600 text-sm">Damage Report</h3>
               </div>
-              <div className="grid grid-cols-12 border-b">
-                <div className="col-span-5 p-4 text-sm font-medium text-slate-600 border-r bg-white">Reported by</div>
-                <div className="col-span-7 p-4 text-sm font-semibold text-slate-800">Shendy Wijaksana</div>
-              </div>
-              <div className="grid grid-cols-12 border-b">
-                <div className="col-span-5 p-4 text-sm font-medium text-slate-600 border-r bg-white">Description Damage</div>
-                <div className="col-span-7 p-4 text-sm font-semibold text-slate-800 leading-relaxed">The machine motor died and did not rotate, causing the production process to be delayed f...</div>
-              </div>
-              <div className="grid grid-cols-12">
-                <div className="col-span-5 p-4 text-sm font-medium text-slate-600 border-r bg-white rounded-bl-xl">Damage Photo</div>
-                <div className="col-span-7 p-4 text-sm font-semibold flex flex-col gap-2">
-                  <a href="#" className="text-blue-600 hover:underline">Photo_Kerusakan.JPG</a>
-                  <a href="#" className="text-blue-600 hover:underline">Photo_Kerusakan.JPG</a>
-                  <a href="#" className="text-blue-600 hover:underline">Photo_Kerusakan.JPG</a>
+              <div className="flex flex-col">
+                <div className="grid grid-cols-12 border-b">
+                  <div className="col-span-5 p-4 text-sm font-medium text-slate-600 border-r bg-white">Wo Created Date</div>
+                  <div className="col-span-7 p-4 text-sm font-semibold text-slate-800">15/08/2024 02:06</div>
+                </div>
+                <div className="grid grid-cols-12 border-b">
+                  <div className="col-span-5 p-4 text-sm font-medium text-slate-600 border-r bg-white">Reported by</div>
+                  <div className="col-span-7 p-4 text-sm font-semibold text-slate-800">Shendy Wijaksana</div>
+                </div>
+                <div className="grid grid-cols-12 border-b">
+                  <div className="col-span-5 p-4 text-sm font-medium text-slate-600 border-r bg-white">Description Damage</div>
+                  <div className="col-span-7 p-4 text-sm font-semibold text-slate-800 leading-relaxed">The machine motor died and did not rotate, causing the production process to be delayed f...</div>
+                </div>
+                <div className="grid grid-cols-12">
+                  <div className="col-span-5 p-4 text-sm font-medium text-slate-600 border-r bg-white rounded-bl-xl">Damage Photo</div>
+                  <div className="col-span-7 p-4 text-sm font-semibold flex flex-col gap-2">
+                    <a href="#" className="text-blue-600 hover:underline">Photo_Kerusakan.JPG</a>
+                    <a href="#" className="text-blue-600 hover:underline">Photo_Kerusakan.JPG</a>
+                    <a href="#" className="text-blue-600 hover:underline">Photo_Kerusakan.JPG</a>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
 
-        {/* Validate Column 1 */}
-        <div className="space-y-6">
-          <h2 className="text-xl font-bold text-slate-800">Validate</h2>
-          <div>
-            <p className="text-sm font-bold text-slate-800 mb-4">Checked by:</p>
-            <p className="text-sm font-medium flex items-center gap-2 mb-4 text-amber-500">
-              <span className="flex items-center justify-center size-4 rounded-full border-2 border-amber-500 text-[10px]"></span>
-              -
-            </p>
-            <div className="flex items-center gap-4 text-sm font-medium mb-2">
-              Status: <span className="px-3 py-1 bg-amber-500 text-white rounded-md text-xs font-semibold">Pending</span>
+          {/* Validate Column 1 */}
+          <div className="space-y-6">
+            <h2 className="text-xl font-bold text-slate-800">Validate</h2>
+            <div>
+              <p className="text-sm font-bold text-slate-800 mb-4">Checked by:</p>
+              <p className="text-sm font-medium flex items-center gap-2 mb-4 text-amber-500">
+                <span className="flex items-center justify-center size-4 rounded-full border-2 border-amber-500 text-[10px]"></span>
+                -
+              </p>
+              <div className="flex items-center gap-4 text-sm font-medium mb-2">
+                Status: <span className="px-3 py-1 bg-amber-500 text-white rounded-md text-xs font-semibold">Pending</span>
+              </div>
+              <p className="text-xs font-medium text-slate-600">Approved Date : -</p>
             </div>
-            <p className="text-xs font-medium text-slate-600">Approved Date : -</p>
-          </div>
-          
-          <div className="bg-white rounded-xl border shadow-sm">
-            <div className="p-4 border-b bg-slate-50/50 rounded-t-xl">
-              <h3 className="font-semibold text-slate-600 text-sm">Maintenance Action</h3>
-            </div>
-            <div className="flex flex-col">
-              <div className="grid grid-cols-12 border-b">
-                <div className="col-span-5 p-4 text-sm font-medium text-slate-600 border-r bg-white">Action Date</div>
-                <div className="col-span-7 p-4 text-sm font-semibold text-slate-800">15/08/2024 02:06</div>
+            
+            <div className="bg-white rounded-xl border shadow-sm">
+              <div className="p-4 border-b bg-slate-50/50 rounded-t-xl">
+                <h3 className="font-semibold text-slate-600 text-sm">Maintenance Action</h3>
               </div>
-              <div className="grid grid-cols-12 border-b">
-                <div className="col-span-5 p-4 text-sm font-medium text-slate-600 border-r bg-white">Repair Action Plan</div>
-                <div className="col-span-7 p-4 text-sm font-semibold text-slate-800 leading-relaxed">Replace gear with new one</div>
-              </div>
-              <div className="grid grid-cols-12 border-b">
-                <div className="col-span-5 p-4 text-sm font-medium text-slate-600 border-r bg-white">Breakdown Type</div>
-                <div className="col-span-7 p-4 text-sm font-semibold text-slate-800">Gear Damage</div>
-              </div>
-              <div className="grid grid-cols-12 border-b">
-                <div className="col-span-5 p-4 text-sm font-medium text-slate-600 border-r bg-white">Technician by</div>
-                <div className="col-span-7 p-4 text-sm font-semibold text-slate-800">Nanang Karbu</div>
-              </div>
-              <div className="grid grid-cols-12 border-b">
-                <div className="col-span-5 p-4 text-sm font-medium text-slate-600 border-r bg-white">Action Taken</div>
-                <div className="col-span-7 p-4 text-sm font-semibold text-slate-800">Change Spare Part</div>
-              </div>
-              <div className="grid grid-cols-12 border-b">
-                <div className="col-span-5 p-4 text-sm font-medium text-slate-600 border-r bg-white">Target Completion Date</div>
-                <div className="col-span-7 p-4 text-sm font-semibold text-slate-800">12/08/2024</div>
-              </div>
-              <div className="grid grid-cols-12 border-b">
-                <div className="col-span-5 p-4 text-sm font-medium text-slate-600 border-r bg-white">Notes on Target Completion</div>
-                <div className="col-span-7 p-4 text-sm font-semibold text-slate-800 leading-relaxed">3 days, because this part was purchased on pre-order, Boss.</div>
-              </div>
-              <div className="grid grid-cols-12">
-                <div className="col-span-5 p-4 text-sm font-medium text-slate-600 border-r bg-white rounded-bl-xl">Repair Action Photo</div>
-                <div className="col-span-7 p-4 text-sm font-semibold">
-                  <a href="#" className="text-blue-600 hover:underline">Photo_Kerusakan.JPG</a>
+              <div className="flex flex-col">
+                <div className="grid grid-cols-12 border-b">
+                  <div className="col-span-5 p-4 text-sm font-medium text-slate-600 border-r bg-white">Action Date</div>
+                  <div className="col-span-7 p-4 text-sm font-semibold text-slate-800">15/08/2024 02:06</div>
+                </div>
+                <div className="grid grid-cols-12 border-b">
+                  <div className="col-span-5 p-4 text-sm font-medium text-slate-600 border-r bg-white">Repair Action Plan</div>
+                  <div className="col-span-7 p-4 text-sm font-semibold text-slate-800 leading-relaxed">Replace gear with new one</div>
+                </div>
+                <div className="grid grid-cols-12 border-b">
+                  <div className="col-span-5 p-4 text-sm font-medium text-slate-600 border-r bg-white">Breakdown Type</div>
+                  <div className="col-span-7 p-4 text-sm font-semibold text-slate-800">Gear Damage</div>
+                </div>
+                <div className="grid grid-cols-12 border-b">
+                  <div className="col-span-5 p-4 text-sm font-medium text-slate-600 border-r bg-white">Technician by</div>
+                  <div className="col-span-7 p-4 text-sm font-semibold text-slate-800">Nanang Karbu</div>
+                </div>
+                <div className="grid grid-cols-12 border-b">
+                  <div className="col-span-5 p-4 text-sm font-medium text-slate-600 border-r bg-white">Action Taken</div>
+                  <div className="col-span-7 p-4 text-sm font-semibold text-slate-800">Change Spare Part</div>
+                </div>
+                <div className="grid grid-cols-12 border-b">
+                  <div className="col-span-5 p-4 text-sm font-medium text-slate-600 border-r bg-white">Target Completion Date</div>
+                  <div className="col-span-7 p-4 text-sm font-semibold text-slate-800">12/08/2024</div>
+                </div>
+                <div className="grid grid-cols-12 border-b">
+                  <div className="col-span-5 p-4 text-sm font-medium text-slate-600 border-r bg-white">Notes on Target Completion</div>
+                  <div className="col-span-7 p-4 text-sm font-semibold text-slate-800 leading-relaxed">3 days, because this part was purchased on pre-order, Boss.</div>
+                </div>
+                <div className="grid grid-cols-12">
+                  <div className="col-span-5 p-4 text-sm font-medium text-slate-600 border-r bg-white rounded-bl-xl">Repair Action Photo</div>
+                  <div className="col-span-7 p-4 text-sm font-semibold">
+                    <a href="#" className="text-blue-600 hover:underline">Photo_Kerusakan.JPG</a>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
 
-        {/* Validate Column 2 */}
-        <div className="space-y-6">
-          <h2 className="text-xl font-bold text-slate-800">Validate</h2>
-          <div>
-            <p className="text-sm font-bold text-slate-800 mb-4">Approved by:</p>
-            <p className="text-sm font-medium flex items-center gap-2 mb-4 text-amber-500">
-              <span className="flex items-center justify-center size-4 rounded-full border-2 border-amber-500 text-[10px]"></span>
-              -
-            </p>
-            <div className="flex items-center gap-4 text-sm font-medium mb-2">
-              Status: <span className="px-3 py-1 bg-amber-500 text-white rounded-md text-xs font-semibold">Pending</span>
+          {/* Validate Column 2 */}
+          <div className="space-y-6">
+            <h2 className="text-xl font-bold text-slate-800">Validate</h2>
+            <div>
+              <p className="text-sm font-bold text-slate-800 mb-4">Approved by:</p>
+              <p className="text-sm font-medium flex items-center gap-2 mb-4 text-amber-500">
+                <span className="flex items-center justify-center size-4 rounded-full border-2 border-amber-500 text-[10px]"></span>
+                -
+              </p>
+              <div className="flex items-center gap-4 text-sm font-medium mb-2">
+                Status: <span className="px-3 py-1 bg-amber-500 text-white rounded-md text-xs font-semibold">Pending</span>
+              </div>
+              <p className="text-xs font-medium text-slate-600">Approved Date : -</p>
             </div>
-            <p className="text-xs font-medium text-slate-600">Approved Date : -</p>
-          </div>
-          
-          <div className="bg-white rounded-xl border shadow-sm">
-            <div className="p-4 border-b bg-slate-50/50 rounded-t-xl">
-              <h3 className="font-semibold text-slate-600 text-sm">Work Validation</h3>
-            </div>
-            <div className="flex flex-col">
-              <div className="grid grid-cols-12 border-b">
-                <div className="col-span-5 p-4 text-sm font-medium text-slate-600 border-r bg-white">Validation Date</div>
-                <div className="col-span-7 p-4 text-sm font-semibold text-slate-800">-</div>
+            
+            <div className="bg-white rounded-xl border shadow-sm">
+              <div className="p-4 border-b bg-slate-50/50 rounded-t-xl">
+                <h3 className="font-semibold text-slate-600 text-sm">Work Validation</h3>
               </div>
-              <div className="grid grid-cols-12 border-b">
-                <div className="col-span-5 p-4 text-sm font-medium text-slate-600 border-r bg-white">Validation by</div>
-                <div className="col-span-7 p-4 text-sm font-semibold text-slate-800">-</div>
-              </div>
-              <div className="grid grid-cols-12 border-b h-32">
-                <div className="col-span-5 p-4 text-sm font-medium text-slate-600 border-r bg-white">Comment</div>
-                <div className="col-span-7 p-4 text-sm font-semibold text-slate-800">-</div>
-              </div>
-              <div className="grid grid-cols-12 border-b">
-                <div className="col-span-5 p-4 text-sm font-medium text-slate-600 border-r bg-white">Final Conclusion</div>
-                <div className="col-span-7 p-4 text-sm font-semibold text-slate-800">-</div>
-              </div>
-              <div className="grid grid-cols-12">
-                <div className="col-span-5 p-4 text-sm font-medium text-slate-600 border-r bg-white rounded-bl-xl">Validate Photo</div>
-                <div className="col-span-7 p-4 text-sm font-semibold">
-                  <span className="text-blue-600">-</span>
+              <div className="flex flex-col">
+                <div className="grid grid-cols-12 border-b">
+                  <div className="col-span-5 p-4 text-sm font-medium text-slate-600 border-r bg-white">Validation Date</div>
+                  <div className="col-span-7 p-4 text-sm font-semibold text-slate-800">-</div>
+                </div>
+                <div className="grid grid-cols-12 border-b">
+                  <div className="col-span-5 p-4 text-sm font-medium text-slate-600 border-r bg-white">Validation by</div>
+                  <div className="col-span-7 p-4 text-sm font-semibold text-slate-800">-</div>
+                </div>
+                <div className="grid grid-cols-12 border-b h-32">
+                  <div className="col-span-5 p-4 text-sm font-medium text-slate-600 border-r bg-white">Comment</div>
+                  <div className="col-span-7 p-4 text-sm font-semibold text-slate-800">-</div>
+                </div>
+                <div className="grid grid-cols-12 border-b">
+                  <div className="col-span-5 p-4 text-sm font-medium text-slate-600 border-r bg-white">Final Conclusion</div>
+                  <div className="col-span-7 p-4 text-sm font-semibold text-slate-800">-</div>
+                </div>
+                <div className="grid grid-cols-12">
+                  <div className="col-span-5 p-4 text-sm font-medium text-slate-600 border-r bg-white rounded-bl-xl">Validate Photo</div>
+                  <div className="col-span-7 p-4 text-sm font-semibold">
+                    <span className="text-blue-600">-</span>
+                  </div>
                 </div>
               </div>
             </div>
