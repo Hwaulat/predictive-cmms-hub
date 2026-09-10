@@ -45,14 +45,6 @@ function WorkOrderPage() {
       <PageHeader
         title="History Work Order"
         description="List of reports that have been created"
-        actions={
-          <Link
-            to="/work-order/add"
-            className="inline-flex h-10 items-center gap-2 rounded-lg bg-blue-600 px-4 text-sm font-semibold text-white transition-opacity hover:opacity-90"
-          >
-            <Plus className="size-4" /> Add New Work Order
-          </Link>
-        }
       />
       
       <div className="bg-white border rounded-xl shadow-sm flex flex-col">
@@ -90,6 +82,12 @@ function WorkOrderPage() {
             <div className="h-9 px-3 rounded-md border border-input bg-white text-xs flex items-center justify-center text-muted-foreground">
               <Calendar className="mr-2 size-3.5" /> dd/mm/yyyy - dd/mm/yyyy
             </div>
+            <Link
+              to="/work-order/add"
+              className="inline-flex h-9 items-center gap-2 rounded-md bg-blue-600 px-4 text-xs font-semibold text-white transition-opacity hover:opacity-90"
+            >
+              <Plus className="size-4" /> Add New Work Order
+            </Link>
           </div>
         </div>
 

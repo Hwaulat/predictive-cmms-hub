@@ -407,11 +407,11 @@ function UsersManagementPage() {
                   <thead className="sticky top-0 bg-slate-100 z-10">
                     <tr className="text-slate-500 uppercase text-xs font-bold tracking-wider">
                       <th className="py-4 px-5 text-left font-semibold">Menu</th>
-                      <th className="py-4 px-2 text-center font-semibold">All Access</th>
-                      <th className="py-4 px-2 text-center font-semibold">Create</th>
-                      <th className="py-4 px-2 text-center font-semibold">Update</th>
-                      <th className="py-4 px-2 text-center font-semibold">Delete</th>
-                      <th className="py-4 px-2 text-center font-semibold">Only View</th>
+                      <th className="py-4 px-2 text-left font-semibold">All Access</th>
+                      <th className="py-4 px-2 text-left font-semibold">Create</th>
+                      <th className="py-4 px-2 text-left font-semibold">Update</th>
+                      <th className="py-4 px-2 text-left font-semibold">Delete</th>
+                      <th className="py-4 px-2 text-left font-semibold">Only View</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y">

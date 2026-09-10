@@ -15,16 +15,20 @@ function MachineDetailPage() {
     <div className="space-y-6">
       {/* Header */}
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold text-slate-800">Machine/Equipment Detail</h1>
         <div className="flex items-center gap-2">
           <Link to="/master-data/machine">
             <Button variant="outline" className="text-slate-700 bg-white">
               <ArrowLeft className="size-4 mr-2" /> Back
             </Button>
           </Link>
-          <Button className="bg-[#f59e0b] hover:bg-[#d97706] text-white font-semibold">
-            <Pen className="size-4 mr-2" /> Edit Machine/Equipment
-          </Button>
+          <h1 className="text-2xl font-bold text-slate-800">Machine/Equipment Detail</h1>
+        </div>
+        <div className="flex items-center gap-2">
+          <Link to="/master-data/machine/edit">
+            <Button className="bg-[#f59e0b] hover:bg-[#d97706] text-white font-semibold">
+              <Pen className="size-4 mr-2" /> Edit Machine/Equipment
+            </Button>
+          </Link>
         </div>
       </div>
 
@@ -92,16 +96,16 @@ function MachineDetailPage() {
 
       {/* Tabs */}
       <Tabs defaultValue="machine" className="w-full">
-        <TabsList className="bg-white border rounded-t-lg h-auto p-0 flex max-w-max border-b-0 overflow-hidden relative top-[1px]">
-          <TabsTrigger value="machine" className="data-[state=active]:bg-white data-[state=active]:border-b-0 border border-transparent data-[state=active]:border-border data-[state=active]:border-t-primary data-[state=active]:border-t-2 rounded-none px-6 py-2.5 text-sm font-semibold">
+        <TabsList className="bg-slate-100 p-1 rounded-xl border flex max-w-max items-center gap-1 shadow-inner mb-6">
+          <TabsTrigger value="machine" className="px-5 py-2 text-xs font-semibold rounded-lg transition-all text-slate-500 data-[state=active]:bg-white data-[state=active]:text-blue-600 data-[state=active]:shadow-sm">
             Machine/Equipment
           </TabsTrigger>
-          <TabsTrigger value="spare" className="data-[state=active]:bg-white data-[state=active]:border-b-0 border border-transparent data-[state=active]:border-border data-[state=active]:border-t-primary data-[state=active]:border-t-2 rounded-none px-6 py-2.5 text-sm font-semibold bg-slate-50/50">
+          <TabsTrigger value="spare" className="px-5 py-2 text-xs font-semibold rounded-lg transition-all text-slate-500 data-[state=active]:bg-white data-[state=active]:text-blue-600 data-[state=active]:shadow-sm">
             Spare Part
           </TabsTrigger>
         </TabsList>
 
-        <div className="bg-white border rounded-lg rounded-tl-none shadow-sm p-6">
+        <div className="bg-white border rounded-lg rounded-tl-none shadow-sm p-6 w-full">
           <TabsContent value="machine" className="mt-0 outline-none">
             <h2 className="text-xl font-bold text-slate-800 mb-6">Machine/Equipment Information</h2>
             
@@ -132,10 +136,10 @@ function MachineDetailPage() {
             </div>
           </TabsContent>
 
-          <TabsContent value="spare" className="mt-0 outline-none">
+          <TabsContent value="spare" className="mt-0 outline-none w-full">
             <h2 className="text-xl font-bold text-slate-800 mb-6">Spare Part Information</h2>
             
-            <div className="border rounded-lg overflow-x-auto">
+            <div className="border rounded-lg overflow-x-auto w-full">
               <table className="w-full text-sm">
                 <thead className="bg-white">
                   <tr className="border-b text-left text-slate-500 font-semibold text-xs tracking-wider">

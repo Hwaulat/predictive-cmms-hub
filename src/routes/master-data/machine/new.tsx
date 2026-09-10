@@ -10,20 +10,27 @@ export const Route = createFileRoute("/master-data/machine/new")({
   head: () => ({
     meta: [{ title: "Add Machine/Equipment" }],
   }),
-  component: AddMachinePage,
+  component: () => <MachineFormPage mode="create" />,
 });
 
-function AddMachinePage() {
+export function MachineFormPage({ mode }: { mode: "create" | "edit" }) {
+  const isEdit = mode === "edit";
+
   return (
     <div className="space-y-6">
       {/* Header */}
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold text-slate-800">Add Machine/Equipment</h1>
-        <Link to="/master-data/machine">
-          <Button variant="outline" className="text-slate-700 bg-white">
-            <ArrowLeft className="size-4 mr-2" /> Back
-          </Button>
-        </Link>
+        <div className="flex items-center gap-3">
+          <Link to="/master-data/machine">
+            <Button variant="outline" className="text-slate-700 bg-white">
+              <ArrowLeft className="size-4 mr-2" /> Back
+            </Button>
+          </Link>
+          <h1 className="text-2xl font-bold text-slate-800">{isEdit ? "Edit Machine/Equipment" : "Add Machine/Equipment"}</h1>
+        </div>
+        <Button className="bg-[#2563eb] hover:bg-[#1d4ed8] text-white px-8 h-10 rounded-md font-semibold">
+          {isEdit ? "Update" : "Save"}
+        </Button>
       </div>
 
       {/* Main Info Card */}
@@ -157,18 +164,18 @@ function AddMachinePage() {
 
       {/* Tabs */}
       <Tabs defaultValue="machine" className="w-full">
-        <TabsList className="bg-white border rounded-t-lg h-auto p-0 flex max-w-max border-b-0 overflow-hidden relative top-[1px]">
-          <TabsTrigger value="machine" className="data-[state=active]:bg-white data-[state=active]:border-b-0 border border-transparent data-[state=active]:border-border data-[state=active]:border-t-primary data-[state=active]:border-t-2 rounded-none px-6 py-2.5 text-sm font-semibold">
+        <TabsList className="bg-slate-100 p-1 rounded-xl border flex max-w-max items-center gap-1 shadow-inner mb-6">
+          <TabsTrigger value="machine" className="px-5 py-2 text-xs font-semibold rounded-lg transition-all text-slate-500 data-[state=active]:bg-white data-[state=active]:text-blue-600 data-[state=active]:shadow-sm">
             Machine/Equipment
           </TabsTrigger>
-          <TabsTrigger value="spare" className="data-[state=active]:bg-white data-[state=active]:border-b-0 border border-transparent data-[state=active]:border-border data-[state=active]:border-t-primary data-[state=active]:border-t-2 rounded-none px-6 py-2.5 text-sm font-semibold bg-slate-50/50">
+          <TabsTrigger value="spare" className="px-5 py-2 text-xs font-semibold rounded-lg transition-all text-slate-500 data-[state=active]:bg-white data-[state=active]:text-blue-600 data-[state=active]:shadow-sm">
             Spare Part
           </TabsTrigger>
         </TabsList>
 
-        <div className="bg-white border rounded-lg rounded-tl-none shadow-sm p-6">
+        <div className="bg-white border rounded-lg rounded-tl-none shadow-sm p-6 w-full">
           <TabsContent value="machine" className="mt-0 outline-none">
-            <h2 className="text-xl font-bold text-slate-800 mb-6">Add Machine/Equipment Information</h2>
+            <h2 className="text-xl font-bold text-slate-800 mb-6">{isEdit ? "Edit Machine/Equipment Information" : "Add Machine/Equipment Information"}</h2>
             
             <div className="grid sm:grid-cols-2 gap-x-8 gap-y-6 max-w-4xl">
               <div className="space-y-2">
@@ -202,17 +209,12 @@ function AddMachinePage() {
               </div>
             </div>
 
-            <div className="flex justify-end mt-10">
-              <Button className="bg-[#2563eb] hover:bg-[#1d4ed8] text-white px-8 h-10 rounded-md font-semibold">
-                Save
-              </Button>
-            </div>
           </TabsContent>
 
-          <TabsContent value="spare" className="mt-0 outline-none">
+          <TabsContent value="spare" className="mt-0 outline-none w-full">
             <h2 className="text-xl font-bold text-slate-800 mb-6">Add Spare Part</h2>
             
-            <div className="border rounded-lg overflow-x-auto">
+            <div className="border rounded-lg overflow-x-auto w-full">
               <table className="w-full text-sm">
                 <thead className="bg-white">
                   <tr className="border-b text-left text-slate-500 font-semibold text-xs uppercase tracking-wider">
@@ -254,11 +256,6 @@ function AddMachinePage() {
               </Button>
             </div>
 
-            <div className="flex justify-end mt-10">
-              <Button className="bg-[#2563eb] hover:bg-[#1d4ed8] text-white px-8 h-10 rounded-md font-semibold">
-                Save
-              </Button>
-            </div>
           </TabsContent>
         </div>
       </Tabs>

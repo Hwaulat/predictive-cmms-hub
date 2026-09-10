@@ -1,91 +1,37 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { Calendar, Plus } from "lucide-react";
-import { DataTable, PageHeader, Panel, SearchBar, StatusPill } from "@/components/ui-kit/page";
-import { checklists } from "@/lib/mock-data";
+import { Link, createFileRoute } from "@tanstack/react-router";
+import { Calendar, Download, Eye, List, Search } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { TablePagination } from "@/components/ui-kit/page";
 
 export const Route = createFileRoute("/checklist")({
   head: () => ({
     meta: [
-      { title: "Inspection Checklist — Maintenance Monitoring System" },
-      {
-        name: "description",
-        content:
-          "Daily and per-shift equipment inspection checklist templates and history with compliance rate per shift.",
-      },
-      { property: "og:title", content: "Inspection Checklist — CMMS" },
-      {
-        property: "og:description",
-        content: "Equipment checklist completion and automatic work order creation from findings.",
-      },
+      { title: "Checklist Report — Maintenance Monitoring System" },
     ],
   }),
   component: ChecklistPage,
 });
 
+const checklistRows = [
+  ["CID12345", "TCF2/Form/ME/01/01", "12/12/2022 12:04", "-", "CRN-01 - Crane", "Department A", "Building A", "Progresive Medium", "Andrian", "Done"],
+  ["CID12344", "TCF2/Form/ME/01/01", "13/12/2022 12:04", "-", "CRN-01 - Crane", "Department B", "Building A", "Progresive Medium", "Dwiki", "Done"],
+  ["CID12343", "TCF2/Form/ME/01/01", "14/12/2022 12:04", "14/12/2022 12:04", "CRN-01 - Crane", "Department C", "Building A", "Progresive Medium", "Dwiki", "Approved"],
+  ["CID12342", "TCF2/Form/ME/01/01", "15/12/2022 12:04", "-", "CRN-01 - Crane", "Department D", "Building A", "Progresive Medium", "Ferdian", "Done"],
+  ["CID12341", "TCF2/Form/ME/01/01", "16/12/2022 12:04", "-", "CRN-01 - Crane", "Department E", "Building A", "Progresive Medium", "Dion", "Done"],
+  ["CID12340", "TCF2/Form/ME/01/01", "17/12/2022 12:04", "17/12/2022 12:04", "CRN-01 - Crane", "Department B", "Building A", "Progresive Medium", "Dwiki", "Approved"],
+];
+
 export function ChecklistPage() {
   return (
-    <div className="space-y-6">
-      <PageHeader
-        title="Checklist"
-        description="Routine equipment condition checks per shift — failed findings automatically offer Work Order creation"
-        actions={
-          <button className="inline-flex h-10 items-center gap-2 rounded-lg bg-primary px-4 text-sm font-semibold text-primary-foreground hover:opacity-90">
-            <Plus className="size-4" /> New Template
-          </button>
-        }
-      />
-
-      <div className="grid gap-4 sm:grid-cols-3">
-        {[
-          { label: "Today's Compliance", value: "86%" },
-          { label: "Checklists Filled", value: "24 / 28" },
-          { label: "Failed Findings", value: "5 items" },
-        ].map((s) => (
-          <div key={s.label} className="card-surface p-4">
-            <p className="text-xs text-muted-foreground">{s.label}</p>
-            <p className="mt-2 font-display text-2xl font-bold">{s.value}</p>
-          </div>
-        ))}
+    <div className="space-y-6 pb-20">
+      <div className="flex items-center justify-between border-b pb-4"><h1 className="text-xl font-bold text-slate-800">Checklist Report</h1><Button className="bg-[#2563eb] hover:bg-[#1d4ed8] text-white"><Download className="size-4 mr-2" /> Download Report</Button></div>
+      <div className="bg-white rounded-xl border shadow-sm flex flex-col overflow-hidden">
+        <div className="p-4 border-b bg-slate-50 flex flex-wrap items-center gap-3"><div className="relative flex-1 min-w-[240px]"><Search className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" /><Input placeholder="Search" className="pl-9 bg-white w-full" /></div><Select defaultValue="all"><SelectTrigger className="w-[140px] bg-white"><SelectValue placeholder="Filter by status" /></SelectTrigger><SelectContent><SelectItem value="all">Filter by status</SelectItem><SelectItem value="done">Done</SelectItem><SelectItem value="approved">Approved</SelectItem></SelectContent></Select><Select defaultValue="all"><SelectTrigger className="w-[150px] bg-white"><SelectValue placeholder="Filter by executor" /></SelectTrigger><SelectContent><SelectItem value="all">Filter by executor</SelectItem><SelectItem value="dwiki">Dwiki</SelectItem></SelectContent></Select><div className="h-9 px-3 rounded-md border border-input bg-white text-xs flex items-center text-muted-foreground"><Calendar className="mr-2 size-3.5" /> Select date range</div><Link to="/report/checklist/machine-ng" className="ml-auto shrink-0"><Button variant="outline" className="border-[#ef4444] text-[#ef4444] hover:bg-red-50"><List className="size-4 mr-2" /> List Machine NG</Button></Link></div>
+        <div className="overflow-x-auto"><table className="w-full text-sm"><thead><tr className="bg-slate-100/50 text-slate-500 uppercase text-xs font-bold tracking-wider border-b text-left whitespace-nowrap">{["Action", "Status", "Checklist ID", "Document Number", "Submit Form", "Approved Date", "Machine", "Department", "Area", "Line", "Executor"].map((header) => <th key={header} className="py-4 px-4 font-semibold">{header}</th>)}</tr></thead><tbody className="divide-y">{checklistRows.map((row) => <tr key={row[0]} className="hover:bg-slate-50/50 whitespace-nowrap"><td className="py-3 px-4"><Link to={`/report/checklist/${row[0]}`}><Button variant="outline" size="icon" className="h-8 w-8 text-slate-400 hover:text-primary"><Eye className="size-4" /></Button></Link></td><td className="py-3 px-4"><span className={`px-3 py-1 rounded-md text-xs font-semibold text-white ${row[9] === "Approved" ? "bg-emerald-500" : "bg-blue-600"}`}>{row[9]}</span></td>{row.slice(0, 9).map((value, index) => <td key={`${row[0]}-${index}`} className="py-3 px-4 text-slate-600">{value}</td>)}</tr>)}</tbody></table></div>
+        <TablePagination />
       </div>
-
-      <Panel title="Completion History" actions={
-          <div className="flex flex-wrap items-center gap-4 w-full">
-            <SearchBar placeholder="Search checklist..." />
-            <select className="h-10 rounded-lg border border-input bg-surface px-3 text-sm outline-none focus:border-ring focus:ring-2 focus:ring-ring/20">
-              <option>Filter by status</option>
-            </select>
-            <select className="h-10 rounded-lg border border-input bg-surface px-3 text-sm outline-none focus:border-ring focus:ring-2 focus:ring-ring/20">
-              <option>Filter by category</option>
-            </select>
-            <div className="h-10 rounded-lg border border-input bg-surface px-3 text-sm flex items-center justify-center text-muted-foreground ml-auto">
-               <Calendar className="mr-2 size-4" /> dd/mm/yyyy - dd/mm/yyyy
-            </div>
-          </div>
-        }>
-        <DataTable
-          columns={["Checklist Name", "Equipment", "Frequency", "Items", "Shift", "Inspector", "Status"]}
-          rows={checklists.map((c) => [
-            <span className="font-medium">{c.name}</span>,
-            c.equipment,
-            c.freq,
-            c.items,
-            c.shift,
-            c.by,
-            <StatusPill
-              label={c.status}
-              tone={
-                c.status === "Completed"
-                  ? "success"
-                  : c.status === "Finding Found"
-                    ? "warning"
-                    : c.status === "Missed"
-                      ? "destructive"
-                      : "info"
-              }
-            />,
-          ])}
-        />
-      </Panel>
     </div>
   );
 }

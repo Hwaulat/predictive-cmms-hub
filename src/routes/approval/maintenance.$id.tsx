@@ -267,11 +267,11 @@ function MaintenanceApprovalDetails() {
                 <th className="py-3 px-4 min-w-[260px] border-r">Inspection Items</th>
                 <th className="py-3 px-4 min-w-[160px] border-r">Inspection Method</th>
                 <th className="py-3 px-4 min-w-[160px] border-r">Standard</th>
-                <th className="py-3 px-4 text-center w-24 border-r">Status</th>
+                <th className="py-3 px-4 text-left w-24 border-r">Status</th>
                 <th className="py-3 px-4 min-w-[120px] border-r">Variable</th>
                 <th className="py-3 px-4 min-w-[200px] border-r">Description of Damage</th>
-                <th className="py-3 px-4 text-center w-24 border-r">Doc. SOP</th>
-                <th className="py-3 px-4 text-center w-20">Preview</th>
+                <th className="py-3 px-4 text-left w-24 border-r">Doc. SOP</th>
+                <th className="py-3 px-4 text-left w-20">Preview</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-border/60">

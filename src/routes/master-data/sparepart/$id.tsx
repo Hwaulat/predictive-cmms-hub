@@ -13,13 +13,15 @@ function DetailPartPage() {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between border-b pb-4">
-        <h1 className="text-2xl font-bold text-slate-800">Detail Part</h1>
         <div className="flex items-center gap-2">
           <Link to="/master-data/sparepart">
             <Button variant="outline" className="text-slate-700 bg-white">
               <ArrowLeft className="size-4 mr-2" /> Back
             </Button>
           </Link>
+          <h1 className="text-2xl font-bold text-slate-800">Detail Part</h1>
+        </div>
+        <div className="flex items-center gap-2">
           <Button className="bg-[#f59e0b] hover:bg-[#d97706] text-white font-semibold">
             <Pen className="size-4 mr-2" /> Edit
           </Button>

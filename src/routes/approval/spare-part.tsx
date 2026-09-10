@@ -245,7 +245,7 @@ function ApprovalSparePartPage() {
             <table className="w-full text-sm">
               <thead>
                 <tr className="bg-slate-100/50 text-slate-500 uppercase text-xs font-bold tracking-wider border-b whitespace-nowrap text-left">
-                  <th className="py-4 px-4 text-center w-24">Document</th>
+                  <th className="py-4 px-4 text-left w-24">Document</th>
                   <th className="py-4 px-4">No.</th>
                   <th className="py-4 px-4 min-w-[150px]">
                     <div className="inline-flex items-center gap-1 cursor-pointer">
@@ -546,7 +546,7 @@ function ApprovalSparePartPage() {
             <table className="w-full text-sm">
               <thead>
                 <tr className="bg-slate-100/50 text-slate-500 uppercase text-xs font-bold tracking-wider border-b whitespace-nowrap text-left">
-                  <th className="py-4 px-4 text-center font-semibold w-24">Action</th>
+                  <th className="py-4 px-4 text-left font-semibold w-24">Action</th>
                   <th className="py-4 px-4 font-semibold min-w-[130px]">
                     <div className="inline-flex items-center gap-1 cursor-pointer">
                       Status <ArrowUpDown className="size-3 text-slate-400" />
@@ -672,7 +672,7 @@ function ApprovalSparePartPage() {
             <table className="w-full text-sm">
               <thead>
                 <tr className="bg-slate-100/50 text-slate-500 uppercase text-xs font-bold tracking-wider border-b whitespace-nowrap text-left">
-                  <th className="py-4 px-4 text-center font-semibold w-24">Action</th>
+                  <th className="py-4 px-4 text-left font-semibold w-24">Action</th>
                   <th className="py-4 px-4 font-semibold w-16">No.</th>
                   <th className="py-4 px-4 font-semibold min-w-[140px]">
                     <div className="inline-flex items-center gap-1 cursor-pointer">

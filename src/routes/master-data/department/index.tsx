@@ -1,6 +1,6 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { Plus, Search, Eye, Edit2, Trash2 } from "lucide-react";
-import { PageHeader, TablePagination } from "@/components/ui-kit/page";
+import { TablePagination } from "@/components/ui-kit/page";
 import { departments } from "@/lib/mock-data";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -20,25 +20,26 @@ function DepartmentList() {
 
   return (
     <div className="space-y-6 pb-20 animate-in fade-in-50 duration-500">
-      <div className="flex items-center justify-between border-b pb-4">
-        <h2 className="text-xl font-bold font-display flex items-center gap-2">
-          Department
-        </h2>
-        <Button 
-          className="bg-[#2563eb] hover:bg-[#1d4ed8] text-white"
-          onClick={() => navigate({ to: "/master-data/department/new" })}
-        >
-          <Plus className="size-4 mr-2" /> Add New Department
-        </Button>
+      <div className="flex items-start justify-between border-b pb-4">
+        <div>
+          <h1 className="text-2xl font-bold text-slate-800">Department</h1>
+          <p className="mt-1 text-sm text-slate-500">List of departments and their area and line hierarchy.</p>
+        </div>
       </div>
 
       <div className="bg-white rounded-xl border shadow-sm flex flex-col">
         {/* Filters */}
-        <div className="p-4 border-b">
-          <div className="relative max-w-sm">
+        <div className="p-4 border-b flex items-center gap-4">
+          <div className="relative w-full flex-1 min-w-0">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
             <Input placeholder="Search" className="pl-9 bg-slate-50/50" />
           </div>
+          <Button
+            className="bg-[#2563eb] hover:bg-[#1d4ed8] text-white shrink-0"
+            onClick={() => navigate({ to: "/master-data/department/new" })}
+          >
+            <Plus className="size-4 mr-2" /> Add New Department
+          </Button>
         </div>
 
         {/* Table */}
@@ -66,7 +67,7 @@ function DepartmentList() {
                           variant="outline" 
                           size="icon" 
                           className="h-8 w-8 text-slate-400 hover:text-primary"
-                          onClick={() => navigate({ to: `/master-data/department/${dept.id}` })}
+                          onClick={() => navigate({ to: `/master-data/department/detail/${dept.id}` })}
                         >
                           <Eye className="size-4" />
                         </Button>

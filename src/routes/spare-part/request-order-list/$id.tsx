@@ -89,7 +89,7 @@ function RequestOrderDetail() {
             <thead>
               <tr className="bg-slate-50 text-slate-500 uppercase text-xs font-bold tracking-wider">
                 <th className="py-4 px-4 text-left font-semibold">Document</th>
-                <th className="py-4 px-4 text-center font-semibold">No.</th>
+                <th className="py-4 px-4 text-left font-semibold">No.</th>
                 <th className="py-4 px-4 text-left font-semibold">Status</th>
                 <th className="py-4 px-4 text-left font-semibold">Status Ordered</th>
                 <th className="py-4 px-4 text-left font-semibold">Application Area</th>

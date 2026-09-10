@@ -66,7 +66,7 @@ function CreateRequestOrder() {
             <table className="w-full text-sm">
               <thead>
                 <tr className="bg-slate-100 border-b text-xs font-bold text-slate-500 uppercase tracking-wider text-left">
-                  <th className="py-3 px-4 w-12 text-center">Action</th>
+                  <th className="py-3 px-4 w-12 text-left">Action</th>
                   <th className="py-3 px-4 min-w-[180px]">Application Area <span className="text-destructive">*</span></th>
                   <th className="py-3 px-4 min-w-[180px]">Choose Item <span className="text-destructive">*</span></th>
                   <th className="py-3 px-4 min-w-[200px]">Item Name <span className="text-destructive">*</span></th>

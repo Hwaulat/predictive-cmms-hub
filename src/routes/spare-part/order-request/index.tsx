@@ -297,7 +297,7 @@ function OrderRequestPage() {
             <table className="w-full text-sm border-collapse">
               <thead>
                 <tr className="bg-slate-100/50 border-b text-slate-500 uppercase text-xs font-bold tracking-wider whitespace-nowrap">
-                  <th className="py-4 px-4 text-center w-10">
+                  <th className="py-4 px-4 text-left w-10">
                     <Checkbox
                       checked={selectAll}
                       onCheckedChange={(checked) => handleSelectAll(Boolean(checked))}

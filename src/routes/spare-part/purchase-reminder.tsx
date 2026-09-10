@@ -626,7 +626,7 @@ function PurchaseReminderPage() {
             <table className="w-full text-sm">
               <thead>
                 <tr className="bg-slate-100/50 text-slate-500 uppercase text-xs font-bold tracking-wider border-b whitespace-nowrap text-left">
-                  <th className="py-4 px-4 w-16 text-center font-semibold">Rank</th>
+                  <th className="py-4 px-4 w-16 text-left font-semibold">Rank</th>
                   <th className="py-4 px-4 font-semibold min-w-[140px]">Sparepart Code</th>
                   <th className="py-4 px-4 font-semibold min-w-[240px]">Sparepart Name</th>
                   <th className="py-4 px-4 font-semibold min-w-[220px]">Equipment / Machine</th>

@@ -244,7 +244,7 @@ function CreateStockTransactionPage() {
                         CURRENT STOCK <ArrowUpDown className="size-3 text-slate-400" />
                       </div>
                     </th>
-                    <th className="py-4 px-4 text-center w-36">
+                    <th className="py-4 px-4 text-left w-36">
                       <div className="inline-flex items-center gap-1 cursor-pointer">
                         ALL QUANTITY <ArrowUpDown className="size-3 text-slate-400" />
                       </div>
@@ -365,7 +365,7 @@ function CreateStockTransactionPage() {
                           RACK NAME <ArrowUpDown className="size-3 text-slate-400" />
                         </div>
                       </th>
-                      <th className="py-3 px-4 text-center w-32">
+                      <th className="py-3 px-4 text-left w-32">
                         <div className="inline-flex items-center gap-1 cursor-pointer">
                           ALL QUANTITY <ArrowUpDown className="size-3 text-slate-400" />
                         </div>
@@ -470,7 +470,7 @@ function CreateStockTransactionPage() {
           <table className="w-full text-sm border-collapse">
             <thead>
               <tr className="bg-slate-100/50 border-b text-slate-500 uppercase text-xs font-bold tracking-wider whitespace-nowrap text-left">
-                <th className="py-4 px-4 text-center w-12">ACTION</th>
+                <th className="py-4 px-4 text-left w-12">ACTION</th>
                 <th className="py-4 px-4">NO.</th>
                 <th className="py-4 px-4 min-w-[200px]">SPAREPART CODE</th>
                 <th className="py-4 px-4 min-w-[280px]">SPAREPART DETAIL</th>

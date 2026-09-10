@@ -206,7 +206,7 @@ function StockTransactionPage() {
           <table className="w-full text-sm">
             <thead>
               <tr className="bg-slate-100/50 text-slate-500 uppercase text-xs font-bold tracking-wider border-b whitespace-nowrap text-left">
-                <th className="py-4 px-4 text-center font-semibold w-28">Action</th>
+                <th className="py-4 px-4 text-left font-semibold w-28">Action</th>
                 <th className="py-4 px-4 font-semibold">No.</th>
                 <th className="py-4 px-4 font-semibold min-w-[170px]">
                   <div className="inline-flex items-center gap-1 cursor-pointer">

@@ -145,7 +145,7 @@ function ApprovalMaintenancePage() {
           <table className="w-full text-sm border-collapse">
             <thead>
               <tr className="bg-slate-100/50 border-b text-slate-500 uppercase text-xs font-bold tracking-wider whitespace-nowrap text-left">
-                <th className="py-4 px-4 text-center w-24">Action</th>
+                <th className="py-4 px-4 text-left w-24">Action</th>
                 <th className="py-4 px-4 min-w-[130px]">Category</th>
                 <th className="py-4 px-4 min-w-[110px]">ID</th>
                 <th className="py-4 px-4 min-w-[180px]">Document Number</th>

@@ -10,20 +10,27 @@ export const Route = createFileRoute("/master-data/sparepart/new")({
   head: () => ({
     meta: [{ title: "Add Spare Part" }],
   }),
-  component: AddSparePartPage,
+  component: () => <SparePartFormPage mode="create" />,
 });
 
-function AddSparePartPage() {
+export function SparePartFormPage({ mode }: { mode: "create" | "edit" }) {
+  const isEdit = mode === "edit";
+
   return (
-    <div className="space-y-6 max-w-5xl mx-auto">
+    <div className="space-y-6 w-full">
       {/* Header */}
       <div className="flex items-center justify-between border-b pb-4">
-        <h1 className="text-2xl font-bold text-slate-800">Add Spare Part</h1>
-        <Link to="/master-data/sparepart">
-          <Button variant="outline" className="text-slate-700 bg-white">
-            <ArrowLeft className="size-4 mr-2" /> Back
-          </Button>
-        </Link>
+        <div className="flex items-center gap-3">
+          <Link to="/master-data/sparepart">
+            <Button variant="outline" className="text-slate-700 bg-white">
+              <ArrowLeft className="size-4 mr-2" /> Back
+            </Button>
+          </Link>
+          <h1 className="text-2xl font-bold text-slate-800">{isEdit ? "Edit Spare Part" : "Add Spare Part"}</h1>
+        </div>
+        <Button className="bg-[#2563eb] hover:bg-[#1d4ed8] text-white px-8 h-10 rounded-md font-semibold">
+          {isEdit ? "Update" : "Save"}
+        </Button>
       </div>
 
       {/* Form */}
@@ -165,12 +172,6 @@ function AddSparePartPage() {
         <div className="space-y-2">
           <Label className="text-slate-600 font-medium">Maintenance Rate (Month)</Label>
           <Input defaultValue="3" className="bg-white" />
-        </div>
-
-        <div className="flex justify-end pt-6">
-          <Button className="bg-[#2563eb] hover:bg-[#1d4ed8] text-white px-8 h-10 rounded-md font-semibold w-full sm:w-auto">
-            Save
-          </Button>
         </div>
 
       </div>

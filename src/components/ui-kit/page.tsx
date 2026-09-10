@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
-import { Search } from "lucide-react";
+import { ArrowLeft, Search } from "lucide-react";
+import { Link } from "@tanstack/react-router";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -21,6 +22,16 @@ export function PageHeader({
       </div>
       {actions}
     </div>
+  );
+}
+
+export function BackButton({ to = "/" }: { to?: string }) {
+  return (
+    <Link to={to as never}>
+      <Button variant="outline" size="sm" className="text-slate-700 bg-white">
+        <ArrowLeft className="size-4 mr-1" /> Back
+      </Button>
+    </Link>
   );
 }
 
@@ -64,7 +75,7 @@ export function Panel({
 
 export function SearchBar({ placeholder = "Search data..." }: { placeholder?: string }) {
   return (
-    <div className="relative w-full max-w-sm">
+    <div className="relative w-full">
       <Search className="absolute top-1/2 left-3 size-4 -translate-y-1/2 text-muted-foreground" />
       <input
         placeholder={placeholder}
